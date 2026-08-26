@@ -45,6 +45,7 @@ const Login = () => {
             label="Email"
             placeholder="Enter your email"
             size="sm"
+            description="email: admin@example.com"
             validation={{
               rules: {
                 required: true,
@@ -63,6 +64,7 @@ const Login = () => {
             label="Password"
             placeholder="Enter your password"
             size="sm"
+            description="password: admin123"
             validation={{
               rules: {
                 required: true,
@@ -80,7 +82,7 @@ const Login = () => {
               <Button
                 variant="link"
                 size="sm"
-                onClick={() => navigate("/forget-password")}
+                onClick={() => navigate("/forgot-password")}
               >
                 Forgot Password
               </Button>
@@ -113,10 +115,9 @@ const Login = () => {
             <Button
               variant="link"
               size="sm"
-              color="danger"
               onClick={() => navigate("/register")}
             >
-              Sign Up
+              Sign Up Here
             </Button>
           </p>
         </div>

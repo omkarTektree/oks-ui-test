@@ -85,13 +85,13 @@ const TextSlider = () => {
 const AuthTemplate = () => {
   return (
     <div className="w-full h-screen overflow-auto bg-black p-3 flex gap-10">
-      <div className="flex-1 flex flex-col justify-between">
+      <div className="flex-1 min-w-100 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="w-8">
             <img src={LogoLight} alt="Logo" />
           </div>
           <div>
-            <Button
+            {/* <Button
               variant="link"
               color="default"
               colorDepth={50}
@@ -102,7 +102,7 @@ const AuthTemplate = () => {
               style={{ textDecoration: "none" }}
             >
               Back to Home
-            </Button>
+            </Button> */}
           </div>
         </div>
 

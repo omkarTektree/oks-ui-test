@@ -18,13 +18,19 @@ export const AuthProvider = ({ children }) => {
     return isValid;
   };
 
+  const register = () => {
+    localStorage.setItem(AUTH_STORAGE_KEY, "true");
+    setIsAuthenticated(true);
+    return true;
+  };
+
   const logout = () => {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

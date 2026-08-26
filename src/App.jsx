@@ -15,7 +15,8 @@ import InnerTemplate from "./Pages/InnerPages/InnerTemplate";
 
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
-const ForgetPassword = lazy(() => import("./Pages/Auth/ForgetPassword"));
+const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword"));
+const Terms = lazy(() => import("./Pages/Auth/Terms"));
 const Dashboard = lazy(() => import("./Pages/InnerPages/Dashboard"));
 
 const App = () => {
@@ -27,8 +28,10 @@ const App = () => {
             <Route element={<AuthTemplate />}>
               <Route path="/" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/forget-password" element={<ForgetPassword />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
             </Route>
+
+            <Route path="/terms" element={<Terms />} />
 
             <Route element={<ProtectedRoute />}>
               <Route element={<InnerTemplate />}>
