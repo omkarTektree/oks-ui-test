@@ -59,7 +59,7 @@ const Terms = () => {
           subtitle="Last updated: August 26, 2026"
           classNames={{
             base: "flex-col items-start mt-10",
-            title: "text-4xl font-bold",
+            title: "text-2xl sm:text-3xl lg:text-4xl font-bold",
             subtitle: "text-black/50",
           }}
         />

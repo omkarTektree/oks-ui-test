@@ -33,7 +33,7 @@ const Login = () => {
         subtitle="Please enter your credentials to log in."
         classNames={{
           base: "flex-col items-start",
-          title: "text-5xl font-bold",
+          title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
           subtitle: "text-black/60",
         }}
       />

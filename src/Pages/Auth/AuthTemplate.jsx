@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import LogoLight from "../../assets/images/logo-light.png";
+import Logo from "../../assets/images/logo.png";
 import { Button, PageTitle } from "oks-ui";
 import { MoveLeft } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -84,8 +85,8 @@ const TextSlider = () => {
 
 const AuthTemplate = () => {
   return (
-    <div className="w-full h-screen overflow-auto bg-black p-3 flex gap-10">
-      <div className="flex-1 min-w-100 flex flex-col justify-between">
+    <div className="w-full min-h-screen lg:h-screen overflow-y-auto bg-black flex flex-col lg:flex-row lg:gap-10 p-3">
+      <div className="hidden lg:flex flex-1 min-w-100 flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="w-8">
             <img src={LogoLight} alt="Logo" />
@@ -110,8 +111,15 @@ const AuthTemplate = () => {
           <TextSlider />
         </div>
       </div>
-      <div className="w-full max-w-180 bg-white h-full  rounded-xl p-10 flex items-center">
-        <Outlet />
+
+      <div className="w-full flex-1 lg:min-h-0 lg:max-w-180 lg:h-full bg-white rounded-xl flex flex-col lg:items-center lg:justify-center">
+        <div className="flex items-center px-6 pt-6 lg:hidden">
+          <img src={Logo} alt="Logo" className="w-7" />
+        </div>
+
+        <div className="w-full px-6 py-8 sm:px-8 lg:p-10">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

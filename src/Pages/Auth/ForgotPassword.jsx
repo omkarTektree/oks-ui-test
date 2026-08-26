@@ -24,7 +24,7 @@ const ForgotPassword = () => {
           subtitle={`We've sent a password reset link to ${submittedEmail}.`}
           classNames={{
             base: "flex-col items-start mt-6",
-            title: "text-4xl font-bold",
+            title: "text-2xl sm:text-3xl lg:text-4xl font-bold",
             subtitle: "text-black/60",
           }}
         />
@@ -50,7 +50,7 @@ const ForgotPassword = () => {
         subtitle="No worries, enter your email and we'll send you a reset link."
         classNames={{
           base: "flex-col items-start",
-          title: "text-5xl font-bold",
+          title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
           subtitle: "text-black/60",
         }}
       />
