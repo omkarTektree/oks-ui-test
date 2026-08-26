@@ -9,8 +9,8 @@ import {
   PageTitle,
   toast,
 } from "oks-ui";
-import { Target } from "lucide-react";
 import { useAuth } from "../../context/useAuth";
+import GoogleIcon from "../../Components/Commom/GoogleIcon";
 
 const Login = () => {
   const { login } = useAuth();
@@ -72,7 +72,7 @@ const Login = () => {
               },
             }}
           />
-          <div className="flex items-center justify-between -mt-3">
+          <div className="flex items-center justify-between">
             <div>
               <Checkbox name="rememberMe" label="Remember Me" size="sm" />
             </div>
@@ -80,7 +80,7 @@ const Login = () => {
               <Button
                 variant="link"
                 size="sm"
-                onClick={() => navigate("/forgot-password")}
+                onClick={() => navigate("/forget-password")}
               >
                 Forgot Password
               </Button>
@@ -89,8 +89,8 @@ const Login = () => {
           <Button
             fullWidth
             type="submit"
+            size="sm"
             colorDepth={900}
-            className="p-4"
             radius="full"
           >
             Login
@@ -101,8 +101,9 @@ const Login = () => {
         <Button
           variant="bordered"
           fullWidth
+          size="sm"
           radius="full"
-          startContent={<Target size={18} />}
+          startContent={<GoogleIcon />}
         >
           Continue with Google
         </Button>
