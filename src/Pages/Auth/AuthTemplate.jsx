@@ -112,13 +112,15 @@ const AuthTemplate = () => {
         </div>
       </div>
 
-      <div className="w-full flex-1 lg:min-h-0 lg:max-w-180 lg:h-full bg-white rounded-xl flex flex-col lg:items-center lg:justify-center">
+      <div className="w-full flex-1 lg:min-h-0 lg:max-w-180 lg:h-full bg-white rounded-xl flex flex-col">
         <div className="flex items-center px-6 pt-6 lg:hidden">
           <img src={Logo} alt="Logo" className="w-7" />
         </div>
 
-        <div className="w-full px-6 py-8 sm:px-8 lg:p-10">
-          <Outlet />
+        <div className="flex-1 flex flex-col px-6 py-8 sm:px-8 lg:p-10">
+          <div className="w-full my-auto">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
