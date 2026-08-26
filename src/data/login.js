@@ -1,0 +1,2 @@
+const loginEmail = "";
+const loginPassword = "";

@@ -1,26 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import LogoLight from "../../assets/images/logo-light.png";
 import { Button, PageTitle } from "oks-ui";
 import { MoveLeft } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SliderContent = [
   {
-    title: "Welcome to Our Platform",
+    title:
+      "One Powerful Platform to Bring Your Ideas, Work, and Ambitions to Life",
     description:
-      "Discover the amazing features we offer to make your experience seamless and enjoyable.",
+      "Everything you need to organize your work, simplify your workflow, and make meaningful progress every day.",
   },
   {
-    title: "Create Your Account",
+    title:
+      "From Your First Idea to Your Biggest Achievement, We’re Here to Help",
     description:
-      "Join our community and unlock exclusive benefits and features.",
+      "Powerful tools and a seamless experience designed to help you turn plans into progress and progress into results.",
   },
   {
-    title: "Get Started",
+    title:
+      "A Better Way to Work Today, Build for Tomorrow, and Achieve What Matters Most",
     description:
-      "Ready to dive in? Sign up now and take the first step towards a better experience.",
+      "Get everything you need in one place and take your next big step with confidence.",
   },
 ];
+
+const SLIDE_DURATION = 18000;
+
+const TextSlider = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % SliderContent.length);
+    }, SLIDE_DURATION);
+    return () => clearInterval(timer);
+  }, []);
+
+  const { title, description } = SliderContent[index];
+
+  return (
+    <div className="max-w-3xl">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -24 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+          <PageTitle
+            as="h1"
+            title={title}
+            subtitle={description}
+            classNames={{
+              base: "flex-col items-start",
+              title: "text-white",
+              subtitle: "text-white/60",
+            }}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="flex gap-2 mt-4">
+        {SliderContent.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => setIndex(i)}
+            className="h-1 rounded-full transition-all duration-300"
+            style={{
+              width: i === index ? "40px" : "4px",
+              backgroundColor: i === index ? "#fff" : "rgba(255,255,255,0.3)",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const AuthTemplate = () => {
   return (
@@ -47,10 +107,10 @@ const AuthTemplate = () => {
         </div>
 
         <div className="text-white">
-          <PageTitle>afasfadfsd</PageTitle>
+          <TextSlider />
         </div>
       </div>
-      <div className="w-full max-w-170 bg-white h-full flex rounded-xl p-4">
+      <div className="w-full max-w-180 bg-white h-full  rounded-xl p-10 flex items-center">
         <Outlet />
       </div>
     </div>
