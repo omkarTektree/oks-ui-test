@@ -23,6 +23,7 @@ import {
   SPRINT_VELOCITY,
   TEAM_WORKLOAD,
 } from "../../data/projects";
+import { avatarUrl } from "../../lib/avatar";
 
 const PROJECT_COLUMNS = [
   {
@@ -45,7 +46,7 @@ const PROJECT_COLUMNS = [
     render: (row) => (
       <AvatarGroup max={3} size="sm">
         {row.team.map((name) => (
-          <Avatar key={name} name={name} />
+          <Avatar key={name} name={name} src={avatarUrl(name)} />
         ))}
       </AvatarGroup>
     ),

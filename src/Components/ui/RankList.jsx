@@ -1,6 +1,7 @@
 import { Avatar } from "oks-ui";
 import Surface from "./Surface";
 import CardHeader from "./CardHeader";
+import { avatarUrl } from "../../lib/avatar";
 
 /**
  * Numbered leaderboard. Per item: `name`, `value`, optional `sub`, optional
@@ -17,7 +18,7 @@ const RankList = ({ title, subtitle, actions, items }) => (
           <span className="w-4 shrink-0 text-center text-xs font-semibold text-[color:var(--app-fg-subtle)]">
             {i + 1}
           </span>
-          <Avatar name={item.name} size="sm" />
+          <Avatar name={item.name} src={avatarUrl(item.name)} size="sm" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2">
               <p className="truncate text-sm font-medium text-[var(--app-fg)]">

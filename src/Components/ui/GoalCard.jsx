@@ -1,6 +1,7 @@
 import { Avatar, Chip } from "oks-ui";
 import Surface from "./Surface";
 import CardHeader from "./CardHeader";
+import { avatarUrl } from "../../lib/avatar";
 
 const R = 54;
 const CIRC = 2 * Math.PI * R;
@@ -83,7 +84,11 @@ const GoalCard = ({
           <ul className="mt-4 w-full space-y-3 border-t border-[color:var(--app-border)] pt-4">
             {people.map((person) => (
               <li key={person.name} className="flex items-center gap-2.5">
-                <Avatar name={person.name} size="sm" />
+                <Avatar
+                  name={person.name}
+                  src={avatarUrl(person.name)}
+                  size="sm"
+                />
                 <span className="flex-1 truncate text-sm text-[color:var(--app-fg-muted)]">
                   {person.name}
                 </span>

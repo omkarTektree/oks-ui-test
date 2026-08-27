@@ -55,7 +55,7 @@ src/
     InnerPages/    Dashboards, app pages, ComingSoon
   context/         Mock auth (localStorage flag)
   data/            nav.js (full sidebar tree) + mock data
-  lib/             theme.js (light/dark handling)
+  lib/             theme.js (light/dark) + avatar.js (stock-photo avatars)
   styles/          theme.css (custom oks-ui token overrides)
 docs/
   COMPONENTS.md    Component catalogue + build plan

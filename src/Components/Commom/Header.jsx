@@ -27,6 +27,7 @@ import {
 import { loginEmail } from "../../data/login";
 import { useAuth } from "../../context/useAuth";
 import { getTheme, toggleTheme } from "../../lib/theme";
+import { avatarUrl } from "../../lib/avatar";
 
 const NOTIFICATIONS = [
   { key: "n1", title: "Revenue report published", time: "12 minutes ago" },
@@ -126,7 +127,7 @@ const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Button variant="ghost" size="sm" className="gap-2 px-1.5">
-              <Avatar name="Admin User" size="sm" />
+              <Avatar name="Admin User" src={avatarUrl("Admin User")} size="sm" />
               <span className="hidden leading-tight sm:block">
                 <span className="block text-sm font-medium text-[var(--app-fg)]">
                   Admin

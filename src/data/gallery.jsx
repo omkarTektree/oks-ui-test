@@ -18,6 +18,7 @@ import {
   toast,
 } from "oks-ui";
 import { Bell, Plus, Star, Trash2 } from "lucide-react";
+import { avatarUrl } from "../lib/avatar";
 
 import Surface from "../Components/ui/Surface";
 import KpiCard from "../Components/ui/KpiCard";
@@ -144,7 +145,7 @@ const oksUi = [
               </Button>
             </Badge>
             <Badge isDot color="success" placement="top-end">
-              <Avatar name="Dana Keller" />
+              <Avatar name="Dana Keller" src={avatarUrl("Dana Keller")} />
             </Badge>
           </>
         ),
@@ -157,26 +158,26 @@ const oksUi = [
     description: "Image with initials / icon fallback, status, and grouping.",
     examples: [
       {
-        title: "Sizes, status, group",
-        code: `<Avatar name="Dana Keller" size="sm" />
-<Avatar name="Arjun Rao" status="online" />
-<Avatar name="Priya Nair" size="lg" isBordered />
+        title: "Image, status, group",
+        code: `<Avatar name="Dana Keller" src={avatarUrl("Dana Keller")} />
+<Avatar name="Arjun Rao" src={avatarUrl("Arjun Rao")} status="online" />
+<Avatar name="Priya Nair" size="lg" isBordered />   {/* no src -> initials */}
 <AvatarGroup max={3}>
-  <Avatar name="A B" />
-  <Avatar name="C D" />
-  <Avatar name="E F" />
-  <Avatar name="G H" />
+  {team.map((n) => <Avatar key={n} name={n} src={avatarUrl(n)} />)}
 </AvatarGroup>`,
         render: () => (
           <>
-            <Avatar name="Dana Keller" size="sm" />
-            <Avatar name="Arjun Rao" status="online" />
+            <Avatar name="Dana Keller" src={avatarUrl("Dana Keller")} />
+            <Avatar
+              name="Arjun Rao"
+              src={avatarUrl("Arjun Rao")}
+              status="online"
+            />
             <Avatar name="Priya Nair" size="lg" isBordered />
             <AvatarGroup max={3}>
-              <Avatar name="A B" />
-              <Avatar name="C D" />
-              <Avatar name="E F" />
-              <Avatar name="G H" />
+              {["Maya Chen", "Sam Okafor", "Lena Ito", "Jonas Weber"].map((n) => (
+                <Avatar key={n} name={n} src={avatarUrl(n)} />
+              ))}
             </AvatarGroup>
           </>
         ),
