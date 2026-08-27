@@ -8,8 +8,7 @@ import AuthFallback from "./Pages/Auth/AuthFallback";
 import AuthTemplate from "./Pages/Auth/AuthTemplate";
 
 import InnerTemplate from "./Pages/InnerPages/InnerTemplate";
-
-
+import Placeholder from "./Pages/InnerPages/Placeholder";
 
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
@@ -33,6 +32,10 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route element={<InnerTemplate />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/projects" element={<Placeholder title="Projects" />} />
+              <Route path="/reports" element={<Placeholder title="Reports" />} />
+              <Route path="/team" element={<Placeholder title="Team" />} />
+              <Route path="/settings" element={<Placeholder title="Settings" />} />
             </Route>
           </Route>
         </Routes>
