@@ -14,7 +14,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | Ecommerce | `/dashboards/ecommerce` | ✅ (KPIs · sales column chart · fulfilment donut · stat strip · category meters · two DataTables) |
 | Finance | `/dashboards/finance` | ✅ (KPIs · cash-flow cards · revenue-vs-expenses multi-series chart · expense donut · budget meters · transactions table) |
 | Sales | `/dashboards/sales` | ✅ (KPIs · pipeline stats · sales-trend chart · quota gauge with rep rows · region donut · leaderboard · deals table) |
-| Marketing | `/dashboards/marketing` | ⬜ |
+| Marketing | `/dashboards/marketing` | ✅ (KPIs · spend/leads chart · channel donut · marketing funnel · campaign ROAS meters · campaigns table) |
 | Logistics | `/dashboards/logistics` | ⬜ |
 | Projects | `/dashboards/projects` | ✅ (KPIs · health strip · project-progress table · team-workload list · deadlines timeline · sprint-velocity chart · activity) |
 | SaaS | `/dashboards/saas` | ⬜ |

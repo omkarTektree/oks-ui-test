@@ -52,7 +52,7 @@ const PRODUCT_COLUMNS = [
 const Dashboard = () => (
   <div className="space-y-6">
     <SectionTitle
-      title="Welcome back, Admin 👋"
+      title="Welcome back, Admin"
       subtitle="Here's what's happening across your workspace today."
       actions={
         <>

@@ -13,6 +13,7 @@ const TONE = {
   Blocked: "danger",
   Pending: "warning",
   Processing: "info",
+  Scheduled: "info",
   Shipped: "info",
   Delivered: "success",
   Paused: "warning",
@@ -22,7 +23,7 @@ const TONE = {
   Completed: "success",
 };
 
-/** Status label → semantic colour, rendered as a dot chip. */
+/** Maps a status label to a semantic colour, rendered as a dot chip. */
 const StatusChip = ({ status, size = "sm" }) => (
   <Chip size={size} variant="dot" color={TONE[status] ?? "default"}>
     {status}

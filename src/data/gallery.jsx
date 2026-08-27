@@ -535,7 +535,8 @@ const composed = [
   {
     slug: "meter-list",
     title: "MeterList",
-    description: "Labelled meters. `scaleToMax` + `showDropOff` → conversion funnel.",
+    description:
+      "Labelled meters. `scaleToMax` + `showDropOff` makes a conversion funnel.",
     examples: [
       {
         title: "Device split & funnel",
