@@ -68,9 +68,13 @@ Overview grid + 14 pages:
 - **Forms:** Form Elements (every field) · Form Layouts · Form Validation · Multi-Step Wizard (`SteppedForm`)
 - **Inputs:** File Upload · Rich Text Editor (`TextEditor`) · Date Pickers · Select Components · Input Masks
 
-## Charts & Analytics  `/charts/*`
-Apex Charts · Chart.js · Statistics · KPI Analytics · Heatmaps · Revenue Analytics ·
-User Analytics
+## Charts & Analytics  `/charts/*`  ✅ (7 pages)
+✅ **Apex Charts** (area/line/bar/column) · **Chart.js** (pie/donut/stacked) ·
+**Statistics** · **KPI Analytics** (KPI-vs-target) · **Heatmaps** (retention +
+activity) · **Revenue Analytics** · **User Analytics**. Pages in
+`src/Pages/InnerPages/charts/`, data in `src/data/charts.js`. Shared `ChartPanel`
+wrapper (`charts/_panel.jsx`); reuses `ChartCard`, `DonutStat`, `MeterList`,
+`CohortGrid`, `GoalCard`.
 
 ## Components  `/components`, `/components/:slug`  ✅ (the promo gallery)
 

@@ -29,6 +29,7 @@ real app.
 | **BoardPage archetype** | `src/Pages/InnerPages/BoardPage.jsx` — config-driven kanban. Powers **3 routes** from `src/data/boards.jsx` (`/projects/team-board`, `/projects/sprint-board`, `/projects/kanban-view`). |
 | **FormPage archetype** | `src/Pages/InnerPages/FormPage.jsx` — config-driven create form (`FormFieldSet` grid + media/tips aside). Powers **4 routes** from `src/data/forms.jsx` (add-user, create-project, add-product, create-order). |
 | **DetailPage archetype** | `src/Pages/InnerPages/DetailPage.jsx` — header + stat tiles + tabs + typed content blocks. New `KeyValueList` ui component. Powers `/user-management/my-profile` from `src/data/details.jsx`. |
+| **Charts section** | `src/Pages/InnerPages/charts/*` — **7 pages** at `/charts/*` (apex-charts, chart-js, statistics, kpi-analytics, heatmaps, revenue-analytics, user-analytics). Data in `src/data/charts.js`. New `ChartPanel` local wrapper. |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -64,9 +65,10 @@ SettingsSection, CodeBlock, Example.
    fleet-management), CRM (opportunities, campaigns), Finance (payments,
    expenses), Marketing (email-campaigns, sms-campaigns, landing-pages,
    segments). `ListPage` now covers **40 routes**.
-6. **Charts & Analytics section** — `/charts/*`: one page per `oks-ui` Chart
-   type (line/area/bar/column/pie/donut) + KPI/heatmap/revenue/user analytics.
-   Reuse `ChartCard`, `CohortGrid`.
+6. ~~Charts & Analytics section~~ — **DONE**. 7 pages in
+   `src/Pages/InnerPages/charts/` (apex-charts, chart-js, statistics,
+   kpi-analytics, heatmaps, revenue-analytics, user-analytics), data in
+   `src/data/charts.js`, shared `ChartPanel` wrapper.
 7. **Reports section** — `/reports/*`: mostly a `ListPage` of saved reports +
    a report-builder stub.
 8. **Utility & Pages sections** — FAQ, Help Center, Pricing, 404, Maintenance,

@@ -14,6 +14,7 @@ import { appsRoutes, appsRoutePaths } from "./Pages/InnerPages/apps/routes";
 import { boardRoutes, boardRoutePaths } from "./Pages/InnerPages/boardRoutes";
 import { formRoutes, formRoutePaths } from "./Pages/InnerPages/formRoutes";
 import { detailRoutes, detailRoutePaths } from "./Pages/InnerPages/detailRoutes";
+import { chartsRoutes, chartsRoutePaths } from "./Pages/InnerPages/charts/routes";
 import { listRoutes, listRoutePaths } from "./Pages/InnerPages/listRoutes";
 import {
   settingsRoutes,
@@ -71,6 +72,7 @@ const CONFIGURED = new Set([
   ...boardRoutePaths,
   ...formRoutePaths,
   ...detailRoutePaths,
+  ...chartsRoutePaths,
 ]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
@@ -142,6 +144,7 @@ const App = () => {
               {boardRoutes}
               {formRoutes}
               {detailRoutes}
+              {chartsRoutes}
               {listRoutes}
               {settingsRoutes}
               {shellRoutes.map((path) => (
