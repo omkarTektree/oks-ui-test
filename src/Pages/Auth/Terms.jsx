@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, PageTitle } from "oks-ui";
 import { MoveLeft } from "lucide-react";
 import Logo from "../../assets/images/logo.png";
+import { RevealOnView } from "../../Components/Commom/Reveal";
 
 const sections = [
   {
@@ -65,12 +66,12 @@ const Terms = () => {
 
         <div className="mt-8 flex flex-col gap-8">
           {sections.map((section) => (
-            <div key={section.title}>
+            <RevealOnView key={section.title}>
               <h2 className="text-lg font-semibold">{section.title}</h2>
               <p className="mt-2 text-black/70 leading-relaxed">
                 {section.body}
               </p>
-            </div>
+            </RevealOnView>
           ))}
         </div>
 

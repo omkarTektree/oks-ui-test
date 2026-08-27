@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Divider, Form, FormFieldSet, PageTitle, toast } from "oks-ui";
 import { useAuth } from "../../context/useAuth";
 import GoogleIcon from "../../Components/Commom/GoogleIcon";
+import { Stagger, RevealItem } from "../../Components/Commom/Reveal";
 
 const Register = () => {
   const { register } = useAuth();
@@ -14,18 +15,20 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full">
-      <PageTitle
-        as="h1"
-        title="Create an Account"
-        subtitle="Sign up to start organizing your work with us."
-        classNames={{
-          base: "flex-col items-start",
-          title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
-          subtitle: "text-black/60",
-        }}
-      />
-      <div>
+    <Stagger className="w-full">
+      <RevealItem>
+        <PageTitle
+          as="h1"
+          title="Create an Account"
+          subtitle="Set up your workspace and start shipping."
+          classNames={{
+            base: "flex-col items-start",
+            title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
+            subtitle: "text-black/60",
+          }}
+        />
+      </RevealItem>
+      <RevealItem>
         <Form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit}>
           <FormFieldSet
             type="text"
@@ -144,8 +147,9 @@ const Register = () => {
             Sign Up
           </Button>
         </Form>
+      </RevealItem>
+      <RevealItem>
         <Divider className="my-10">or Continue with</Divider>
-
         <Button
           variant="bordered"
           fullWidth
@@ -155,16 +159,16 @@ const Register = () => {
         >
           Continue with Google
         </Button>
-        <div className="mt-6 text-center">
-          <p className="text-black/60 text-sm">
-            Already have an account?{" "}
-            <Button variant="link" size="sm" onClick={() => navigate("/")}>
-              Login
-            </Button>
-          </p>
-        </div>
-      </div>
-    </div>
+      </RevealItem>
+      <RevealItem className="mt-6 text-center">
+        <p className="text-black/60 text-sm">
+          Already have an account?{" "}
+          <Button variant="link" size="sm" onClick={() => navigate("/")}>
+            Login
+          </Button>
+        </p>
+      </RevealItem>
+    </Stagger>
   );
 };
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, FormFieldSet, PageTitle, toast } from "oks-ui";
 import { MailCheck } from "lucide-react";
+import { Stagger, RevealItem } from "../../Components/Commom/Reveal";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -14,47 +15,55 @@ const ForgotPassword = () => {
 
   if (submittedEmail) {
     return (
-      <div className="w-full">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/5">
-          <MailCheck size={26} />
-        </div>
-        <PageTitle
-          as="h1"
-          title="Check Your Email"
-          subtitle={`We've sent a password reset link to ${submittedEmail}.`}
-          classNames={{
-            base: "flex-col items-start mt-6",
-            title: "text-2xl sm:text-3xl lg:text-4xl font-bold",
-            subtitle: "text-black/60",
-          }}
-        />
-        <Button
-          fullWidth
-          size="sm"
-          colorDepth={900}
-          radius="full"
-          className="mt-8"
-          onClick={() => navigate("/")}
-        >
-          Back to Login
-        </Button>
-      </div>
+      <Stagger className="w-full">
+        <RevealItem>
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/5">
+            <MailCheck size={26} />
+          </div>
+        </RevealItem>
+        <RevealItem>
+          <PageTitle
+            as="h1"
+            title="Check Your Email"
+            subtitle={`We've sent a password reset link to ${submittedEmail}.`}
+            classNames={{
+              base: "flex-col items-start mt-6",
+              title: "text-2xl sm:text-3xl lg:text-4xl font-bold",
+              subtitle: "text-black/60",
+            }}
+          />
+        </RevealItem>
+        <RevealItem>
+          <Button
+            fullWidth
+            size="sm"
+            colorDepth={900}
+            radius="full"
+            className="mt-8"
+            onClick={() => navigate("/")}
+          >
+            Back to Login
+          </Button>
+        </RevealItem>
+      </Stagger>
     );
   }
 
   return (
-    <div className="w-full">
-      <PageTitle
-        as="h1"
-        title="Forgot Password?"
-        subtitle="No worries, enter your email and we'll send you a reset link."
-        classNames={{
-          base: "flex-col items-start",
-          title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
-          subtitle: "text-black/60",
-        }}
-      />
-      <div>
+    <Stagger className="w-full">
+      <RevealItem>
+        <PageTitle
+          as="h1"
+          title="Forgot Password?"
+          subtitle="No worries, enter your email and we'll send you a reset link."
+          classNames={{
+            base: "flex-col items-start",
+            title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
+            subtitle: "text-black/60",
+          }}
+        />
+      </RevealItem>
+      <RevealItem>
         <Form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit}>
           <FormFieldSet
             type="email"
@@ -84,16 +93,16 @@ const ForgotPassword = () => {
             Send Reset Link
           </Button>
         </Form>
-        <div className="mt-6 text-center">
-          <p className="text-black/60 text-sm">
-            Remember your password?{" "}
-            <Button variant="link" size="sm" onClick={() => navigate("/")}>
-              Login
-            </Button>
-          </p>
-        </div>
-      </div>
-    </div>
+      </RevealItem>
+      <RevealItem className="mt-6 text-center">
+        <p className="text-black/60 text-sm">
+          Remember your password?{" "}
+          <Button variant="link" size="sm" onClick={() => navigate("/")}>
+            Login
+          </Button>
+        </p>
+      </RevealItem>
+    </Stagger>
   );
 };
 

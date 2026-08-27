@@ -10,6 +10,7 @@ import {
 } from "oks-ui";
 import { useAuth } from "../../context/useAuth";
 import GoogleIcon from "../../Components/Commom/GoogleIcon";
+import { Stagger, RevealItem } from "../../Components/Commom/Reveal";
 
 const Login = () => {
   const { login } = useAuth();
@@ -25,18 +26,20 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full">
-      <PageTitle
-        as="h1"
-        title="Welcome Back!"
-        subtitle="Please enter your credentials to log in."
-        classNames={{
-          base: "flex-col items-start",
-          title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
-          subtitle: "text-black/60",
-        }}
-      />
-      <div>
+    <Stagger className="w-full">
+      <RevealItem>
+        <PageTitle
+          as="h1"
+          title="Welcome Back!"
+          subtitle="Sign in to pick up where you left off."
+          classNames={{
+            base: "flex-col items-start",
+            title: "text-3xl sm:text-4xl lg:text-5xl font-bold",
+            subtitle: "text-black/60",
+          }}
+        />
+      </RevealItem>
+      <RevealItem>
         <Form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit}>
           <FormFieldSet
             type="email"
@@ -97,8 +100,9 @@ const Login = () => {
             Login
           </Button>
         </Form>
+      </RevealItem>
+      <RevealItem>
         <Divider className="my-10">or Continue with</Divider>
-
         <Button
           variant="bordered"
           fullWidth
@@ -108,20 +112,20 @@ const Login = () => {
         >
           Continue with Google
         </Button>
-        <div className="mt-6 text-center">
-          <p className="text-black/60 text-sm">
-            Don't have an account?{" "}
-            <Button
-              variant="link"
-              size="sm"
-              onClick={() => navigate("/register")}
-            >
-              Sign Up Here
-            </Button>
-          </p>
-        </div>
-      </div>
-    </div>
+      </RevealItem>
+      <RevealItem className="mt-6 text-center">
+        <p className="text-black/60 text-sm">
+          Don't have an account?{" "}
+          <Button
+            variant="link"
+            size="sm"
+            onClick={() => navigate("/register")}
+          >
+            Sign Up Here
+          </Button>
+        </p>
+      </RevealItem>
+    </Stagger>
   );
 };
 
