@@ -61,6 +61,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | `EntityCell` | Avatar + primary text + muted secondary. | `Avatar` + text | ✅ |
 | `ActivityFeed` | Events list with actor avatar, text, relative time. | `Avatar` + `--app-*` tokens | ✅ (filter 🔨) |
 | `Timeline` | Vertical list with dot markers + connecting rail; per-item date + tag. | `Surface` + markers | ✅ |
+| `CohortGrid` | Retention heatmap — cells shaded by value. | `Surface` + `table` + `color-mix` | ✅ |
 | `KeyValueList` | Definition list for detail panels. | `Divider` + rows | ⬜ |
 
 ## 5. Shell & navigation  · _Vela: sidebar, top bar, breadcrumbs_

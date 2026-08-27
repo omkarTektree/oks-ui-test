@@ -17,3 +17,4 @@ export { default as EntityCell } from "./EntityCell";
 export { default as DataTable } from "./DataTable";
 export { default as ActivityFeed } from "./ActivityFeed";
 export { default as Timeline } from "./Timeline";
+export { default as CohortGrid } from "./CohortGrid";

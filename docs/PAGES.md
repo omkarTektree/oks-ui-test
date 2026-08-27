@@ -15,10 +15,10 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | Finance | `/dashboards/finance` | ✅ (KPIs · cash-flow cards · revenue-vs-expenses multi-series chart · expense donut · budget meters · transactions table) |
 | Sales | `/dashboards/sales` | ✅ (KPIs · pipeline stats · sales-trend chart · quota gauge with rep rows · region donut · leaderboard · deals table) |
 | Marketing | `/dashboards/marketing` | ✅ (KPIs · spend/leads chart · channel donut · marketing funnel · campaign ROAS meters · campaigns table) |
-| Logistics | `/dashboards/logistics` | ⬜ |
+| Logistics | `/dashboards/logistics` | ✅ (KPIs · warehouse meters · delivery donut · volume chart · on-time gauge · fleet + regional tiles · shipments table) |
 | Projects | `/dashboards/projects` | ✅ (KPIs · health strip · project-progress table · team-workload list · deadlines timeline · sprint-velocity chart · activity) |
-| SaaS | `/dashboards/saas` | ⬜ |
-| Business Intelligence | `/dashboards/business-intelligence` | ⬜ |
+| SaaS | `/dashboards/saas` | ✅ (KPIs · health tiles · MRR chart · plan-mix donut · cohort retention heatmap · signups table) |
+| Business Intelligence | `/dashboards/business-intelligence` | ✅ (KPIs · AI-insight Alerts · KPI-vs-target table · data sources · report library · regional donut) |
 
 ## Orders  `/orders` ⬜
 

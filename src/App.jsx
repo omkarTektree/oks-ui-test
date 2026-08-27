@@ -30,6 +30,11 @@ const ProjectsDashboard = lazy(
 const MarketingDashboard = lazy(
   () => import("./Pages/InnerPages/MarketingDashboard")
 );
+const SaasDashboard = lazy(() => import("./Pages/InnerPages/SaasDashboard"));
+const LogisticsDashboard = lazy(
+  () => import("./Pages/InnerPages/LogisticsDashboard")
+);
+const BiDashboard = lazy(() => import("./Pages/InnerPages/BiDashboard"));
 const ComponentsOverview = lazy(
   () => import("./Pages/InnerPages/ComponentsOverview")
 );
@@ -45,6 +50,9 @@ const REAL_INNER = new Set([
   "/dashboards/sales",
   "/dashboards/projects",
   "/dashboards/marketing",
+  "/dashboards/saas",
+  "/dashboards/logistics",
+  "/dashboards/business-intelligence",
 ]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
@@ -94,6 +102,15 @@ const App = () => {
               <Route
                 path="/dashboards/marketing"
                 element={<MarketingDashboard />}
+              />
+              <Route path="/dashboards/saas" element={<SaasDashboard />} />
+              <Route
+                path="/dashboards/logistics"
+                element={<LogisticsDashboard />}
+              />
+              <Route
+                path="/dashboards/business-intelligence"
+                element={<BiDashboard />}
               />
               <Route path="/components" element={<ComponentsOverview />} />
               <Route
