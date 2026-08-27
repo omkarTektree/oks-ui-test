@@ -1,36 +1,56 @@
 import { Button } from "oks-ui";
+import { Download, Plus } from "lucide-react";
 import {
-  Activity,
-  DollarSign,
-  Download,
-  Plus,
-  TrendingUp,
-  Users,
-} from "lucide-react";
-import {
+  ActivityFeed,
   CardHeader,
+  ChartCard,
+  DataTable,
+  DonutStat,
+  EntityCell,
+  GoalCard,
   KpiCard,
+  MeterList,
   SectionTitle,
   StatGroup,
+  StatusChip,
   Surface,
 } from "../../Components/ui";
+import {
+  ACTIVITY,
+  DEVICE_SESSIONS,
+  FUNNEL,
+  KPIS,
+  MONTHLY_TARGET,
+  REVENUE_SERIES,
+  TOP_PRODUCTS,
+  TRAFFIC_SOURCES,
+} from "../../data/analytics";
 
-const KPIS = [
-  { icon: DollarSign, label: "Total revenue", value: "$486,200", delta: 12.4, hint: "vs. previous 30 days" },
-  { icon: Users, label: "Active users", value: "84,200", delta: 8.1, hint: "vs. previous 30 days" },
-  { icon: TrendingUp, label: "Conversion rate", value: "3.24%", delta: 0.6, hint: "vs. previous 30 days" },
-  { icon: Activity, label: "Avg. order value", value: "$68.40", delta: 2.1, deltaDirection: "down", hint: "vs. previous 30 days" },
-];
-
-const ACTIVITY = [
-  { who: "Maya Chen", what: "published a new revenue report.", when: "12 minutes ago" },
-  { who: "System", what: "flagged a spike in checkout errors.", when: "48 minutes ago" },
-  { who: "Diego Ruiz", what: "closed the Q3 marketing campaign.", when: "2 hours ago" },
-  { who: "Priya Nair", what: "invited 3 new teammates to the workspace.", when: "5 hours ago" },
+const PRODUCT_COLUMNS = [
+  {
+    key: "product",
+    header: "Product",
+    render: (row) => <EntityCell name={row.name} sub={row.sku} />,
+  },
+  { key: "channel", header: "Channel" },
+  { key: "sales", header: "Sales", align: "right" },
+  {
+    key: "revenue",
+    header: "Revenue",
+    align: "right",
+    render: (row) => (
+      <span className="font-medium text-[var(--app-fg)]">{row.revenue}</span>
+    ),
+  },
+  {
+    key: "status",
+    header: "Status",
+    render: (row) => <StatusChip status={row.status} />,
+  },
 ];
 
 const Dashboard = () => (
-  <div>
+  <div className="space-y-6">
     <SectionTitle
       title="Welcome back, Admin 👋"
       subtitle="Here's what's happening across your workspace today."
@@ -39,7 +59,11 @@ const Dashboard = () => (
           <Button variant="bordered" size="sm" color="default">
             Last 30 days
           </Button>
-          <Button variant="bordered" size="sm" startContent={<Download size={15} />}>
+          <Button
+            variant="bordered"
+            size="sm"
+            startContent={<Download size={15} />}
+          >
             Export
           </Button>
           <Button color="primary" size="sm" startContent={<Plus size={15} />}>
@@ -55,32 +79,94 @@ const Dashboard = () => (
       ))}
     </StatGroup>
 
-    <Surface className="mt-6" padding="none">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="lg:col-span-2">
+        <ChartCard
+          title="Revenue overview"
+          headline="$486,200"
+          delta={18.2}
+          deltaLabel="vs. last year"
+          views={[
+            {
+              key: "revenue",
+              label: "Revenue",
+              data: REVENUE_SERIES,
+              x: "month",
+              series: "revenue",
+              dataFormat: { prefix: "$", format: "compact" },
+            },
+            {
+              key: "orders",
+              label: "Orders",
+              data: REVENUE_SERIES,
+              x: "month",
+              series: "orders",
+              dataFormat: { format: "compact" },
+            },
+            {
+              key: "sessions",
+              label: "Sessions",
+              data: REVENUE_SERIES,
+              x: "month",
+              series: "sessions",
+              dataFormat: { format: "compact" },
+            },
+          ]}
+        />
+      </div>
+
+      <DonutStat
+        title="Traffic sources"
+        subtitle="Where your visits come from"
+        data={TRAFFIC_SOURCES}
+        categoryKey="source"
+        valueKey="visits"
+        centerValue="84.2k"
+        centerLabel="Total visits"
+      />
+    </div>
+
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <MeterList
+        title="Conversion funnel"
+        subtitle="Last 30 days journey"
+        items={FUNNEL}
+        scaleToMax
+        showDropOff
+      />
+      <MeterList
+        title="Sessions by device"
+        subtitle="Share of total sessions"
+        items={DEVICE_SESSIONS}
+      />
+      <GoalCard title="Monthly target" {...MONTHLY_TARGET} />
+    </div>
+
+    <Surface padding="none">
+      <div className="flex items-center justify-between px-5 pt-5">
+        <CardHeader
+          title="Top performing products"
+          subtitle="By revenue this month"
+        />
+        <Button variant="link" size="sm">
+          View all
+        </Button>
+      </div>
+      <DataTable
+        columns={PRODUCT_COLUMNS}
+        rows={TOP_PRODUCTS}
+        getRowKey={(row) => row.sku}
+      />
+    </Surface>
+
+    <Surface padding="none">
       <div className="px-5 pt-5">
         <CardHeader
           title="Recent activity"
           subtitle="Latest events across the workspace"
         />
       </div>
-      <ul className="divide-y divide-[color:var(--app-border)]">
-        {ACTIVITY.map((item) => (
-          <li
-            key={`${item.who}-${item.what}`}
-            className="flex items-center gap-3 px-5 py-3.5 text-sm"
-          >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--app-surface-2)] text-xs font-semibold text-[color:var(--app-fg-muted)]">
-              {item.who.slice(0, 1)}
-            </span>
-            <p className="min-w-0 flex-1 truncate text-[color:var(--app-fg-muted)]">
-              <span className="font-medium text-[var(--app-fg)]">{item.who}</span>{" "}
-              {item.what}
-            </p>
-            <span className="shrink-0 text-xs text-[color:var(--app-fg-subtle)]">
-              {item.when}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <ActivityFeed items={ACTIVITY} />
     </Surface>
   </div>
 );

@@ -9,7 +9,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 ## Dashboards  `/dashboards/*`
 | Page | Route | Status |
 | --- | --- | --- |
-| Analytics | `/dashboards/analytics` | ✅ (KPIs + activity; charts/table 🔨) |
+| Analytics | `/dashboards/analytics` | ✅ (KPIs · revenue chart · donut · funnel · device meters · goal gauge · products table · activity) |
 | CRM | `/dashboards/crm` | 🔨 |
 | Ecommerce | `/dashboards/ecommerce` | 🔨 |
 | Finance | `/dashboards/finance` | ⬜ |

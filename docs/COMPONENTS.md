@@ -36,33 +36,30 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | `KpiCard` | Headline metric: value, label, hint, `TrendChip`, leading icon. Sparkline slot 🔨. | `Surface` + `Stat` + `TrendChip` | ✅ |
 | `TrendChip` | `↗ 12.4%` / `↘ 2.1%` pill, green / red by direction. | `Chip` (`color` success/danger, `startContent` arrow) | ✅ |
 | `StatGroup` | Responsive grid of `KpiCard`s (2 / 3 / 4 col). | CSS grid | ✅ |
-| `ProgressStat` | Label + value + horizontal bar (e.g. Desktop 58%). | `div` bar + `--oks-*` + `Tooltip` |
-| `GoalCard` | Radial gauge — "78% · $98.4k of $126k · ahead of schedule". | `Surface` + SVG ring + `Chip` + `Divider` |
-| `MiniChart` | Inline sparkline, no axes/legend. | `Chart` `type="area"` minimal |
+| `MeterList` | Card of labelled meters; `scaleToMax` + `showDropOff` makes a conversion funnel. | `Surface` + `CardHeader` + bars | ✅ |
+| `GoalCard` | Radial gauge — "78% · $98.4k of $126k · ahead of schedule". | `Surface` + SVG ring + `Chip` | ✅ |
+| `MiniChart` | Inline sparkline, no axes/legend. | `Chart` `type="area"` minimal | 🔨 |
 
 ## 3. Charts  · _Vela: "Revenue overview", "Traffic sources", "Conversion funnel"_
 
-| Component | Purpose | Built from |
-| --- | --- | --- |
-| `ChartCard` | Full chart block: headline value + delta, series toggle, chart body, footer note. | `Surface` + `CardHeader` + `Tabs` + `Chart` |
-| `DonutStat` | Donut with centre total + labelled legend list with %. | `Chart` `type="donut"` + legend rows |
-| `FunnelChart` | Stacked descending bars with counts + drop‑off %. | `Surface` + bars (`div`) + `Tooltip` |
-| `BarCompareCard` | Grouped/stacked column chart with legend. | `ChartCard` + `Chart` `type="column"` |
-| `ChartLegend` | Shared clickable legend (toggle series). | `Chip` (toggle) or `Tabs` |
+| Component | Purpose | Built from | Status |
+| --- | --- | --- | --- |
+| `ChartCard` | Chart block: headline value + delta, series toggle, chart body. | `Surface` + `Tabs` + `Chart` | ✅ |
+| `DonutStat` | Donut with centre total + labelled percentage legend. | `Surface` + `Chart` `type="donut"` + legend | ✅ |
+| `BarCompareCard` | Grouped/stacked column chart with legend. | `ChartCard` + `Chart` `type="column"` | ⬜ |
 
 ## 4. Data display  · _Vela: "Top performing products", "Recent activity"_
 
-| Component | Purpose | Built from |
-| --- | --- | --- |
-| `DataTable` | Sortable headers, selectable rows, per‑cell renderers, empty / loading states, pagination. The flagship composite. | `table` + `Checkbox` + `Chip` + `Dropdown` (row actions) + `Avatar` + `Pagination` + `EmptyState` + `Loader` |
-| `TableToolbar` | Search + filter chips + column/sort menu above a table. | `SearchInput` + `Chip` (filters) + `SelectField` + `Button` |
-| `Pagination` | Page controls. | `ButtonGroup` + `Button` `isIconOnly` |
-| `StatusChip` | Status → colour map (In stock / Low stock / Out of stock, Active / Paused…). | `Chip` `variant="dot"` |
-| `EntityCell` | Avatar + primary text + muted secondary (name / SKU, user / email). | `Avatar` + text |
-| `ActivityFeed` | Timeline of events with actor avatar, text, relative time, filter. | `Avatar` + `Divider` + `Chip`/`Tabs` filter |
-| `Timeline` | Vertical step list with dot markers. | `Divider` + markers + content |
-| `KeyValueList` | Definition list for detail panels. | `Divider` + rows |
-| `DescriptionCard` | `Surface` wrapping a `KeyValueList`. | `Surface` + `KeyValueList` |
+| Component | Purpose | Built from | Status |
+| --- | --- | --- | --- |
+| `DataTable` | Column config + per‑cell renderers. Sorting / selection / pagination next. | `table` + `--app-*` tokens | ✅ (basic) |
+| `TableToolbar` | Search + filter chips + column/sort menu above a table. | `SearchInput` + `Chip` + `SelectField` + `Button` | ⬜ |
+| `Pagination` | Page controls. | `ButtonGroup` + `Button` `isIconOnly` | ⬜ |
+| `StatusChip` | Status → colour map (In stock / Low stock / Out of stock…). | `Chip` `variant="dot"` | ✅ |
+| `EntityCell` | Avatar + primary text + muted secondary. | `Avatar` + text | ✅ |
+| `ActivityFeed` | Events list with actor avatar, text, relative time. | `Avatar` + `--app-*` tokens | ✅ (filter 🔨) |
+| `Timeline` | Vertical step list with dot markers. | `Divider` + markers | ⬜ |
+| `KeyValueList` | Definition list for detail panels. | `Divider` + rows | ⬜ |
 
 ## 5. Shell & navigation  · _Vela: sidebar, top bar, breadcrumbs_
 
