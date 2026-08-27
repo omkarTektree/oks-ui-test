@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /**
  * Lightweight dropdown menu: a trigger plus a floating panel that closes on
@@ -37,32 +37,23 @@ const Menu = ({ trigger, children, align = "right", width = 232 }) => {
       >
         {trigger}
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            role="menu"
-            style={{ width }}
-            initial={
-              reduceMotion
-                ? { opacity: 0 }
-                : { opacity: 0, y: -6, scale: 0.98 }
-            }
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={
-              reduceMotion
-                ? { opacity: 0 }
-                : { opacity: 0, y: -6, scale: 0.98 }
-            }
-            transition={{ duration: 0.14, ease: "easeOut" }}
-            onClick={() => setOpen(false)}
-            className={`absolute z-40 mt-2 overflow-hidden rounded-xl border border-black/[0.08] bg-white p-1.5 shadow-xl shadow-black/10 ${
-              align === "right" ? "right-0" : "left-0"
-            }`}
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <motion.div
+          role="menu"
+          style={{ width }}
+          initial={
+            reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.98 }
+          }
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.14, ease: "easeOut" }}
+          onClick={() => setOpen(false)}
+          className={`absolute z-40 mt-2 overflow-hidden rounded-xl border border-black/[0.08] bg-white p-1.5 shadow-xl shadow-black/10 ${
+            align === "right" ? "right-0" : "left-0"
+          }`}
+        >
+          {children}
+        </motion.div>
+      )}
     </div>
   );
 };
@@ -86,7 +77,9 @@ export const MenuItem = ({ icon: Icon, children, onClick, danger = false }) => (
 export const MenuLabel = ({ title, subtitle }) => (
   <div className="px-3 py-2">
     <p className="text-sm font-medium text-black">{title}</p>
-    {subtitle ? <p className="truncate text-xs text-black/50">{subtitle}</p> : null}
+    {subtitle ? (
+      <p className="truncate text-xs text-black/50">{subtitle}</p>
+    ) : null}
   </div>
 );
 
