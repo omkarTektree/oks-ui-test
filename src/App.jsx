@@ -12,6 +12,7 @@ import ComingSoon from "./Pages/InnerPages/ComingSoon";
 import { tablesFormsRoutes } from "./Pages/InnerPages/tables-forms/routes";
 import { appsRoutes, appsRoutePaths } from "./Pages/InnerPages/apps/routes";
 import { boardRoutes, boardRoutePaths } from "./Pages/InnerPages/boardRoutes";
+import { formRoutes, formRoutePaths } from "./Pages/InnerPages/formRoutes";
 import { listRoutes, listRoutePaths } from "./Pages/InnerPages/listRoutes";
 import {
   settingsRoutes,
@@ -67,6 +68,7 @@ const CONFIGURED = new Set([
   ...settingsRoutePaths,
   ...appsRoutePaths,
   ...boardRoutePaths,
+  ...formRoutePaths,
 ]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
@@ -136,6 +138,7 @@ const App = () => {
               {tablesFormsRoutes}
               {appsRoutes}
               {boardRoutes}
+              {formRoutes}
               {listRoutes}
               {settingsRoutes}
               {shellRoutes.map((path) => (

@@ -33,13 +33,13 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 
 ## User Management  `/user-management/*`
-✅ **All Users · Roles · Teams · Departments · Activity Logs** (via `ListPage`) ·
-⬜ My Profile · Add User · Permissions
+✅ **All Users · Roles · Teams · Departments · Activity Logs** (`ListPage`) ·
+**Add User** (`FormPage`) · ⬜ My Profile · Permissions
 
 ## Projects  `/projects/*`
 ✅ **All Projects** (`ListPage`) · **Team Board · Sprint Board · Kanban View**
-(`BoardPage` archetype — `src/data/boards.jsx`) · ⬜ Create Project · Timeline ·
-Gantt View · Project Analytics
+(`BoardPage`) · **Create Project** (`FormPage`) · ⬜ Timeline · Gantt View ·
+Project Analytics
 
 ## Finance  `/finance/*`
 ✅ **Transactions · Invoices** (`ListPage`) · ⬜ Payments · Expenses ·
@@ -58,9 +58,9 @@ Shipments · Delivery Tracking · Fleet Management · Warehouse Management ·
 Route Planning
 
 ## Ecommerce  `/ecommerce/*`
-✅ **Product List · Orders · Customers** (`ListPage`) · ⬜ Product Grid ·
-Add Product · Categories · Create Order · Customer Analytics · Reviews ·
-Inventory · Coupons · Wishlist · Promotions
+✅ **Product List · Orders · Customers** (`ListPage`) · **Add Product ·
+Create Order** (`FormPage`) · ⬜ Product Grid · Categories · Customer Analytics ·
+Reviews · Inventory · Coupons · Wishlist · Promotions
 
 ## Tables & Forms  `/tables-forms`, `/tables-forms/*`  ✅ (working demos)
 Overview grid + 14 pages:
