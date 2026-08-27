@@ -18,6 +18,7 @@ export { default as DataTable } from "./DataTable";
 export { default as ActivityFeed } from "./ActivityFeed";
 export { default as Timeline } from "./Timeline";
 export { default as CohortGrid } from "./CohortGrid";
+export { default as BoardView } from "./BoardView";
 export { default as Pagination } from "./Pagination";
 export { default as SearchInput } from "./SearchInput";
 export { default as TableToolbar } from "./TableToolbar";

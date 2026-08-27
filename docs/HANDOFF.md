@@ -25,6 +25,7 @@ real app.
 | **Tables & Forms** | `/tables-forms` + 14 demo pages (5 tables, 4 forms, 5 specialised inputs). `src/Pages/InnerPages/tables-forms/` |
 | **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **16 routes** from `src/data/lists.jsx` (All Users, Roles, Teams, Departments, Activity Logs, All Projects, Product List, Orders, Customers x2, Leads, Deals, Transactions, Invoices, Employees) |
 | **SettingsPage archetype** | `src/Pages/InnerPages/SettingsPage.jsx` — config-driven. Powers **15 routes** from `src/data/settings.jsx` (Settings/* and Account/*) |
+| **Apps section** | `src/Pages/InnerPages/apps/*` — **10 screens** at `/apps/*`: Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts. Data in `src/data/apps.js`, routes in `apps/routes.jsx`. New `BoardView` ui component (kanban). |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -39,13 +40,11 @@ SettingsSection, CodeBlock, Example.
 
 ## Next, in priority order
 
-1. **App shells** — `/apps/*`: Chat, Group Chat, Email (3-pane messaging
-   layout), Calendar (month grid), File Manager (grid/list + breadcrumb),
-   Notes, Task Manager, Help Desk, Support Tickets, Contacts.
-   → build 2-3 layout archetypes (`MessagingLayout`, `CalendarView`,
-   `FileBrowser`) then configure.
+1. ~~App shells~~ — **DONE** (commit after `c3762be`). 10 screens under `/apps/*`.
 2. **Board archetype** — `/projects/{team-board,sprint-board,kanban-view}`:
-   column layout with cards. One `BoardPage` component + configs.
+   column layout with cards. **`BoardView` ui component already exists**
+   (`src/Components/ui/BoardView.jsx`, used by `/apps/task-manager`). Add a
+   `BoardPage` wrapper + configs in `src/data/`, wire the 3 project routes.
 3. **FormPage archetype** — `/{user-management/add-user, projects/create-project,
    ecommerce/add-product, ecommerce/create-order}`: `FormCard` + fields, config-
    driven like ListPage. (`FormCard` already exists.)
@@ -114,6 +113,10 @@ SettingsSection, CodeBlock, Example.
   `[{key,name,color}]`), `dataFormat={{prefix,format:"compact"}}`,
   `palette={{roles:["primary"]}}` or `{colors:[…]}`, `legend={{show}}`. Multi-
   series -> array + show legend. `ChartCard` wraps all this.
+
+- **Dev server port:** `vite.config.js` now honours `$PORT` (`strictPort`) so the
+  browser-tool preview can pin a port when 5173 is taken by another session.
+  `.claude/launch.json` has `"autoPort": true`.
 
 ## Verify / run
 

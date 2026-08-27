@@ -10,6 +10,7 @@ import AuthTemplate from "./Pages/Auth/AuthTemplate";
 import InnerTemplate from "./Pages/InnerPages/InnerTemplate";
 import ComingSoon from "./Pages/InnerPages/ComingSoon";
 import { tablesFormsRoutes } from "./Pages/InnerPages/tables-forms/routes";
+import { appsRoutes, appsRoutePaths } from "./Pages/InnerPages/apps/routes";
 import { listRoutes, listRoutePaths } from "./Pages/InnerPages/listRoutes";
 import {
   settingsRoutes,
@@ -60,7 +61,11 @@ const REAL_INNER = new Set([
   "/dashboards/logistics",
   "/dashboards/business-intelligence",
 ]);
-const CONFIGURED = new Set([...listRoutePaths, ...settingsRoutePaths]);
+const CONFIGURED = new Set([
+  ...listRoutePaths,
+  ...settingsRoutePaths,
+  ...appsRoutePaths,
+]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
     !AUTH_PATHS.has(path) &&
@@ -127,6 +132,7 @@ const App = () => {
                 element={<ComponentPage />}
               />
               {tablesFormsRoutes}
+              {appsRoutes}
               {listRoutes}
               {settingsRoutes}
               {shellRoutes.map((path) => (

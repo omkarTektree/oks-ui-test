@@ -22,9 +22,15 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 
 ## Orders  `/orders` ⬜
 
-## Apps  `/apps/*`
-Chat · Contacts · File Manager · Notes · Task Manager · Help Desk · Group Chat ·
-Support Tickets · Email · Calendar
+## Apps  `/apps/*`  ✅ (10 working screens)
+✅ **Chat** (2-pane DM + details) · **Group Chat** (channels + members) ·
+**Email** (3-pane mailbox) · **Calendar** (live month grid + upcoming) ·
+**File Manager** (breadcrumb, folder/file grid + list toggle, storage) ·
+**Notes** (folders + note grid) · **Task Manager** (`BoardView` kanban) ·
+**Help Desk** (stats + queues + agents + recent tickets) ·
+**Support Tickets** (master–detail + status filters) ·
+**Contacts** (grid + detail panel). Pages in `src/Pages/InnerPages/apps/`,
+data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 
 ## User Management  `/user-management/*`
 ✅ **All Users · Roles · Teams · Departments · Activity Logs** (via `ListPage`) ·
