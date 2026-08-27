@@ -71,6 +71,7 @@ export const MONTHLY_TARGET = {
   percent: 78,
   current: "$98.4k",
   target: "$126k",
+  currentLabel: "This month",
   note: "You're ahead of schedule",
 };
 

@@ -5,6 +5,8 @@ const TONE = {
   "Low stock": "warning",
   "Out of stock": "danger",
   Active: "success",
+  Won: "success",
+  Lost: "danger",
   Pending: "warning",
   Processing: "info",
   Shipped: "info",
