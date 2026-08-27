@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { loginEmail, loginPassword } from "../data/login";
 import { AuthContext } from "./authContextInstance";
 

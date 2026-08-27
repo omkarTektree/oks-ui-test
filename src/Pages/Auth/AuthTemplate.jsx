@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import LogoLight from "../../assets/images/logo-light.png";
 import Logo from "../../assets/images/logo.png";
-import { Button, PageTitle } from "oks-ui";
-import { MoveLeft } from "lucide-react";
+import { PageTitle } from "oks-ui";
 import { AnimatePresence, motion } from "framer-motion";
 
 const SliderContent = [

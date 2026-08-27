@@ -1,5 +1,4 @@
-import { Backdrop, Loader } from "oks-ui";
-import React from "react";
+import { Loader } from "oks-ui";
 
 const AuthFallback = () => {
   return (

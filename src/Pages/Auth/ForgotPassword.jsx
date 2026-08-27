@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, FormFieldSet, PageTitle, toast } from "oks-ui";
 import { MailCheck } from "lucide-react";

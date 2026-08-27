@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, PageTitle } from "oks-ui";
 import { MoveLeft } from "lucide-react";

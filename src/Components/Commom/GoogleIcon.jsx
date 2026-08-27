@@ -1,5 +1,3 @@
-import React from "react";
-
 const GoogleIcon = () => (
   <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
     <path
