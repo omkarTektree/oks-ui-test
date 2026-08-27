@@ -64,7 +64,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | `Timeline` | Vertical list with dot markers + connecting rail; per-item date + tag. | `Surface` + markers | ✅ |
 | `CohortGrid` | Retention heatmap — cells shaded by value. | `Surface` + `table` + `color-mix` | ✅ |
 | `BoardView` | Horizontal kanban columns with count badges + card render prop. Powers Task Manager and the projects boards. | `div` columns + `--app-*` tokens | ✅ |
-| `KeyValueList` | Definition list for detail panels. | `Divider` + rows | ⬜ |
+| `KeyValueList` | Definition list for detail panels (1- or 2-col). | `dl` + `--app-*` tokens | ✅ |
 
 ## 5. Shell & navigation  · _Vela: sidebar, top bar, breadcrumbs_
 

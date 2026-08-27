@@ -28,6 +28,7 @@ real app.
 | **Apps section** | `src/Pages/InnerPages/apps/*` — **10 screens** at `/apps/*`: Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts. Data in `src/data/apps.js`, routes in `apps/routes.jsx`. New `BoardView` ui component (kanban). |
 | **BoardPage archetype** | `src/Pages/InnerPages/BoardPage.jsx` — config-driven kanban. Powers **3 routes** from `src/data/boards.jsx` (`/projects/team-board`, `/projects/sprint-board`, `/projects/kanban-view`). |
 | **FormPage archetype** | `src/Pages/InnerPages/FormPage.jsx` — config-driven create form (`FormFieldSet` grid + media/tips aside). Powers **4 routes** from `src/data/forms.jsx` (add-user, create-project, add-product, create-order). |
+| **DetailPage archetype** | `src/Pages/InnerPages/DetailPage.jsx` — header + stat tiles + tabs + typed content blocks. New `KeyValueList` ui component. Powers `/user-management/my-profile` from `src/data/details.jsx`. |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -50,9 +51,11 @@ SettingsSection, CodeBlock, Example.
    pure-data configs in `src/data/forms.jsx`, powers `/user-management/add-user`,
    `/projects/create-project`, `/ecommerce/add-product`, `/ecommerce/create-order`.
    Config supports `sections[].columns`, `fields[].fullWidth`, `media`, `tips`.
-4. **Detail/profile archetype** — `/user-management/my-profile`,
-   `/account` overview, customer/deal detail: `Surface` + `KeyValueList`
-   (build `KeyValueList`) + tabs.
+4. ~~Detail/profile archetype~~ — **DONE**. `DetailPage`
+   (`src/Pages/InnerPages/DetailPage.jsx`) — header + stat tiles + tabs, blocks
+   of kind keyvalue/timeline/activity/list/text. New `KeyValueList` ui component.
+   Configs in `src/data/details.jsx`, powers `/user-management/my-profile`.
+   Add more configs for customer/deal detail once those routes exist in nav.
 5. **Remaining list routes** — extend `src/data/lists.jsx`: HR (Attendance,
    Leave Requests, Payroll, Recruitment, Job Applications), Ecommerce
    (Categories, Reviews, Inventory, Coupons, Promotions, Wishlist), Logistics

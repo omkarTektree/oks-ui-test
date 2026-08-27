@@ -34,7 +34,7 @@ data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 
 ## User Management  `/user-management/*`
 ✅ **All Users · Roles · Teams · Departments · Activity Logs** (`ListPage`) ·
-**Add User** (`FormPage`) · ⬜ My Profile · Permissions
+**Add User** (`FormPage`) · **My Profile** (`DetailPage`) · ⬜ Permissions
 
 ## Projects  `/projects/*`
 ✅ **All Projects** (`ListPage`) · **Team Board · Sprint Board · Kanban View**
