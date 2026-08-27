@@ -110,7 +110,7 @@ const Register = () => {
                     I agree to the{" "}
                     <button
                       type="button"
-                      className="text-red-600 underline hover:text-red-700"
+                      className="text-blue-600 underline hover:text-blue-700"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();

@@ -86,7 +86,7 @@ const TextSlider = () => {
 const AuthTemplate = () => {
   return (
     <div className="w-full min-h-screen lg:h-screen overflow-y-auto bg-black flex flex-col lg:flex-row lg:gap-10 p-3">
-      <div className="hidden lg:flex flex-1 min-w-100 flex-col justify-between">
+      <div className="hidden lg:flex flex-1 min-w-120 flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="w-8">
             <img src={LogoLight} alt="Logo" />
@@ -112,7 +112,7 @@ const AuthTemplate = () => {
         </div>
       </div>
 
-      <div className="w-full flex-1 lg:min-h-0 lg:max-w-180 lg:h-full bg-white rounded-xl flex flex-col">
+      <div className="w-full flex-1 lg:min-h-0 lg:max-w-160 lg:h-full bg-white rounded-xl flex flex-col">
         <div className="flex items-center px-6 pt-6 lg:hidden">
           <img src={Logo} alt="Logo" className="w-7" />
         </div>
