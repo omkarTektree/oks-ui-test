@@ -10,6 +10,7 @@ import AuthTemplate from "./Pages/Auth/AuthTemplate";
 import InnerTemplate from "./Pages/InnerPages/InnerTemplate";
 import ComingSoon from "./Pages/InnerPages/ComingSoon";
 import { tablesFormsRoutes } from "./Pages/InnerPages/tables-forms/routes";
+import { listRoutes, listRoutePaths } from "./Pages/InnerPages/listRoutes";
 import { NAV_ROUTES } from "./data/nav";
 
 const Login = lazy(() => import("./Pages/Auth/Login"));
@@ -55,10 +56,12 @@ const REAL_INNER = new Set([
   "/dashboards/logistics",
   "/dashboards/business-intelligence",
 ]);
+const LIST_PATHS = new Set(listRoutePaths);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
     !AUTH_PATHS.has(path) &&
     !REAL_INNER.has(path) &&
+    !LIST_PATHS.has(path) &&
     !path.startsWith("/40") &&
     !path.startsWith("/components") &&
     !path.startsWith("/tables-forms")
@@ -120,6 +123,7 @@ const App = () => {
                 element={<ComponentPage />}
               />
               {tablesFormsRoutes}
+              {listRoutes}
               {shellRoutes.map((path) => (
                 <Route key={path} path={path} element={<ComingSoon />} />
               ))}

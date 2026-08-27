@@ -27,33 +27,33 @@ Chat · Contacts · File Manager · Notes · Task Manager · Help Desk · Group 
 Support Tickets · Email · Calendar
 
 ## User Management  `/user-management/*`
-All Users · My Profile · Add User · Roles · Permissions · Teams · Departments ·
-Activity Logs
+✅ **All Users · Roles · Teams · Departments · Activity Logs** (via `ListPage`) ·
+⬜ My Profile · Add User · Permissions
 
 ## Projects  `/projects/*`
-All Projects · Create Project · Timeline · Team Board · Sprint Board · Gantt View ·
-Project Analytics · Kanban View
+✅ **All Projects** (`ListPage`) · ⬜ Create Project · Timeline · Team Board ·
+Sprint Board · Gantt View · Project Analytics · Kanban View
 
 ## Finance  `/finance/*`
-Transactions · Payments · Expenses · Profit & Loss · Budget Management · Invoices ·
-Financial Reports
+✅ **Transactions · Invoices** (`ListPage`) · ⬜ Payments · Expenses ·
+Profit & Loss · Budget Management · Financial Reports
 
 ## CRM  `/crm/*`
-CRM Dashboard · CRM App · Leads · Opportunities · Customers · Deals · Pipeline ·
-Sales Funnel · Campaigns · Customer Journey
+✅ **Leads · Deals · Customers** (`ListPage`) · ⬜ CRM Dashboard · CRM App ·
+Opportunities · Pipeline · Sales Funnel · Campaigns · Customer Journey
 
 ## HR Management  `/hr/*`
-Employees · Attendance · Leave Requests · Payroll · Departments · Recruitment ·
-Job Applications
+✅ **Employees** (`ListPage`) · ⬜ Attendance · Leave Requests · Payroll ·
+Departments · Recruitment · Job Applications
 
 ## Logistics  `/logistics/*`
 Shipments · Delivery Tracking · Fleet Management · Warehouse Management ·
 Route Planning
 
 ## Ecommerce  `/ecommerce/*`
-Product Grid · Product List · Add Product · Categories · Orders · Create Order ·
-Customers · Customer Analytics · Reviews · Inventory · Coupons · Wishlist ·
-Promotions
+✅ **Product List · Orders · Customers** (`ListPage`) · ⬜ Product Grid ·
+Add Product · Categories · Create Order · Customer Analytics · Reviews ·
+Inventory · Coupons · Wishlist · Promotions
 
 ## Tables & Forms  `/tables-forms`, `/tables-forms/*`  ✅ (working demos)
 Overview grid + 14 pages:

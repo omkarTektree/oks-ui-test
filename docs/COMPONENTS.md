@@ -104,6 +104,10 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 
 ## Pages to build  (after `SidebarNav` is settled)
 
+**Archetypes built:** `ListPage` (generic CRUD list — config-driven, powers ~16
+routes from `src/data/lists.jsx`), the Tables & Forms demos, the 9 dashboards,
+the component gallery.
+
 | Page | Shows off |
 | --- | --- |
 | **Analytics dashboard** | `KpiCard`, `ChartCard`, `DonutStat`, `FunnelChart`, `DataTable`, `ActivityFeed`, `GoalCard`, `ProgressStat` — the Vela clone |
