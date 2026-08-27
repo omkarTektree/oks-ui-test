@@ -16,6 +16,7 @@ import { formRoutes, formRoutePaths } from "./Pages/InnerPages/formRoutes";
 import { detailRoutes, detailRoutePaths } from "./Pages/InnerPages/detailRoutes";
 import { chartsRoutes, chartsRoutePaths } from "./Pages/InnerPages/charts/routes";
 import { reportsRoutes, reportsRoutePaths } from "./Pages/InnerPages/reports/routes";
+import { pagesRoutes, pagesRoutePaths } from "./Pages/InnerPages/pages/routes";
 import { listRoutes, listRoutePaths } from "./Pages/InnerPages/listRoutes";
 import {
   settingsRoutes,
@@ -27,6 +28,8 @@ const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
 const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword"));
 const Terms = lazy(() => import("./Pages/Auth/Terms"));
+const NotFound = lazy(() => import("./Pages/NotFound"));
+const Maintenance = lazy(() => import("./Pages/Maintenance"));
 const AnalyticsDashboard = lazy(() => import("./Pages/InnerPages/Dashboard"));
 const CrmDashboard = lazy(() => import("./Pages/InnerPages/CrmDashboard"));
 const EcommerceDashboard = lazy(
@@ -75,6 +78,7 @@ const CONFIGURED = new Set([
   ...detailRoutePaths,
   ...chartsRoutePaths,
   ...reportsRoutePaths,
+  ...pagesRoutePaths,
 ]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
@@ -82,6 +86,7 @@ const shellRoutes = NAV_ROUTES.filter(
     !REAL_INNER.has(path) &&
     !CONFIGURED.has(path) &&
     !path.startsWith("/40") &&
+    path !== "/maintenance" &&
     !path.startsWith("/components") &&
     !path.startsWith("/tables-forms")
 );
@@ -98,6 +103,8 @@ const App = () => {
           </Route>
 
           <Route path="/terms" element={<Terms />} />
+          <Route path="/404-error" element={<NotFound />} />
+          <Route path="/maintenance" element={<Maintenance />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<InnerTemplate />}>
@@ -148,6 +155,7 @@ const App = () => {
               {detailRoutes}
               {chartsRoutes}
               {reportsRoutes}
+              {pagesRoutes}
               {listRoutes}
               {settingsRoutes}
               {shellRoutes.map((path) => (

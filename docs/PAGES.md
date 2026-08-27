@@ -105,11 +105,14 @@ archetype — KPI row + `ChartCard` + breakdown + table, configs in
 General · Company · Theme · Appearance · Locale · Notifications · Integrations · API
 
 ## Utility  `/utility/*`
-FAQ · Help Center · Knowledge Base · Documentation · Search Results ·
-Notifications Center · Activity Feed · Pricing · Widget Gallery · UI Playground
+✅ **FAQ · Help Center · Knowledge Base · Documentation · Search Results ·
+Notifications Center · Activity Feed · Pricing** — pages in
+`src/Pages/InnerPages/pages/`. `HelpCenter` has a `variant` prop
+(help/kb/docs). ⬜ Widget Gallery · UI Playground
 
 ## Pages  `/pages/*`
-Theme Customizer · RTL / Dark / Light Preview · Starter Kit · Changelog · Roadmap
+✅ **Changelog · Release Notes · Roadmap** (`BoardView`) · **Theme Customizer**
+(live CSS-var preview) · ⬜ RTL / Dark / Light Preview · Starter Kit
 
 ## Auth & system  (outside the app shell)
 | Page | Route | Status |
@@ -118,6 +121,6 @@ Theme Customizer · RTL / Dark / Light Preview · Starter Kit · Changelog · Ro
 | Register | `/register` | ✅ |
 | Forgot Password | `/forgot-password` | ✅ |
 | Terms | `/terms` | ✅ |
-| 404 Error | `/404-error` | ⬜ |
-| Maintenance | `/maintenance` | ⬜ |
-| Release Notes | `/pages/release-notes` | ⬜ |
+| 404 Error | `/404-error` | ✅ (`src/Pages/NotFound.jsx`, outside the shell) |
+| Maintenance | `/maintenance` | ✅ (`src/Pages/Maintenance.jsx`, outside the shell) |
+| Release Notes | `/pages/release-notes` | ✅ (`Changelog` with alt copy) |

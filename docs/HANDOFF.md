@@ -31,6 +31,7 @@ real app.
 | **DetailPage archetype** | `src/Pages/InnerPages/DetailPage.jsx` — header + stat tiles + tabs + typed content blocks. New `KeyValueList` ui component. Powers `/user-management/my-profile` from `src/data/details.jsx`. |
 | **Charts section** | `src/Pages/InnerPages/charts/*` — **7 pages** at `/charts/*` (apex-charts, chart-js, statistics, kpi-analytics, heatmaps, revenue-analytics, user-analytics). Data in `src/data/charts.js`. New `ChartPanel` local wrapper. |
 | **ReportPage archetype** | `src/Pages/InnerPages/ReportPage.jsx` — KPI row + `ChartCard` + breakdown + table, pure-data configs in `src/data/reports.jsx`. Powers 5 `/reports/*` routes + `CustomBuilder` stub. |
+| **Utility & Pages** | `src/Pages/InnerPages/pages/*` — FAQ, Help Center (+kb/docs variants), Pricing, Search Results, Notifications Center, Activity Feed, Changelog/Release Notes, Roadmap, Theme Customizer. Data in `src/data/content.jsx`. `NotFound` + `Maintenance` standalone in `src/Pages/` (routes `/404-error`, `/maintenance`, outside the shell). |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -73,8 +74,12 @@ SettingsSection, CodeBlock, Example.
 7. ~~Reports section~~ — **DONE**. `ReportPage` archetype
    (`src/Pages/InnerPages/ReportPage.jsx`, configs `src/data/reports.jsx`) for
    the 5 report pages + an interactive `CustomBuilder` stub.
-8. **Utility & Pages sections** — FAQ, Help Center, Pricing, 404, Maintenance,
-   Changelog, Roadmap, Theme Customizer. Mostly static/marketing layouts.
+8. ~~Utility & Pages sections~~ — **DONE**. `src/Pages/InnerPages/pages/*` —
+   FAQ, Help Center (+ Knowledge Base / Documentation variants), Pricing,
+   Search Results, Notifications Center, Activity Feed, Changelog / Release
+   Notes, Roadmap, Theme Customizer. Standalone `NotFound` + `Maintenance` in
+   `src/Pages/`. Still ⬜: `/utility/{widget-gallery,ui-playground}`,
+   `/pages/{rtl-dark-light-preview,starter-kit}`.
 9. **CRM Dashboard vs CRM App** — nav has `/crm/crm-dashboard` separate from
    the `/dashboards/crm` we built; point it at the same component or build a
    variant.
