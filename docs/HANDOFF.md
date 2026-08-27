@@ -23,7 +23,7 @@ real app.
 | **9 dashboards** | Analytics, CRM, Ecommerce, Finance, Sales, Projects, Marketing, SaaS, Logistics, Business Intelligence — all at `/dashboards/*` |
 | **Component gallery** | `/components` grid + `/components/:slug` — 28 entries (12 oks-ui primitives + 16 composed), live examples + copyable code. Registry: `src/data/gallery.jsx` |
 | **Tables & Forms** | `/tables-forms` + 14 demo pages (5 tables, 4 forms, 5 specialised inputs). `src/Pages/InnerPages/tables-forms/` |
-| **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **16 routes** from `src/data/lists.jsx` (All Users, Roles, Teams, Departments, Activity Logs, All Projects, Product List, Orders, Customers x2, Leads, Deals, Transactions, Invoices, Employees) |
+| **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **40 routes** from `src/data/lists.jsx` across User Management, Projects, Finance, CRM, HR, Logistics, Ecommerce, Marketing + `/orders` |
 | **SettingsPage archetype** | `src/Pages/InnerPages/SettingsPage.jsx` — config-driven. Powers **15 routes** from `src/data/settings.jsx` (Settings/* and Account/*) |
 | **Apps section** | `src/Pages/InnerPages/apps/*` — **10 screens** at `/apps/*`: Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts. Data in `src/data/apps.js`, routes in `apps/routes.jsx`. New `BoardView` ui component (kanban). |
 | **BoardPage archetype** | `src/Pages/InnerPages/BoardPage.jsx` — config-driven kanban. Powers **3 routes** from `src/data/boards.jsx` (`/projects/team-board`, `/projects/sprint-board`, `/projects/kanban-view`). |
@@ -56,12 +56,14 @@ SettingsSection, CodeBlock, Example.
    of kind keyvalue/timeline/activity/list/text. New `KeyValueList` ui component.
    Configs in `src/data/details.jsx`, powers `/user-management/my-profile`.
    Add more configs for customer/deal detail once those routes exist in nav.
-5. **Remaining list routes** — extend `src/data/lists.jsx`: HR (Attendance,
-   Leave Requests, Payroll, Recruitment, Job Applications), Ecommerce
-   (Categories, Reviews, Inventory, Coupons, Promotions, Wishlist), Logistics
-   (Shipments, Delivery Tracking, Fleet Management), CRM (Opportunities,
-   Campaigns), Finance (Payments, Expenses), Marketing (Email/SMS Campaigns,
-   Landing Pages, Segments), `/orders`.
+5. ~~Remaining list routes~~ — **DONE**. Added **24 configs** to
+   `src/data/lists.jsx` (auto-wired via `listRoutePaths`): `/orders`, HR
+   (attendance, leave-requests, payroll, departments, recruitment,
+   job-applications), Ecommerce (categories, reviews, inventory, coupons,
+   promotions, wishlist), Logistics (shipments, delivery-tracking,
+   fleet-management), CRM (opportunities, campaigns), Finance (payments,
+   expenses), Marketing (email-campaigns, sms-campaigns, landing-pages,
+   segments). `ListPage` now covers **40 routes**.
 6. **Charts & Analytics section** — `/charts/*`: one page per `oks-ui` Chart
    type (line/area/bar/column/pie/donut) + KPI/heatmap/revenue/user analytics.
    Reuse `ChartCard`, `CohortGrid`.

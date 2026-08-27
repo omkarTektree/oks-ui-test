@@ -46,6 +46,19 @@ const TONE = {
   Contacted: "info",
   Qualified: "success",
   Negotiation: "warning",
+  Present: "success",
+  Remote: "info",
+  Late: "warning",
+  Absent: "danger",
+  "Out for delivery": "info",
+  Maintenance: "warning",
+  Idle: "default",
+  Screening: "info",
+  Interview: "info",
+  Offer: "success",
+  Discovery: "info",
+  Qualification: "info",
+  Proposal: "warning",
 };
 
 /** Maps a status label to a semantic colour, rendered as a dot chip. */

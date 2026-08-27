@@ -1,4 +1,5 @@
 import { Chip } from "oks-ui";
+import { Star } from "lucide-react";
 import EntityCell from "../Components/ui/EntityCell";
 import StatusChip from "../Components/ui/StatusChip";
 import { PEOPLE } from "./people";
@@ -146,6 +147,246 @@ export const EMPLOYEES_LIST = PEOPLE.map((p, i) => ({
   employment: pick(["Full-time", "Full-time", "Full-time", "Contract"], i),
 }));
 
+/* ----------------------------------------------------- datasets (group 5) -- */
+
+const CITIES = ["Berlin", "Rotterdam", "Chicago", "Austin", "Lyon", "Leeds", "Porto", "Gdansk"];
+const CARRIERS = ["Delta Freight", "Vertex Logistics", "BlueLine Express", "Cargomax"];
+
+export const CATEGORIES_LIST = [
+  "Electronics", "Apparel", "Home & Kitchen", "Beauty", "Sports & Outdoors",
+  "Toys & Games", "Books", "Grocery", "Office", "Pet Supplies",
+].map((name, i) => ({
+  id: `CAT-${100 + i}`,
+  name,
+  slug: name.toLowerCase().replace(/[^a-z]+/g, "-"),
+  products: 8 + ((i * 37) % 140),
+  visible: i % 4 !== 0,
+}));
+
+export const REVIEWS_LIST = Array.from({ length: 26 }, (_, i) => ({
+  id: `REV-${3000 + i}`,
+  product: pick(PRODUCTS, i),
+  author: pick(PEOPLE, i * 3 + 4).name,
+  rating: 1 + ((i * 2) % 5),
+  title: pick(
+    ["Exactly as described", "Great value", "Not for me", "Would buy again",
+      "Arrived damaged", "Better than expected", "Runs small", "Five stars"],
+    i
+  ),
+  date: `2026-0${(i % 6) + 1}-${String(((i * 5) % 27) + 1).padStart(2, "0")}`,
+  status: pick(["Published", "Published", "Pending", "Rejected"], i * 3),
+}));
+
+export const INVENTORY_LIST = PRODUCTS_LIST.map((p, i) => ({
+  id: p.id,
+  name: p.name,
+  warehouse: pick(["Berlin DC", "Rotterdam DC", "Chicago DC"], i),
+  onHand: (i * 53) % 400,
+  committed: (i * 17) % 60,
+  reorder: 40,
+  status: ((i * 53) % 400) < 40 ? "Low stock" : ((i * 53) % 400) === 0 ? "Out of stock" : "In stock",
+}));
+
+export const COUPONS_LIST = Array.from({ length: 18 }, (_, i) => ({
+  id: `CPN-${400 + i}`,
+  code: pick(["WELCOME10", "SUMMER25", "FREESHIP", "VIP15", "BUNDLE20", "FLASH30"], i) + (i > 5 ? i : ""),
+  type: pick(["Percent", "Fixed", "Free shipping"], i),
+  value: pick(["10%", "25%", "$15", "Free shipping", "20%", "30%"], i),
+  used: (i * 29) % 300,
+  limit: 500,
+  status: pick(["Active", "Active", "Scheduled", "Failed"], i * 3),
+}));
+
+export const PROMOTIONS_LIST = Array.from({ length: 14 }, (_, i) => ({
+  id: `PROMO-${200 + i}`,
+  name: pick(
+    ["Summer Sale", "Back to School", "Clearance", "New Arrivals Boost",
+      "Loyalty Double Points", "Bundle & Save", "Flash Weekend"],
+    i
+  ),
+  channel: pick(["Storefront", "Email", "Paid social", "All channels"], i),
+  starts: `2026-0${(i % 6) + 1}-01`,
+  ends: `2026-0${(i % 6) + 2}-15`,
+  status: pick(["Active", "Scheduled", "Completed", "Paused"], i * 3),
+}));
+
+export const WISHLIST_LIST = Array.from({ length: 20 }, (_, i) => ({
+  id: `WISH-${600 + i}`,
+  customer: pick(PEOPLE, i * 3 + 2).name,
+  product: pick(PRODUCTS, i),
+  added: `${(i % 27) + 1}d ago`,
+  price: 19 + ((i * 37) % 380),
+  inStock: i % 5 !== 0,
+}));
+
+export const ATTENDANCE_LIST = PEOPLE.slice(0, 24).map((p, i) => ({
+  id: `ATT-${p.id}`,
+  name: p.name,
+  team: p.team,
+  clockIn: `0${8 + (i % 2)}:${String((i * 7) % 60).padStart(2, "0")}`,
+  clockOut: `1${7 + (i % 2)}:${String((i * 11) % 60).padStart(2, "0")}`,
+  hours: (7.5 + ((i % 4) * 0.5)).toFixed(1),
+  status: pick(["Present", "Present", "Present", "Remote", "Late", "Absent"], i * 3),
+}));
+
+export const LEAVE_LIST = Array.from({ length: 20 }, (_, i) => ({
+  id: `LV-${1200 + i}`,
+  name: pick(PEOPLE, i * 3 + 1).name,
+  type: pick(["Vacation", "Sick", "Personal", "Parental", "Bereavement"], i),
+  from: `2026-0${(i % 6) + 1}-${String(((i * 3) % 20) + 1).padStart(2, "0")}`,
+  days: 1 + (i % 10),
+  status: pick(["Approved", "Pending", "Rejected", "Approved"], i * 3),
+}));
+
+export const PAYROLL_LIST = PEOPLE.slice(0, 22).map((p, i) => ({
+  id: `PAY-${p.id}`,
+  name: p.name,
+  team: p.team,
+  gross: 4500 + ((i * 317) % 7000),
+  deductions: 900 + ((i * 91) % 1800),
+  net: 3600 + ((i * 226) % 5200),
+  status: pick(["Paid", "Paid", "Processing", "Pending"], i * 3),
+}));
+
+export const RECRUITMENT_LIST = Array.from({ length: 16 }, (_, i) => ({
+  id: `REQ-${70 + i}`,
+  role: pick(
+    ["Senior Frontend Engineer", "Product Designer", "Data Analyst",
+      "Account Executive", "Support Specialist", "Engineering Manager",
+      "Content Marketer", "DevOps Engineer"],
+    i
+  ),
+  department: pick(["Engineering", "Design", "Data", "Sales", "Support", "Marketing"], i),
+  location: pick(["Remote", "Berlin", "New York", "London"], i),
+  applicants: (i * 13) % 90,
+  status: pick(["Open", "Open", "In Review", "Closed"], i * 3),
+}));
+
+export const APPLICATIONS_LIST = Array.from({ length: 28 }, (_, i) => ({
+  id: `APP-${5200 + i}`,
+  name: pick(PEOPLE, i * 5 + 3).name,
+  role: pick(
+    ["Senior Frontend Engineer", "Product Designer", "Data Analyst",
+      "Account Executive", "Support Specialist"],
+    i
+  ),
+  applied: `${(i % 27) + 1}d ago`,
+  stage: pick(["New", "Screening", "Interview", "Offer", "Rejected"], i * 3),
+  rating: 1 + ((i * 3) % 5),
+}));
+
+export const SHIPMENTS_LIST = Array.from({ length: 28 }, (_, i) => ({
+  id: `SHP-${90000 + i}`,
+  origin: pick(CITIES, i),
+  destination: pick(CITIES, i + 3),
+  carrier: pick(CARRIERS, i),
+  eta: `2026-07-${String(((i * 3) % 27) + 1).padStart(2, "0")}`,
+  status: pick(["In Transit", "In Transit", "Delivered", "Delayed", "Processing"], i * 3),
+}));
+
+export const DELIVERIES_LIST = Array.from({ length: 24 }, (_, i) => ({
+  id: `DLV-${40000 + i}`,
+  order: `ORD-${8800 + i}`,
+  driver: pick(PEOPLE, i * 4 + 1).name,
+  stops: 3 + (i % 9),
+  window: pick(["09:00–12:00", "12:00–15:00", "15:00–18:00"], i),
+  status: pick(["Out for delivery", "Delivered", "Scheduled", "Delayed"], i * 3),
+}));
+
+export const FLEET_LIST = Array.from({ length: 18 }, (_, i) => ({
+  id: `VH-${300 + i}`,
+  type: pick(["Cargo van", "Box truck", "Semi-trailer", "EV van"], i),
+  plate: `${pick(["B", "RO", "CHI", "AT"], i)}-${1000 + i * 7}`,
+  driver: pick(PEOPLE, i * 3 + 2).name,
+  mileage: 12000 + ((i * 4130) % 180000),
+  status: pick(["Active", "Active", "Maintenance", "Idle"], i * 3),
+}));
+
+export const OPPORTUNITIES_LIST = Array.from({ length: 22 }, (_, i) => ({
+  id: `OPP-${8000 + i}`,
+  account: pick(COMPANIES, i),
+  owner: pick(PEOPLE, i * 4 + 2).name,
+  stage: pick(["Qualified", "Discovery", "Proposal", "Negotiation", "Won", "Lost"], i * 3),
+  value: 5000 + ((i * 617) % 80000),
+  close: `2026-0${(i % 6) + 1}-${String(((i * 5) % 27) + 1).padStart(2, "0")}`,
+}));
+
+const CAMPAIGN_NAMES = [
+  "Q3 Product Launch", "Webinar: Scaling Ops", "Nurture — Trial Users",
+  "Reactivation Push", "Partner Co-marketing", "Holiday Promo",
+  "Feature Spotlight: Reports", "Case Study Series",
+];
+
+export const CAMPAIGNS_LIST = Array.from({ length: 16 }, (_, i) => ({
+  id: `CMP-${900 + i}`,
+  name: pick(CAMPAIGN_NAMES, i) + (i > 7 ? " 2" : ""),
+  channel: pick(["Email", "Paid social", "Events", "Content"], i),
+  leads: (i * 47) % 900,
+  budget: 2000 + ((i * 613) % 40000),
+  status: pick(["Active", "Scheduled", "Completed", "Paused"], i * 3),
+}));
+
+export const PAYMENTS_LIST = Array.from({ length: 26 }, (_, i) => ({
+  id: `PMT-${50000 + i}`,
+  party: pick(COMPANIES, i),
+  method: pick(["Card", "ACH", "Wire", "Bank transfer"], i),
+  date: `2026-06-${String(((i * 3) % 27) + 1).padStart(2, "0")}`,
+  amount: 300 + ((i * 187) % 14000),
+  status: pick(["Paid", "Paid", "Pending", "Failed", "Refunded"], i * 3),
+}));
+
+export const EXPENSES_LIST = Array.from({ length: 24 }, (_, i) => ({
+  id: `EXP-${30000 + i}`,
+  vendor: pick([...COMPANIES, "AWS Cloud Services", "Figma Enterprise", "WeWork", "LinkedIn Ads"], i),
+  category: pick(["Software", "Travel", "Office", "Marketing", "Contractors", "Utilities"], i),
+  date: `2026-06-${String(((i * 4) % 27) + 1).padStart(2, "0")}`,
+  amount: 90 + ((i * 143) % 6000),
+  status: pick(["Approved", "Pending", "Approved", "Rejected"], i * 3),
+}));
+
+export const MKT_EMAIL_LIST = Array.from({ length: 18 }, (_, i) => ({
+  id: `EM-${700 + i}`,
+  name: pick(CAMPAIGN_NAMES, i) + " — Email",
+  sent: (i * 1330) % 42000,
+  openRate: `${28 + ((i * 3) % 40)}%`,
+  clickRate: `${2 + ((i * 2) % 12)}%`,
+  status: pick(["Sent", "Sent", "Draft", "Sending", "Scheduled"], i * 3),
+}));
+
+export const MKT_SMS_LIST = Array.from({ length: 14 }, (_, i) => ({
+  id: `SMS-${800 + i}`,
+  name: pick(CAMPAIGN_NAMES, i) + " — SMS",
+  sent: (i * 640) % 18000,
+  ctr: `${4 + ((i * 3) % 16)}%`,
+  optOut: `${(i % 3) * 0.4 + 0.2}%`,
+  status: pick(["Sent", "Draft", "Scheduled", "Sending"], i * 3),
+}));
+
+export const LANDING_PAGES_LIST = Array.from({ length: 16 }, (_, i) => ({
+  id: `LP-${500 + i}`,
+  name: pick(
+    ["Product Launch", "Free Trial", "Webinar Signup", "Pricing", "Demo Request",
+      "Ebook Download", "Partner Program"],
+    i
+  ) + (i > 6 ? ` v${Math.floor(i / 7) + 1}` : ""),
+  visits: (i * 2130) % 60000,
+  conversion: `${2 + ((i * 3) % 22)}%`,
+  updated: `${(i % 27) + 1}d ago`,
+  status: pick(["Published", "Published", "Draft"], i * 3),
+}));
+
+export const SEGMENTS_LIST = Array.from({ length: 14 }, (_, i) => ({
+  id: `SEG-${300 + i}`,
+  name: pick(
+    ["Trial — day 3", "Power users", "Churn risk", "Enterprise ICP",
+      "Newsletter subscribers", "Cart abandoners", "NPS promoters"],
+    i
+  ),
+  size: (i * 733) % 22000,
+  basis: pick(["Behavioral", "Firmographic", "Lifecycle", "Engagement"], i),
+  updated: `${(i % 14) + 1}d ago`,
+}));
+
 /* --------------------------------------------------------------- configs --- */
 
 const USER_COLS = [
@@ -166,6 +407,21 @@ const bar = (v) => (
 );
 
 const strong = (v) => <span className="font-medium text-[var(--app-fg)]">{v}</span>;
+const stars = (n) => (
+  <span className="inline-flex items-center justify-end gap-0.5" aria-label={`${n} out of 5`}>
+    {Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        size={13}
+        className={
+          i < n
+            ? "fill-[var(--oks-color-warning-500)] text-[var(--oks-color-warning-500)]"
+            : "text-[color:var(--app-fg-subtle)]"
+        }
+      />
+    ))}
+  </span>
+);
 const moneyCell = (n) => (
   <span className={n < 0 ? "font-medium text-[color:var(--oks-color-danger-600)]" : "font-medium text-[var(--app-fg)]"}>
     {n < 0 ? "-" : ""}{money(Math.abs(n))}
@@ -348,6 +604,354 @@ export const LIST_CONFIGS = {
       { key: "team", header: "Team", sortable: true },
       { key: "location", header: "Location", sortable: true },
       { key: "employment", header: "Type", render: (r) => nameChip(r.employment) },
+    ],
+  },
+
+  /* ------------------------------------------------------ group 5 configs -- */
+
+  "/orders": {
+    title: "Orders", subtitle: "Every order across all channels.",
+    getRowKey: (r) => r.id, rows: ORDERS_LIST, searchKeys: ["id", "customer"], pageSize: 12,
+    filters: [
+      { key: "processing", label: "Processing", test: (r) => r.status === "Processing" },
+      { key: "shipped", label: "Shipped", test: (r) => r.status === "Shipped" },
+      { key: "delivered", label: "Delivered", test: (r) => r.status === "Delivered" },
+    ],
+    columns: [
+      { key: "id", header: "Order", sortable: true, render: (r) => strong(r.id) },
+      { key: "customer", header: "Customer", render: (r) => <EntityCell name={r.customer} /> },
+      { key: "date", header: "Date", sortable: true },
+      { key: "items", header: "Items", align: "right" },
+      { key: "total", header: "Total", align: "right", sortable: true, render: (r) => strong(money(r.total)) },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+
+  "/hr/attendance": {
+    title: "Attendance", subtitle: "Clock-in and clock-out across the team, today.",
+    getRowKey: (r) => r.id, rows: ATTENDANCE_LIST, searchKeys: ["name", "team"], pageSize: 12,
+    filters: [
+      { key: "present", label: "Present", test: (r) => r.status === "Present" },
+      { key: "remote", label: "Remote", test: (r) => r.status === "Remote" },
+      { key: "late", label: "Late", test: (r) => r.status === "Late" },
+      { key: "absent", label: "Absent", test: (r) => r.status === "Absent" },
+    ],
+    columns: [
+      { key: "name", header: "Employee", sortable: true, render: (r) => <EntityCell name={r.name} sub={r.team} /> },
+      { key: "clockIn", header: "Clock in", align: "right" },
+      { key: "clockOut", header: "Clock out", align: "right" },
+      { key: "hours", header: "Hours", align: "right", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/hr/leave-requests": {
+    title: "Leave requests", subtitle: "Time-off requests awaiting or past review.",
+    actionLabel: "Request leave", getRowKey: (r) => r.id, rows: LEAVE_LIST, searchKeys: ["name", "type"],
+    filters: [
+      { key: "pending", label: "Pending", test: (r) => r.status === "Pending" },
+      { key: "approved", label: "Approved", test: (r) => r.status === "Approved" },
+      { key: "rejected", label: "Rejected", test: (r) => r.status === "Rejected" },
+    ],
+    columns: [
+      { key: "name", header: "Employee", sortable: true, render: (r) => <EntityCell name={r.name} /> },
+      { key: "type", header: "Type", sortable: true, render: (r) => nameChip(r.type) },
+      { key: "from", header: "From", sortable: true },
+      { key: "days", header: "Days", align: "right", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/hr/payroll": {
+    title: "Payroll", subtitle: "Current pay run — June 2026.",
+    getRowKey: (r) => r.id, rows: PAYROLL_LIST, searchKeys: ["name", "team"], pageSize: 12,
+    columns: [
+      { key: "name", header: "Employee", sortable: true, render: (r) => <EntityCell name={r.name} sub={r.team} /> },
+      { key: "gross", header: "Gross", align: "right", sortable: true, render: (r) => strong(money(r.gross)) },
+      { key: "deductions", header: "Deductions", align: "right", render: (r) => moneyCell(-r.deductions) },
+      { key: "net", header: "Net", align: "right", sortable: true, render: (r) => strong(money(r.net)) },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/hr/departments": {
+    title: "Departments", subtitle: "Company structure and headcount.",
+    getRowKey: (r) => r.id, rows: TEAMS,
+    columns: [
+      { key: "name", header: "Department", sortable: true, render: (r) => strong(r.name) },
+      { key: "lead", header: "Head", render: (r) => <EntityCell name={r.lead} /> },
+      { key: "members", header: "Headcount", align: "right", sortable: true },
+      { key: "projects", header: "Open roles", align: "right" },
+    ],
+  },
+  "/hr/recruitment": {
+    title: "Recruitment", subtitle: "Open requisitions and their pipelines.",
+    actionLabel: "New requisition", getRowKey: (r) => r.id, rows: RECRUITMENT_LIST, searchKeys: ["role", "department"],
+    filters: [
+      { key: "open", label: "Open", test: (r) => r.status === "Open" },
+      { key: "review", label: "In review", test: (r) => r.status === "In Review" },
+      { key: "closed", label: "Closed", test: (r) => r.status === "Closed" },
+    ],
+    columns: [
+      { key: "role", header: "Role", sortable: true, render: (r) => strong(r.role) },
+      { key: "department", header: "Department", sortable: true },
+      { key: "location", header: "Location" },
+      { key: "applicants", header: "Applicants", align: "right", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/hr/job-applications": {
+    title: "Job applications", subtitle: "Candidates across every open role.",
+    getRowKey: (r) => r.id, rows: APPLICATIONS_LIST, searchKeys: ["name", "role"], pageSize: 12,
+    filters: [
+      { key: "new", label: "New", test: (r) => r.stage === "New" },
+      { key: "interview", label: "Interview", test: (r) => r.stage === "Interview" },
+      { key: "offer", label: "Offer", test: (r) => r.stage === "Offer" },
+    ],
+    columns: [
+      { key: "name", header: "Candidate", sortable: true, render: (r) => <EntityCell name={r.name} sub={r.role} /> },
+      { key: "applied", header: "Applied", align: "right" },
+      { key: "rating", header: "Rating", align: "right", sortable: true, render: (r) => stars(r.rating) },
+      { key: "stage", header: "Stage", render: (r) => <StatusChip status={r.stage} /> },
+    ],
+  },
+
+  "/ecommerce/categories": {
+    title: "Categories", subtitle: "How the catalogue is organised.",
+    actionLabel: "New category", getRowKey: (r) => r.id, rows: CATEGORIES_LIST, searchKeys: ["name"],
+    columns: [
+      { key: "name", header: "Category", sortable: true, render: (r) => strong(r.name) },
+      { key: "slug", header: "Slug" },
+      { key: "products", header: "Products", align: "right", sortable: true },
+      { key: "visible", header: "Visibility", render: (r) => <StatusChip status={r.visible ? "Published" : "Draft"} /> },
+    ],
+  },
+  "/ecommerce/reviews": {
+    title: "Reviews", subtitle: "Customer product reviews awaiting or past moderation.",
+    getRowKey: (r) => r.id, rows: REVIEWS_LIST, searchKeys: ["product", "author", "title"], pageSize: 12,
+    filters: [
+      { key: "pending", label: "Pending", test: (r) => r.status === "Pending" },
+      { key: "published", label: "Published", test: (r) => r.status === "Published" },
+      { key: "rejected", label: "Rejected", test: (r) => r.status === "Rejected" },
+    ],
+    columns: [
+      { key: "product", header: "Product", sortable: true, render: (r) => <EntityCell name={r.product} sub={r.title} /> },
+      { key: "author", header: "Author", render: (r) => <EntityCell name={r.author} /> },
+      { key: "rating", header: "Rating", align: "right", sortable: true, render: (r) => stars(r.rating) },
+      { key: "date", header: "Date", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/ecommerce/inventory": {
+    title: "Inventory", subtitle: "Stock on hand by warehouse.",
+    getRowKey: (r) => r.id, rows: INVENTORY_LIST, searchKeys: ["name", "warehouse"], pageSize: 12,
+    filters: [
+      { key: "low", label: "Low stock", test: (r) => r.status === "Low stock" },
+      { key: "out", label: "Out of stock", test: (r) => r.status === "Out of stock" },
+    ],
+    columns: [
+      { key: "name", header: "Product", sortable: true, render: (r) => <EntityCell name={r.name} sub={r.id} /> },
+      { key: "warehouse", header: "Warehouse", sortable: true },
+      { key: "onHand", header: "On hand", align: "right", sortable: true },
+      { key: "committed", header: "Committed", align: "right" },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/ecommerce/coupons": {
+    title: "Coupons", subtitle: "Discount codes and their redemption.",
+    actionLabel: "New coupon", getRowKey: (r) => r.id, rows: COUPONS_LIST, searchKeys: ["code", "type"],
+    columns: [
+      { key: "code", header: "Code", sortable: true, render: (r) => strong(r.code) },
+      { key: "type", header: "Type" },
+      { key: "value", header: "Value", render: (r) => nameChip(r.value, "primary") },
+      { key: "used", header: "Used", align: "right", sortable: true, render: (r) => `${r.used} / ${r.limit}` },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/ecommerce/promotions": {
+    title: "Promotions", subtitle: "Scheduled and running promotional campaigns.",
+    actionLabel: "New promotion", getRowKey: (r) => r.id, rows: PROMOTIONS_LIST, searchKeys: ["name", "channel"],
+    filters: [
+      { key: "active", label: "Active", test: (r) => r.status === "Active" },
+      { key: "scheduled", label: "Scheduled", test: (r) => r.status === "Scheduled" },
+      { key: "completed", label: "Completed", test: (r) => r.status === "Completed" },
+    ],
+    columns: [
+      { key: "name", header: "Promotion", sortable: true, render: (r) => strong(r.name) },
+      { key: "channel", header: "Channel", sortable: true },
+      { key: "starts", header: "Starts", sortable: true },
+      { key: "ends", header: "Ends", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/ecommerce/wishlist": {
+    title: "Wishlist", subtitle: "Products customers have saved for later.",
+    getRowKey: (r) => r.id, rows: WISHLIST_LIST, searchKeys: ["customer", "product"], pageSize: 12,
+    columns: [
+      { key: "customer", header: "Customer", sortable: true, render: (r) => <EntityCell name={r.customer} /> },
+      { key: "product", header: "Product", render: (r) => strong(r.product) },
+      { key: "price", header: "Price", align: "right", sortable: true, render: (r) => strong(money(r.price)) },
+      { key: "added", header: "Added", align: "right" },
+      { key: "inStock", header: "Availability", render: (r) => <StatusChip status={r.inStock ? "In stock" : "Out of stock"} /> },
+    ],
+  },
+
+  "/logistics/shipments": {
+    title: "Shipments", subtitle: "Freight in transit across the network.",
+    actionLabel: "New shipment", getRowKey: (r) => r.id, rows: SHIPMENTS_LIST, searchKeys: ["id", "origin", "destination", "carrier"], pageSize: 12,
+    filters: [
+      { key: "transit", label: "In transit", test: (r) => r.status === "In Transit" },
+      { key: "delivered", label: "Delivered", test: (r) => r.status === "Delivered" },
+      { key: "delayed", label: "Delayed", test: (r) => r.status === "Delayed" },
+    ],
+    columns: [
+      { key: "id", header: "Shipment", sortable: true, render: (r) => strong(r.id) },
+      { key: "origin", header: "Origin", sortable: true },
+      { key: "destination", header: "Destination", sortable: true },
+      { key: "carrier", header: "Carrier" },
+      { key: "eta", header: "ETA", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/logistics/delivery-tracking": {
+    title: "Delivery tracking", subtitle: "Last-mile routes and their progress.",
+    getRowKey: (r) => r.id, rows: DELIVERIES_LIST, searchKeys: ["id", "order", "driver"], pageSize: 12,
+    columns: [
+      { key: "id", header: "Route", sortable: true, render: (r) => strong(r.id) },
+      { key: "order", header: "Order" },
+      { key: "driver", header: "Driver", render: (r) => <EntityCell name={r.driver} /> },
+      { key: "stops", header: "Stops", align: "right", sortable: true },
+      { key: "window", header: "Window" },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/logistics/fleet-management": {
+    title: "Fleet management", subtitle: "Vehicles, drivers and service status.",
+    actionLabel: "Add vehicle", getRowKey: (r) => r.id, rows: FLEET_LIST, searchKeys: ["id", "plate", "driver", "type"],
+    filters: [
+      { key: "active", label: "Active", test: (r) => r.status === "Active" },
+      { key: "maintenance", label: "Maintenance", test: (r) => r.status === "Maintenance" },
+      { key: "idle", label: "Idle", test: (r) => r.status === "Idle" },
+    ],
+    columns: [
+      { key: "id", header: "Vehicle", sortable: true, render: (r) => strong(r.id) },
+      { key: "type", header: "Type", sortable: true },
+      { key: "plate", header: "Plate" },
+      { key: "driver", header: "Driver", render: (r) => <EntityCell name={r.driver} /> },
+      { key: "mileage", header: "Mileage", align: "right", sortable: true, render: (r) => `${r.mileage.toLocaleString()} mi` },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+
+  "/crm/opportunities": {
+    title: "Opportunities", subtitle: "Qualified deals with a projected close.",
+    actionLabel: "New opportunity", getRowKey: (r) => r.id, rows: OPPORTUNITIES_LIST, searchKeys: ["account", "owner"],
+    columns: [
+      { key: "account", header: "Account", sortable: true, render: (r) => strong(r.account) },
+      { key: "owner", header: "Owner", render: (r) => <EntityCell name={r.owner} /> },
+      { key: "stage", header: "Stage", sortable: true, render: (r) => <StatusChip status={r.stage} /> },
+      { key: "value", header: "Value", align: "right", sortable: true, render: (r) => strong(money(r.value)) },
+      { key: "close", header: "Close date", sortable: true },
+    ],
+  },
+  "/crm/campaigns": {
+    title: "Campaigns", subtitle: "Demand-gen campaigns and their contribution.",
+    actionLabel: "New campaign", getRowKey: (r) => r.id, rows: CAMPAIGNS_LIST, searchKeys: ["name", "channel"],
+    filters: [
+      { key: "active", label: "Active", test: (r) => r.status === "Active" },
+      { key: "scheduled", label: "Scheduled", test: (r) => r.status === "Scheduled" },
+      { key: "completed", label: "Completed", test: (r) => r.status === "Completed" },
+    ],
+    columns: [
+      { key: "name", header: "Campaign", sortable: true, render: (r) => strong(r.name) },
+      { key: "channel", header: "Channel", sortable: true },
+      { key: "leads", header: "Leads", align: "right", sortable: true },
+      { key: "budget", header: "Budget", align: "right", sortable: true, render: (r) => strong(money(r.budget)) },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+
+  "/finance/payments": {
+    title: "Payments", subtitle: "Incoming and outgoing payments.",
+    getRowKey: (r) => r.id, rows: PAYMENTS_LIST, searchKeys: ["id", "party", "method"], pageSize: 12,
+    filters: [
+      { key: "paid", label: "Paid", test: (r) => r.status === "Paid" },
+      { key: "pending", label: "Pending", test: (r) => r.status === "Pending" },
+      { key: "failed", label: "Failed", test: (r) => r.status === "Failed" },
+    ],
+    columns: [
+      { key: "id", header: "Payment", sortable: true, render: (r) => strong(r.id) },
+      { key: "party", header: "Party", sortable: true },
+      { key: "method", header: "Method" },
+      { key: "date", header: "Date", sortable: true },
+      { key: "amount", header: "Amount", align: "right", sortable: true, render: (r) => strong(money(r.amount)) },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/finance/expenses": {
+    title: "Expenses", subtitle: "Company spend by vendor and category.",
+    actionLabel: "Add expense", getRowKey: (r) => r.id, rows: EXPENSES_LIST, searchKeys: ["vendor", "category"], pageSize: 12,
+    filters: [
+      { key: "pending", label: "Pending", test: (r) => r.status === "Pending" },
+      { key: "approved", label: "Approved", test: (r) => r.status === "Approved" },
+      { key: "rejected", label: "Rejected", test: (r) => r.status === "Rejected" },
+    ],
+    columns: [
+      { key: "vendor", header: "Vendor", sortable: true, render: (r) => strong(r.vendor) },
+      { key: "category", header: "Category", sortable: true, render: (r) => nameChip(r.category) },
+      { key: "date", header: "Date", sortable: true },
+      { key: "amount", header: "Amount", align: "right", sortable: true, render: (r) => strong(money(r.amount)) },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+
+  "/marketing/email-campaigns": {
+    title: "Email campaigns", subtitle: "Broadcasts and their engagement.",
+    actionLabel: "New email", getRowKey: (r) => r.id, rows: MKT_EMAIL_LIST, searchKeys: ["name"],
+    filters: [
+      { key: "sent", label: "Sent", test: (r) => r.status === "Sent" },
+      { key: "draft", label: "Draft", test: (r) => r.status === "Draft" },
+      { key: "scheduled", label: "Scheduled", test: (r) => r.status === "Scheduled" },
+    ],
+    columns: [
+      { key: "name", header: "Campaign", sortable: true, render: (r) => strong(r.name) },
+      { key: "sent", header: "Sent", align: "right", sortable: true, render: (r) => r.sent.toLocaleString() },
+      { key: "openRate", header: "Open rate", align: "right" },
+      { key: "clickRate", header: "Click rate", align: "right" },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/marketing/sms-campaigns": {
+    title: "SMS campaigns", subtitle: "Text broadcasts and their response.",
+    actionLabel: "New SMS", getRowKey: (r) => r.id, rows: MKT_SMS_LIST, searchKeys: ["name"],
+    columns: [
+      { key: "name", header: "Campaign", sortable: true, render: (r) => strong(r.name) },
+      { key: "sent", header: "Sent", align: "right", sortable: true, render: (r) => r.sent.toLocaleString() },
+      { key: "ctr", header: "CTR", align: "right" },
+      { key: "optOut", header: "Opt-out", align: "right" },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/marketing/landing-pages": {
+    title: "Landing pages", subtitle: "Campaign pages and their conversion.",
+    actionLabel: "New page", getRowKey: (r) => r.id, rows: LANDING_PAGES_LIST, searchKeys: ["name"],
+    filters: [
+      { key: "published", label: "Published", test: (r) => r.status === "Published" },
+      { key: "draft", label: "Draft", test: (r) => r.status === "Draft" },
+    ],
+    columns: [
+      { key: "name", header: "Page", sortable: true, render: (r) => strong(r.name) },
+      { key: "visits", header: "Visits", align: "right", sortable: true, render: (r) => r.visits.toLocaleString() },
+      { key: "conversion", header: "Conversion", align: "right" },
+      { key: "updated", header: "Updated", align: "right" },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/marketing/segments": {
+    title: "Segments", subtitle: "Audiences you can target across channels.",
+    actionLabel: "New segment", getRowKey: (r) => r.id, rows: SEGMENTS_LIST, searchKeys: ["name", "basis"],
+    columns: [
+      { key: "name", header: "Segment", sortable: true, render: (r) => strong(r.name) },
+      { key: "size", header: "Size", align: "right", sortable: true, render: (r) => r.size.toLocaleString() },
+      { key: "basis", header: "Basis", render: (r) => nameChip(r.basis) },
+      { key: "updated", header: "Updated", align: "right" },
     ],
   },
 };

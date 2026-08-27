@@ -20,7 +20,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | SaaS | `/dashboards/saas` | ✅ (KPIs · health tiles · MRR chart · plan-mix donut · cohort retention heatmap · signups table) |
 | Business Intelligence | `/dashboards/business-intelligence` | ✅ (KPIs · AI-insight Alerts · KPI-vs-target table · data sources · report library · regional donut) |
 
-## Orders  `/orders` ⬜
+## Orders  `/orders`  ✅ (`ListPage`)
 
 ## Apps  `/apps/*`  ✅ (10 working screens)
 ✅ **Chat** (2-pane DM + details) · **Group Chat** (channels + members) ·
@@ -42,25 +42,25 @@ data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 Project Analytics
 
 ## Finance  `/finance/*`
-✅ **Transactions · Invoices** (`ListPage`) · ⬜ Payments · Expenses ·
+✅ **Transactions · Invoices · Payments · Expenses** (`ListPage`) · ⬜
 Profit & Loss · Budget Management · Financial Reports
 
 ## CRM  `/crm/*`
-✅ **Leads · Deals · Customers** (`ListPage`) · ⬜ CRM Dashboard · CRM App ·
-Opportunities · Pipeline · Sales Funnel · Campaigns · Customer Journey
+✅ **Leads · Deals · Customers · Opportunities · Campaigns** (`ListPage`) · ⬜
+CRM Dashboard · CRM App · Pipeline · Sales Funnel · Customer Journey
 
 ## HR Management  `/hr/*`
-✅ **Employees** (`ListPage`) · ⬜ Attendance · Leave Requests · Payroll ·
-Departments · Recruitment · Job Applications
+✅ **Employees · Attendance · Leave Requests · Payroll · Departments ·
+Recruitment · Job Applications** (`ListPage`)
 
 ## Logistics  `/logistics/*`
-Shipments · Delivery Tracking · Fleet Management · Warehouse Management ·
-Route Planning
+✅ **Shipments · Delivery Tracking · Fleet Management** (`ListPage`) · ⬜
+Warehouse Management · Route Planning
 
 ## Ecommerce  `/ecommerce/*`
-✅ **Product List · Orders · Customers** (`ListPage`) · **Add Product ·
-Create Order** (`FormPage`) · ⬜ Product Grid · Categories · Customer Analytics ·
-Reviews · Inventory · Coupons · Wishlist · Promotions
+✅ **Product List · Orders · Customers · Categories · Reviews · Inventory ·
+Coupons · Wishlist · Promotions** (`ListPage`) · **Add Product · Create Order**
+(`FormPage`) · ⬜ Product Grid · Customer Analytics
 
 ## Tables & Forms  `/tables-forms`, `/tables-forms/*`  ✅ (working demos)
 Overview grid + 14 pages:
@@ -88,7 +88,8 @@ More entries are just data — add an object to the registry.
 Profile · Settings · Security · Billing · Notifications · Connected Apps · API
 
 ## Marketing  `/marketing/*`
-Overview · Email Campaigns · SMS Campaigns · Landing Pages · Segments · Analytics
+✅ **Email Campaigns · SMS Campaigns · Landing Pages · Segments** (`ListPage`) ·
+⬜ Overview · Analytics
 
 ## Reports  `/reports/*`
 Sales Report · Revenue Report · Customer Report · Project Report · Marketing Report ·
