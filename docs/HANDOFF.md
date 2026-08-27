@@ -1,7 +1,8 @@
 # Session handoff — continue here
 
-Last updated after commit **`c3762be`**. Read this + [`PAGES.md`](PAGES.md) +
-[`COMPONENTS.md`](COMPONENTS.md) + [`THEMING.md`](THEMING.md), then keep going.
+Last updated after commit **`e443875`** (all 9 priority groups done). Read this +
+[`PAGES.md`](PAGES.md) + [`COMPONENTS.md`](COMPONENTS.md) +
+[`THEMING.md`](THEMING.md), then pick up from **"Still open"** below.
 
 ---
 
@@ -90,15 +91,59 @@ verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
    (`src/Pages/InnerPages/CrmApp.jsx`) is a new pipeline-board workspace
    (`BoardView` of deals + tasks + rep leaderboard).
 
-## Still open (not in the original priority list)
+## Still open — what's left to build
 
-- `/crm/{pipeline,sales-funnel,customer-journey}`, `/ecommerce/product-grid`,
-  `/ecommerce/customer-analytics`, `/finance/{profit-and-loss,budget-management,
-  financial-reports}`, `/hr` gaps already covered, `/logistics/{warehouse-management,
-  route-planning}`, `/projects/{timeline,gantt-view,project-analytics}`,
-  `/marketing/{overview,analytics}`, `/user-management/permissions`,
-  `/utility/{widget-gallery,ui-playground}`, `/pages/{starter-kit,rtl-dark-light-preview}`.
-  All still resolve to the themed `ComingSoon`.
+**20 nav leaves** still fall through to the themed `ComingSoon`. None need a new
+archetype — each reuses something that already exists. Suggested order (biggest
+reuse payoff first):
+
+### A. Analytics-style dashboards (reuse the dashboard pattern + `ChartCard`/`DonutStat`/`MeterList`/`CohortGrid`/`KpiCard`)
+| Route | Build as |
+| --- | --- |
+| `/projects/project-analytics` | Dashboard page — reuse `src/data/projects.js` (KPIs, health, velocity, workload) + `ChartCard` for `SPRINT_VELOCITY`. Closest sibling: `ProjectsDashboard.jsx`. |
+| `/ecommerce/customer-analytics` | Dashboard page — cohort retention (`CohortGrid`), acquisition `DonutStat`, LTV `KpiCard`s, top-customers `DataTable` from `CUSTOMERS_LIST`. Mirror `charts/UserAnalytics.jsx`. |
+| `/marketing/overview` | Dashboard page — reuse `src/data/marketing.js` (already powers `MarketingDashboard.jsx`); can literally point the route at `MarketingDashboard` like `/crm/crm-dashboard` → `CrmDashboard`, or make a lighter variant. |
+| `/marketing/analytics` | Dashboard page — channel `DonutStat` + campaign ROAS `MeterList` + email/SMS engagement from `MKT_EMAIL_LIST`/`MKT_SMS_LIST` in `lists.jsx`. |
+| `/finance/profit-and-loss` | `ReportPage` config in `src/data/reports.jsx` — revenue vs expenses `ChartCard` (data already in `charts.js`) + a P&L line-item `table`. Add `/finance/profit-and-loss` key; route auto-wires. |
+| `/finance/financial-reports` | `ListPage` config in `src/data/lists.jsx` — a saved-reports list (name, type, period, owner, last run, status). Auto-wires via `listRoutePaths`. |
+| `/finance/budget-management` | `SettingsPage`-ish or a `MeterList` per department vs budget + an editable `DataTable`. Reuse `PROJECT_HEALTH`-style meter data. |
+
+### B. CRM funnel / pipeline views (reuse `MeterList` + `BoardView`)
+| Route | Build as |
+| --- | --- |
+| `/crm/pipeline` | `BoardView` of `DEALS_LIST` by `stage` with column `$` totals — this is exactly the board already inside `CrmApp.jsx`; extract it or make `/crm/pipeline` a focused board-only page. |
+| `/crm/sales-funnel` | `MeterList` with `scaleToMax` + `showDropOff` over `PIPELINE_STAGES` (in `src/data/crm.js`). One `Surface`. |
+| `/crm/customer-journey` | `Timeline` component — stages from lead → onboarded → expansion, with per-stage counts. Reuse `Timeline` + `DonutStat`. |
+
+### C. Simple list routes (add a config to `src/data/lists.jsx` — auto-wires, no App.jsx edit)
+| Route | Rows |
+| --- | --- |
+| `/logistics/warehouse-management` | warehouses: name, location, capacity %, SKUs, staff, status. Reuse the `bar()` cell helper. |
+| `/logistics/route-planning` | routes: id, driver, stops, distance, est. time, vehicle, status. |
+| `/user-management/permissions` | permission matrix — either a `ListPage` (permission, description, roles-with-it) or a custom `CohortGrid`-style grid (roles × permissions with check cells). |
+
+### D. Marketing/Ecommerce product views
+| Route | Build as |
+| --- | --- |
+| `/ecommerce/product-grid` | Card grid variant of `PRODUCTS_LIST` (image placeholder, name, price, `StatusChip`) — like the File Manager grid. Toggle links to `/ecommerce/product-list`. |
+
+### E. Utility / Pages leftovers (marketing-ish static)
+| Route | Build as |
+| --- | --- |
+| `/projects/timeline` | Horizontal Gantt-lite: project rows with a positioned bar per date range. Custom, small; reuse `Surface` + `PROJECTS_LIST` (`due`, `progress`). |
+| `/projects/gantt-view` | Same as `/projects/timeline` with finer-grained task bars — build one component, two configs. |
+| `/utility/widget-gallery` | A curated subset of the `/components` gallery — can reuse `src/data/gallery.jsx` filtered, or a bespoke "dashboard widgets" showcase (`KpiCard`, `ChartCard`, `GoalCard`, `RankList` side by side). |
+| `/utility/ui-playground` | Interactive prop-tweaker for 3–4 components (Button/Chip/Chart) — state + live render. Like `ThemeCustomizer.jsx`'s live-preview pattern. |
+| `/pages/rtl-dark-light-preview` | Side-by-side `iframe`-free preview: render a mini component cluster three times with `dir="rtl"` / forced `data-theme`. Reuse `ThemeCustomizer` preview cluster. |
+| `/pages/starter-kit` | Static marketing page — feature grid, "what's included" checklist, copy-paste `npx` command in a `CodeBlock`. |
+
+### Notes
+- `/marketing/overview` and `/finance/*` dashboards: check `src/data/marketing.js`
+  and `src/data/finance.js` first — the dashboard versions already have rich mock
+  data you can reuse wholesale.
+- Anything list-shaped: add to `LIST_CONFIGS` and you're done (route + nav
+  exclusion are automatic via `listRoutePaths`). Everything else needs the
+  5-step "How to add a page group" flow below.
 
 ## How to add a page group (the established pattern)
 
