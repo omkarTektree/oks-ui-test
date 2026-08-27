@@ -1,15 +1,33 @@
 # Component catalogue & build plan
 
-Every entry is a **composed component** we build from `oks-ui` primitives and
-reuse across pages. The "Built from" column is the point of the whole repo —
-it shows people *how* to assemble `oks-ui` into real UI.
+## How the UI is layered
 
-Primitives `oks-ui` gives us: `Button` `ButtonGroup` `Alert` `Toast` `Loader`
-`Modal` `Tabs` `Drawer` `Dropdown` `Badge` `Avatar` `AvatarGroup` `Chip`
-`Tooltip` `Chart` (line/area/bar/column/pie/donut) `Divider` `Backdrop`
-`PageTitle` and the full `Form` / field set. It does **not** ship: Card, Table,
-Progress, Pagination, Breadcrumbs, Skeleton, Nav/Sidebar — those are the gaps we
-fill.
+The project is **not** "all oks-ui", a fork of oks-ui, or a merge into oks-ui.
+It's two layers with one shared token system:
+
+**Layer 1 — `oks-ui` primitives, used directly and unmodified.**
+`Button` `ButtonGroup` `Alert` `Toast` `Loader` `Modal` `Tabs` `Drawer`
+`Dropdown` `Badge` `Avatar` `AvatarGroup` `Chip` `Tooltip`
+`Chart` (line/area/bar/column/pie/donut) `Divider` `Backdrop` `PageTitle`
+`Switch` `Checkbox` `SteppedForm` `TextEditor` and the full `Form` / field set.
+The **only** customization is CSS variables in `src/styles/theme.css` — no
+component copies, no overrides, no patches.
+
+**Layer 2 — a thin composition layer (`src/Components/ui/`, ~29 components)**
+that fills the widgets `oks-ui` deliberately doesn't ship: Card, Table,
+Progress, Pagination, Breadcrumbs, Skeleton, Nav/Sidebar, KPI/chart cards, etc.
+Within this layer:
+- **~16 are assembled from `oks-ui` primitives** — e.g. `DataTable` = `<table>` +
+  `Checkbox` + `Pagination`; `ChartCard` = `Tabs` + `Chart`; `TrendChip` /
+  `StatusChip` = `Chip`; `FormCard` = `Form`; `CardHeader` / `SectionTitle` =
+  `PageTitle`.
+- **~13 are pure structural CSS + design tokens**, no `oks-ui` import — `Surface`
+  (a styled `div`), `BoardView`, `Timeline`, `CohortGrid`, `MeterList`,
+  `KeyValueList`, `StatGroup`, the messaging / calendar page layouts. (Several of
+  these still nest Layer-2 composites, so they touch `oks-ui` transitively.)
+
+Every entry below reads as **"Built from"** — that column is the point of the
+whole repo: it shows people *how* to assemble `oks-ui` into real UI.
 
 Location: `src/Components/ui/`. Each component is prop‑driven and themed via the
 `--app-*` / `--oks-*` tokens (see [`THEMING.md`](THEMING.md)). Route map:

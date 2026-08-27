@@ -14,6 +14,13 @@ and compose the widgets `oks-ui` lacks (Card, Table, charts wrappers…) into a
 reusable `src/Components/ui/` layer. Every screen should be copy-pasteable into a
 real app.
 
+**Two layers, one token system** (see [`COMPONENTS.md`](COMPONENTS.md) →
+"How the UI is layered"): Layer 1 is `oks-ui` primitives used **directly and
+unmodified** (customized only through CSS variables in `theme.css` — no forks,
+no overrides); Layer 2 is the ~29-component `src/Components/ui/` composition
+layer that fills `oks-ui`'s gaps — about half assembled from `oks-ui` primitives,
+about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
+
 ## Done (all committed to `main`, pushed)
 
 | Area | State |
