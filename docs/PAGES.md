@@ -10,7 +10,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | Page | Route | Status |
 | --- | --- | --- |
 | Analytics | `/dashboards/analytics` | ✅ (KPIs · revenue chart · donut · funnel · device meters · goal gauge · products table · activity) |
-| CRM | `/dashboards/crm` | 🔨 |
+| CRM | `/dashboards/crm` | ✅ (KPIs · pipeline stages · win/loss donut · lead sources · activity tiles · rep leaderboard) |
 | Ecommerce | `/dashboards/ecommerce` | 🔨 |
 | Finance | `/dashboards/finance` | ⬜ |
 | Sales | `/dashboards/sales` | ⬜ |

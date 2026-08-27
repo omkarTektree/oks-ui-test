@@ -4,13 +4,18 @@ import CardHeader from "./CardHeader";
 
 const COLORS = ["#6d5bdb", "#8a7ae6", "#ada2ef", "#cdc7f6", "#e6e3fb"];
 
-/** Donut with a centre total and a labelled percentage legend. */
+/**
+ * Donut with a centre total and a labelled percentage legend.
+ * `metaKey` names a field shown as a muted count next to each legend row
+ * (e.g. "382" for lead sources).
+ */
 const DonutStat = ({
   title,
   subtitle,
   data,
   categoryKey,
   valueKey,
+  metaKey,
   centerValue,
   centerLabel,
 }) => {
@@ -54,7 +59,12 @@ const DonutStat = ({
               <span className="flex-1 truncate text-[color:var(--app-fg-muted)]">
                 {d[categoryKey]}
               </span>
-              <span className="font-medium text-[var(--app-fg)]">
+              {metaKey != null && (
+                <span className="text-xs text-[color:var(--app-fg-subtle)]">
+                  {d[metaKey]}
+                </span>
+              )}
+              <span className="w-9 text-right font-medium text-[var(--app-fg)]">
                 {Math.round((d[valueKey] / total) * 100)}%
               </span>
             </li>

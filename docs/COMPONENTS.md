@@ -36,6 +36,8 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | `KpiCard` | Headline metric: value, label, hint, `TrendChip`, leading icon. Sparkline slot 🔨. | `Surface` + `Stat` + `TrendChip` | ✅ |
 | `TrendChip` | `↗ 12.4%` / `↘ 2.1%` pill, green / red by direction. | `Chip` (`color` success/danger, `startContent` arrow) | ✅ |
 | `StatGroup` | Responsive grid of `KpiCard`s (2 / 3 / 4 col). | CSS grid | ✅ |
+| `StatTile` | Compact metric (no Surface) for grids inside a card. | `TrendChip` | ✅ |
+| `RankList` | Numbered leaderboard — avatar, value, "% of target" bar. | `Surface` + `Avatar` | ✅ |
 | `MeterList` | Card of labelled meters; `scaleToMax` + `showDropOff` makes a conversion funnel. | `Surface` + `CardHeader` + bars | ✅ |
 | `GoalCard` | Radial gauge — "78% · $98.4k of $126k · ahead of schedule". | `Surface` + SVG ring + `Chip` | ✅ |
 | `MiniChart` | Inline sparkline, no axes/legend. | `Chart` `type="area"` minimal | 🔨 |
