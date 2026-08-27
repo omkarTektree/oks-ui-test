@@ -30,6 +30,7 @@ real app.
 | **FormPage archetype** | `src/Pages/InnerPages/FormPage.jsx` — config-driven create form (`FormFieldSet` grid + media/tips aside). Powers **4 routes** from `src/data/forms.jsx` (add-user, create-project, add-product, create-order). |
 | **DetailPage archetype** | `src/Pages/InnerPages/DetailPage.jsx` — header + stat tiles + tabs + typed content blocks. New `KeyValueList` ui component. Powers `/user-management/my-profile` from `src/data/details.jsx`. |
 | **Charts section** | `src/Pages/InnerPages/charts/*` — **7 pages** at `/charts/*` (apex-charts, chart-js, statistics, kpi-analytics, heatmaps, revenue-analytics, user-analytics). Data in `src/data/charts.js`. New `ChartPanel` local wrapper. |
+| **ReportPage archetype** | `src/Pages/InnerPages/ReportPage.jsx` — KPI row + `ChartCard` + breakdown + table, pure-data configs in `src/data/reports.jsx`. Powers 5 `/reports/*` routes + `CustomBuilder` stub. |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -69,8 +70,9 @@ SettingsSection, CodeBlock, Example.
    `src/Pages/InnerPages/charts/` (apex-charts, chart-js, statistics,
    kpi-analytics, heatmaps, revenue-analytics, user-analytics), data in
    `src/data/charts.js`, shared `ChartPanel` wrapper.
-7. **Reports section** — `/reports/*`: mostly a `ListPage` of saved reports +
-   a report-builder stub.
+7. ~~Reports section~~ — **DONE**. `ReportPage` archetype
+   (`src/Pages/InnerPages/ReportPage.jsx`, configs `src/data/reports.jsx`) for
+   the 5 report pages + an interactive `CustomBuilder` stub.
 8. **Utility & Pages sections** — FAQ, Help Center, Pricing, 404, Maintenance,
    Changelog, Roadmap, Theme Customizer. Mostly static/marketing layouts.
 9. **CRM Dashboard vs CRM App** — nav has `/crm/crm-dashboard` separate from

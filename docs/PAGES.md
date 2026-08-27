@@ -95,9 +95,11 @@ Profile · Settings · Security · Billing · Notifications · Connected Apps ·
 ✅ **Email Campaigns · SMS Campaigns · Landing Pages · Segments** (`ListPage`) ·
 ⬜ Overview · Analytics
 
-## Reports  `/reports/*`
-Sales Report · Revenue Report · Customer Report · Project Report · Marketing Report ·
-Custom Builder
+## Reports  `/reports/*`  ✅ (6 pages)
+✅ **Sales · Revenue · Customer · Project · Marketing Report** (`ReportPage`
+archetype — KPI row + `ChartCard` + breakdown + table, configs in
+`src/data/reports.jsx`) · **Custom Builder** (interactive builder stub —
+`src/Pages/InnerPages/reports/CustomBuilder.jsx`)
 
 ## Settings  `/settings/*`
 General · Company · Theme · Appearance · Locale · Notifications · Integrations · API
