@@ -16,7 +16,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | Sales | `/dashboards/sales` | ✅ (KPIs · pipeline stats · sales-trend chart · quota gauge with rep rows · region donut · leaderboard · deals table) |
 | Marketing | `/dashboards/marketing` | ⬜ |
 | Logistics | `/dashboards/logistics` | ⬜ |
-| Projects | `/dashboards/projects` | ⬜ |
+| Projects | `/dashboards/projects` | ✅ (KPIs · health strip · project-progress table · team-workload list · deadlines timeline · sprint-velocity chart · activity) |
 | SaaS | `/dashboards/saas` | ⬜ |
 | Business Intelligence | `/dashboards/business-intelligence` | ⬜ |
 

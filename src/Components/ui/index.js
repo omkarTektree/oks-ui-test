@@ -16,3 +16,4 @@ export { default as StatusChip } from "./StatusChip";
 export { default as EntityCell } from "./EntityCell";
 export { default as DataTable } from "./DataTable";
 export { default as ActivityFeed } from "./ActivityFeed";
+export { default as Timeline } from "./Timeline";

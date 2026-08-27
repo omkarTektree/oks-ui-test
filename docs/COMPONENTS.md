@@ -60,7 +60,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | `StatusChip` | Status → colour map (In stock / Low stock / Out of stock…). | `Chip` `variant="dot"` | ✅ |
 | `EntityCell` | Avatar + primary text + muted secondary. | `Avatar` + text | ✅ |
 | `ActivityFeed` | Events list with actor avatar, text, relative time. | `Avatar` + `--app-*` tokens | ✅ (filter 🔨) |
-| `Timeline` | Vertical step list with dot markers. | `Divider` + markers | ⬜ |
+| `Timeline` | Vertical list with dot markers + connecting rail; per-item date + tag. | `Surface` + markers | ✅ |
 | `KeyValueList` | Definition list for detail panels. | `Divider` + rows | ⬜ |
 
 ## 5. Shell & navigation  · _Vela: sidebar, top bar, breadcrumbs_

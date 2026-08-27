@@ -13,6 +13,7 @@ const KpiCard = ({
   hint,
   delta,
   deltaDirection,
+  deltaSuffix,
 }) => (
   <Surface padding="md" interactive>
     <div className="flex items-start justify-between">
@@ -24,7 +25,11 @@ const KpiCard = ({
         <span />
       )}
       {delta != null ? (
-        <TrendChip value={delta} direction={deltaDirection} />
+        <TrendChip
+          value={delta}
+          direction={deltaDirection}
+          suffix={deltaSuffix}
+        />
       ) : null}
     </div>
     <Stat className="mt-4" value={value} label={label} hint={hint} />
