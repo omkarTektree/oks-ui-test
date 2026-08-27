@@ -64,13 +64,17 @@ Rich Text Editor · Date Pickers · Select Components · Input Masks
 Apex Charts · Chart.js · Statistics · KPI Analytics · Heatmaps · Revenue Analytics ·
 User Analytics
 
-## Components  `/components`, `/components/*`  🔨 (the promo gallery)
-Overview · Buttons · Alerts · Cards · Modals · Tabs · Accordions · Avatars ·
-Badges · Breadcrumbs · Dropdowns · Pagination · Progress · Tooltips · Popovers ·
-Toasts · Timeline · Ratings · Carousel · Offcanvas · Loaders · Empty States
+## Components  `/components`, `/components/:slug`  ✅ (the promo gallery)
 
-Each renders the matching `oks-ui` component (or our `ui/` composite) with a
-live example and its code.
+`/components` is a card grid; each `/components/:slug` renders live examples +
+copyable source. Registry: `src/data/gallery.jsx`.
+
+- **oks-ui:** Button · Chip · Badge · Avatar · Alert · Tabs · Tooltip · Dropdown ·
+  Toast · Loader · Divider · PageTitle
+- **Composed (`src/Components/ui`):** Surface · KpiCard · TrendChip · StatusChip ·
+  EntityCell · ChartCard · DonutStat · MeterList · GoalCard · DataTable · ActivityFeed
+
+More entries are just data — add an object to the registry.
 
 ## Account  `/account/*`
 Profile · Settings · Security · Billing · Notifications · Connected Apps · API
