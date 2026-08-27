@@ -1,0 +1,122 @@
+/* ---------------------------------------------------------------------------
+   Custom oks-ui theme
+   ---------------------------------------------------------------------------
+   oks-ui is entirely CSS variables. This file overrides its `--oks-*` tokens
+   to show that a product can own its colours, radii, and per-component sizing
+   without touching component code. Loaded AFTER `oks-ui/styles.css` so these win.
+
+   It also defines an `--app-*` layer that our composed components in
+   `src/Components/ui/` read from, so they track light/dark with everything else.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* --- Custom brand palette: "iris" (not one of oks-ui's built-ins) --------- */
+  --oks-palette-iris-50: #f2f1fd;
+  --oks-palette-iris-100: #e6e3fb;
+  --oks-palette-iris-200: #cdc7f6;
+  --oks-palette-iris-300: #ada2ef;
+  --oks-palette-iris-400: #8a7ae6;
+  --oks-palette-iris-500: #6d5bdb;
+  --oks-palette-iris-600: #5a45c8;
+  --oks-palette-iris-700: #4b38a6;
+  --oks-palette-iris-800: #3f3086;
+  --oks-palette-iris-900: #362a6b;
+  --oks-palette-iris-950: #211840;
+
+  /* --- Point the semantic roles at palettes we chose ---------------------- */
+  --oks-color-primary-50: var(--oks-palette-iris-50);
+  --oks-color-primary-100: var(--oks-palette-iris-100);
+  --oks-color-primary-200: var(--oks-palette-iris-200);
+  --oks-color-primary-300: var(--oks-palette-iris-300);
+  --oks-color-primary-400: var(--oks-palette-iris-400);
+  --oks-color-primary-500: var(--oks-palette-iris-500);
+  --oks-color-primary-600: var(--oks-palette-iris-600);
+  --oks-color-primary-700: var(--oks-palette-iris-700);
+  --oks-color-primary-800: var(--oks-palette-iris-800);
+  --oks-color-primary-900: var(--oks-palette-iris-900);
+  --oks-color-primary-950: var(--oks-palette-iris-950);
+
+  --oks-color-success-50: var(--oks-palette-emerald-50);
+  --oks-color-success-100: var(--oks-palette-emerald-100);
+  --oks-color-success-500: var(--oks-palette-emerald-500);
+  --oks-color-success-600: var(--oks-palette-emerald-600);
+
+  --oks-color-warning-50: var(--oks-palette-amber-50);
+  --oks-color-warning-100: var(--oks-palette-amber-100);
+  --oks-color-warning-500: var(--oks-palette-amber-500);
+  --oks-color-warning-600: var(--oks-palette-amber-600);
+
+  /* --- Rounder corners than the default scale ---------------------------- */
+  --oks-radius-sm: 0.3125rem;
+  --oks-radius-md: 0.5rem;
+  --oks-radius-lg: 0.75rem;
+  --oks-radius-xl: 1rem;
+  --oks-radius-2xl: 1.25rem;
+
+  /* --- A couple of per-component overrides, to show that lever exists ----- */
+  --oks-button-radius: var(--oks-radius-lg);
+  --oks-chip-radius: var(--oks-radius-full);
+
+  --oks-color-surface: #ffffff;
+
+  /* --- App layer: our composed components read these -------------------- */
+  --app-bg: #f7f7fb;
+  --app-surface: #ffffff;
+  --app-surface-2: #f4f4f8;
+  --app-border: rgba(17, 17, 27, 0.08);
+  --app-border-strong: rgba(17, 17, 27, 0.14);
+  --app-fg: #16161d;
+  --app-fg-muted: rgba(22, 22, 29, 0.62);
+  --app-fg-subtle: rgba(22, 22, 29, 0.42);
+  --app-ring: var(--oks-color-primary-500);
+  --app-shadow-sm: 0 1px 2px rgba(17, 17, 27, 0.06);
+  --app-shadow-md: 0 4px 16px -4px rgba(17, 17, 27, 0.12);
+
+  color-scheme: light;
+}
+
+/* --------------------------------- Dark ---------------------------------- */
+:root[data-theme="dark"] {
+  --oks-color-surface: #17171c;
+
+  --oks-form-field-bg: #1c1c22;
+  --oks-form-field-fg: #f2f2f4;
+  --oks-form-field-placeholder: rgba(242, 242, 244, 0.4);
+  --oks-form-field-label: #f2f2f4;
+  --oks-form-field-muted: rgba(242, 242, 244, 0.62);
+  --oks-form-field-border: rgba(255, 255, 255, 0.14);
+  --oks-form-field-border-hover: rgba(255, 255, 255, 0.24);
+
+  --app-bg: #0d0d11;
+  --app-surface: #17171c;
+  --app-surface-2: #1e1e24;
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-border-strong: rgba(255, 255, 255, 0.16);
+  --app-fg: #f4f4f6;
+  --app-fg-muted: rgba(244, 244, 246, 0.64);
+  --app-fg-subtle: rgba(244, 244, 246, 0.42);
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --app-shadow-md: 0 8px 28px -8px rgba(0, 0, 0, 0.6);
+
+  color-scheme: dark;
+}
+
+/* Base page surface + typography */
+body {
+  background: var(--app-bg);
+  color: var(--app-fg);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Theme-aware logo swap */
+.app-logo-light {
+  display: none;
+}
+:root[data-theme="dark"] .app-logo-dark {
+  display: none;
+}
+:root[data-theme="dark"] .app-logo-light {
+  display: block;
+}

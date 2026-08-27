@@ -11,27 +11,31 @@ Primitives `oks-ui` gives us: `Button` `ButtonGroup` `Alert` `Toast` `Loader`
 Progress, Pagination, Breadcrumbs, Skeleton, Nav/Sidebar — those are the gaps we
 fill.
 
-Location: `src/Components/ui/`. Each component is prop‑driven, themed via
-`--oks-*` tokens, and documented with a short usage snippet in its own file.
+Location: `src/Components/ui/`. Each component is prop‑driven and themed via the
+`--app-*` / `--oks-*` tokens (see [`THEMING.md`](THEMING.md)). Route map:
+[`PAGES.md`](PAGES.md).
+
+Legend: **✅ built** · 🔨 next · ⬜ planned
 
 ---
 
 ## 1. Foundation (fills the primitive gaps)
 
-| Component | Purpose | Built from |
-| --- | --- | --- |
-| `Surface` | The Card `oks-ui` doesn't have. `bg`, token border + radius, padding scale, `variant` = plain / bordered / elevated. Everything below sits in one. | `div` + `--oks-*` tokens |
-| `CardHeader` | Title row inside a `Surface`: heading, optional subtitle, right‑aligned actions slot. | `PageTitle` + actions children |
-| `SectionTitle` | Page‑ and block‑level headings. | `PageTitle` |
-| `Stat` | A single number + label + optional `TrendChip`, used standalone or inside cards. | `Chip` |
+| Component | Purpose | Built from | Status |
+| --- | --- | --- | --- |
+| `Surface` | The Card `oks-ui` doesn't have. Token border + radius, padding scale, `interactive` hover. Everything below sits in one. | `div` + `--app-*` tokens | ✅ |
+| `CardHeader` | Title row inside a `Surface`: heading, subtitle, right‑aligned actions slot. | `PageTitle` + actions children | ✅ |
+| `SectionTitle` | Page‑level heading + subtitle + actions cluster. | `PageTitle` | ✅ |
+| `Stat` | A single value + label + optional hint. | `div` + tokens | ✅ |
+| `UpgradeCard` | Sidebar promo block. | `Surface` + `Button` | ✅ |
 
 ## 2. Metrics & KPIs  · _Vela: top 4 cards, "Monthly target", "Sessions by device"_
 
-| Component | Purpose | Built from |
-| --- | --- | --- |
-| `KpiCard` | Headline metric: big animated value, label, `TrendChip`, leading icon, optional sparkline. | `Surface` + `Chip` + `Tooltip` + `MiniChart` |
-| `TrendChip` | `↗ 12.4%` / `↘ 2.1%` pill, green / red by direction. | `Chip` (`color` success/danger, `startContent` arrow) |
-| `StatGroup` | Responsive row/grid of `KpiCard`s. | CSS grid + `KpiCard` |
+| Component | Purpose | Built from | Status |
+| --- | --- | --- | --- |
+| `KpiCard` | Headline metric: value, label, hint, `TrendChip`, leading icon. Sparkline slot 🔨. | `Surface` + `Stat` + `TrendChip` | ✅ |
+| `TrendChip` | `↗ 12.4%` / `↘ 2.1%` pill, green / red by direction. | `Chip` (`color` success/danger, `startContent` arrow) | ✅ |
+| `StatGroup` | Responsive grid of `KpiCard`s (2 / 3 / 4 col). | CSS grid | ✅ |
 | `ProgressStat` | Label + value + horizontal bar (e.g. Desktop 58%). | `div` bar + `--oks-*` + `Tooltip` |
 | `GoalCard` | Radial gauge — "78% · $98.4k of $126k · ahead of schedule". | `Surface` + SVG ring + `Chip` + `Divider` |
 | `MiniChart` | Inline sparkline, no axes/legend. | `Chart` `type="area"` minimal |
@@ -64,14 +68,13 @@ Location: `src/Components/ui/`. Each component is prop‑driven, themed via
 
 | Component | Purpose | Built from | Status |
 | --- | --- | --- | --- |
-| `AppHeader` | Sidebar toggles, search, theme switch, notifications, account menu. | `Button` `isIconOnly` + `TextField` + `Badge` + `Dropdown` + `Avatar` + `Divider` + `Tooltip` | **building now** |
-| `AppFooter` | Copyright, legal links, version. | `Divider` + `Button` `variant="link"` + `Chip` | **building now** |
-| `SidebarNav` | Collapsible groups, active state, mini (icon) mode, count badges, promo card. | `Button` (`variant="ghost"`, `as={NavLink}`) + `Divider` + `Tooltip` + `Chip` | **needs discussion** |
-| `Breadcrumbs` | Path trail. | `Button` `variant="link"` + separator | planned |
-| `PageHeader` | Greeting/title + subtitle + actions (date range, export, add). | `PageTitle` + `Button` + `Dropdown` + `Tabs` | planned |
-| `CommandMenu` (⌘K) | "Search anything" palette. | `Modal` + `TextField` + result list + keyboard | planned |
-| `UpgradeCard` | Sidebar promo. | `Surface` + `PageTitle` + `Button` | planned |
-| `DateRangeMenu` | "Last 30 days" preset picker. | `Dropdown` + `DatePickerField` | planned |
+| `Header` | Sidebar toggles, search, theme switch, notifications, account menu. | `Button` `isIconOnly` + `TextField` + `Badge` + `Dropdown` + `Avatar` + `Divider` + `Tooltip` | ✅ |
+| `Footer` | Copyright, legal links, version. | `Divider` + `Button` `variant="link"` + `Chip` | ✅ |
+| `Sidebar` | Full Vela tree, collapsible groups, active state, mini (icon) mode, promo card. Data in `src/data/nav.js`. | `NavLink` + `lucide` icons + CSS accordion + `UpgradeCard` | ✅ (mini-mode flyouts 🔨) |
+| `Breadcrumbs` | Path trail. | `Button` `variant="link"` + separator | 🔨 |
+| `PageHeader` | Greeting/title + subtitle + actions (date range, export, add). | `PageTitle` + `Button` + `Dropdown` + `Tabs` | 🔨 |
+| `CommandMenu` (⌘K) | "Search anything" palette. | `Modal` + `TextField` + result list + keyboard | ⬜ |
+| `DateRangeMenu` | "Last 30 days" preset picker. | `Dropdown` + `DatePickerField` | ⬜ |
 
 ## 6. Feedback & states
 

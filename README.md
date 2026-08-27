@@ -24,9 +24,10 @@ stat cards, charts, tables, funnels, and progress widgets.
 2. **Compose, don't duplicate.** Every gap‑filling widget lives in
    `src/Components/ui/` as a reusable, prop‑driven component built from `oks-ui`.
    Pages assemble these; they don't re‑implement them.
-3. **Theme through tokens.** Colour, spacing, and radius come from the `--oks-*`
-   CSS variables, not hard‑coded values. Tailwind is used for *layout only*
-   (grid / flex / spacing), never for component styling.
+3. **Own the theme.** We override `oks-ui`'s `--oks-*` tokens with a custom brand
+   palette, radii, and a full dark mode — no component code touched. Our composed
+   components read an `--app-*` layer so everything flips together. See
+   [`docs/THEMING.md`](docs/THEMING.md).
 4. **Accessible & responsive by default** — `oks-ui` gives us keyboard nav,
    focus rings, ARIA roles, and reduced‑motion support; we keep it that way.
 
@@ -47,15 +48,19 @@ stat cards, charts, tables, funnels, and progress widgets.
 src/
   Components/
     Commom/        App shell — Header, Sidebar, Footer   (folder name is a typo, kept for now)
-    ui/            Composable widgets built from oks-ui  (KpiCard, DataTable, ChartCard, …)
+    ui/            Composable widgets built from oks-ui  (Surface, KpiCard, StatGroup, …)
     Auth/          ProtectedRoute
   Pages/
     Auth/          Login / Register / Forgot password / Terms  (oks-ui Form-driven)
-    InnerPages/    Dashboards and app pages
+    InnerPages/    Dashboards, app pages, ComingSoon
   context/         Mock auth (localStorage flag)
-  data/            Mock data for the demo screens
+  data/            nav.js (full sidebar tree) + mock data
+  lib/             theme.js (light/dark handling)
+  styles/          theme.css (custom oks-ui token overrides)
 docs/
-  COMPONENTS.md    The component catalogue + build plan
+  COMPONENTS.md    Component catalogue + build plan
+  PAGES.md         Full page/route map (mirrors Vela)
+  THEMING.md       How the custom theme + dark mode work
 ```
 
 ## Running
@@ -81,7 +86,16 @@ app shell have something to gate. It is not real authentication.
 
 ## Where to look
 
-- **`docs/COMPONENTS.md`** — the full list of components to build from `oks-ui`,
-  grouped by category, each noting which primitives it uses.
+- **`docs/COMPONENTS.md`** — the full list of components to build from `oks-ui`.
+- **`docs/PAGES.md`** — every route and its build status.
+- **`docs/THEMING.md`** — the custom token overrides and dark mode.
 - **`src/Components/ui/`** — the composed components as they land.
-- **`src/Pages/InnerPages/`** — pages that assemble them.
+- **`src/data/nav.js`** — the whole sidebar tree in one place.
+
+## Status
+
+Shell (sidebar / header / footer), the theme system, and the foundation
+`ui/` components (`Surface`, `CardHeader`, `SectionTitle`, `Stat`, `TrendChip`,
+`KpiCard`, `StatGroup`) are in. The Analytics dashboard has real KPIs + activity;
+charts, the data table, and the component gallery are next. Every other nav link
+resolves to a themed **Coming soon** page.

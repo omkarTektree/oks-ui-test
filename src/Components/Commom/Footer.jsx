@@ -11,16 +11,16 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="shrink-0 bg-white">
+    <footer className="shrink-0 bg-[var(--app-surface)]">
       <Divider />
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-4 sm:flex-row sm:px-6">
-        <p className="text-xs text-black/50">
+        <p className="text-xs text-[color:var(--app-fg-subtle)]">
           © {year} OKS — built with{" "}
           <a
             href="https://www.oks-ui.com"
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-black/70 hover:text-black"
+            className="font-medium text-[color:var(--app-fg-muted)] hover:text-[var(--app-fg)]"
           >
             oks-ui
           </a>

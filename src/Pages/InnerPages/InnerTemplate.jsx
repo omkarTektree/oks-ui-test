@@ -25,10 +25,10 @@ const InnerTemplate = () => {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#fafafa]">
+    <div className="flex h-screen w-full overflow-hidden bg-[var(--app-bg)]">
       {/* Desktop sidebar */}
       <aside
-        className={`hidden shrink-0 border-r border-black/[0.08] transition-[width] duration-300 lg:block ${
+        className={`hidden shrink-0 border-r border-[color:var(--app-border)] transition-[width] duration-300 lg:block ${
           collapsed ? "w-16" : "w-64"
         }`}
       >
@@ -43,7 +43,7 @@ const InnerTemplate = () => {
         onClick={() => setMobileOpen(false)}
       />
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-black/[0.08] bg-white shadow-xl transition-transform duration-300 ease-out lg:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-[color:var(--app-border)] bg-[var(--app-surface)] shadow-xl transition-transform duration-300 ease-out lg:hidden ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-hidden={!mobileOpen}

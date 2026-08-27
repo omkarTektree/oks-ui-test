@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+/* Make Tailwind's `dark:` variant follow the same `data-theme` attribute
+   that oks-ui and our theme.css use. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));

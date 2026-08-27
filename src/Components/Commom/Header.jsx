@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -10,21 +11,22 @@ import {
   DropdownTrigger,
   TextField,
   Tooltip,
-  toast,
 } from "oks-ui";
 import {
   Bell,
   LogOut,
   Menu,
-  MoonStar,
+  Moon,
   PanelLeft,
   PanelLeftClose,
   Search,
   Settings,
+  Sun,
   User,
 } from "lucide-react";
 import { loginEmail } from "../../data/login";
 import { useAuth } from "../../context/useAuth";
+import { getTheme, toggleTheme } from "../../lib/theme";
 
 const NOTIFICATIONS = [
   { key: "n1", title: "Revenue report published", time: "12 minutes ago" },
@@ -35,6 +37,7 @@ const NOTIFICATIONS = [
 const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [theme, setTheme] = useState(getTheme);
 
   const handleLogout = () => {
     logout();
@@ -42,7 +45,7 @@ const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
   };
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-black/[0.08] bg-white/80 px-4 backdrop-blur sm:gap-3 sm:px-6">
+    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-[color:var(--app-border)] bg-[var(--app-surface)] px-4 sm:gap-3 sm:px-6">
       <Button
         isIconOnly
         variant="ghost"
@@ -82,15 +85,19 @@ const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
       </div>
 
       <div className="ml-auto flex items-center gap-1 sm:gap-1.5">
-        <Tooltip content="Toggle theme" placement="bottom" delay={300}>
+        <Tooltip
+          content={theme === "dark" ? "Switch to light" : "Switch to dark"}
+          placement="bottom"
+          delay={300}
+        >
           <Button
             isIconOnly
             variant="ghost"
             size="sm"
             aria-label="Toggle theme"
-            onClick={() => toast.info("Dark mode is on the roadmap")}
+            onClick={() => setTheme(toggleTheme())}
           >
-            <MoonStar size={19} />
+            {theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
           </Button>
         </Tooltip>
 
@@ -121,8 +128,12 @@ const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
             <Button variant="ghost" size="sm" className="gap-2 px-1.5">
               <Avatar name="Admin User" size="sm" />
               <span className="hidden leading-tight sm:block">
-                <span className="block text-sm font-medium">Admin</span>
-                <span className="block text-xs text-black/50">Administrator</span>
+                <span className="block text-sm font-medium text-[var(--app-fg)]">
+                  Admin
+                </span>
+                <span className="block text-xs text-[color:var(--app-fg-subtle)]">
+                  Administrator
+                </span>
               </span>
             </Button>
           </DropdownTrigger>

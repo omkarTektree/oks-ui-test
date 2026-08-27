@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./Components/Auth/ProtectedRoute";
@@ -8,13 +8,22 @@ import AuthFallback from "./Pages/Auth/AuthFallback";
 import AuthTemplate from "./Pages/Auth/AuthTemplate";
 
 import InnerTemplate from "./Pages/InnerPages/InnerTemplate";
-import Placeholder from "./Pages/InnerPages/Placeholder";
+import ComingSoon from "./Pages/InnerPages/ComingSoon";
+import { NAV_ROUTES } from "./data/nav";
 
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
 const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword"));
 const Terms = lazy(() => import("./Pages/Auth/Terms"));
-const Dashboard = lazy(() => import("./Pages/InnerPages/Dashboard"));
+const AnalyticsDashboard = lazy(() => import("./Pages/InnerPages/Dashboard"));
+
+// Auth screens live outside the app shell; everything else is a shell page.
+const AUTH_PATHS = new Set(["/", "/register", "/forgot-password"]);
+const REAL_INNER = new Set(["/dashboards/analytics"]);
+const shellRoutes = NAV_ROUTES.filter(
+  (path) =>
+    !AUTH_PATHS.has(path) && !REAL_INNER.has(path) && !path.startsWith("/40")
+);
 
 const App = () => {
   return (
@@ -31,11 +40,18 @@ const App = () => {
 
           <Route element={<ProtectedRoute />}>
             <Route element={<InnerTemplate />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/projects" element={<Placeholder title="Projects" />} />
-              <Route path="/reports" element={<Placeholder title="Reports" />} />
-              <Route path="/team" element={<Placeholder title="Team" />} />
-              <Route path="/settings" element={<Placeholder title="Settings" />} />
+              <Route
+                path="/dashboard"
+                element={<Navigate to="/dashboards/analytics" replace />}
+              />
+              <Route
+                path="/dashboards/analytics"
+                element={<AnalyticsDashboard />}
+              />
+              {shellRoutes.map((path) => (
+                <Route key={path} path={path} element={<ComingSoon />} />
+              ))}
+              <Route path="*" element={<ComingSoon />} />
             </Route>
           </Route>
         </Routes>

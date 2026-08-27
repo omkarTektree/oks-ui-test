@@ -1,0 +1,335 @@
+// Full application navigation — mirrors the Vela admin template structure.
+// Groups collapse in the sidebar; every leaf resolves to a route (real pages
+// where built, a themed "Coming soon" page otherwise).
+
+import {
+  LayoutDashboard,
+  ShoppingCart,
+  LayoutGrid,
+  Users,
+  FolderKanban,
+  Landmark,
+  Contact,
+  BriefcaseBusiness,
+  Truck,
+  Store,
+  Table2,
+  ChartColumn,
+  Component,
+  CircleUser,
+  Megaphone,
+  FileBarChart,
+  Settings,
+  LifeBuoy,
+  FileText,
+  Crown,
+} from "lucide-react";
+
+const slug = (s) =>
+  s
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+/** Build `{ label, to }` leaves under a base path. */
+const leaves = (base, labels) =>
+  labels.map((label) => ({ label, to: `${base}/${slug(label)}` }));
+
+export const NAV = [
+  {
+    label: "Dashboards",
+    icon: LayoutDashboard,
+    items: leaves("/dashboards", [
+      "Analytics",
+      "CRM",
+      "Ecommerce",
+      "Finance",
+      "Sales",
+      "Marketing",
+      "Logistics",
+      "Projects",
+      "SaaS",
+      "Business Intelligence",
+    ]),
+  },
+  { label: "Orders", icon: ShoppingCart, to: "/orders" },
+  {
+    label: "Apps",
+    icon: LayoutGrid,
+    items: leaves("/apps", [
+      "Chat",
+      "Contacts",
+      "File Manager",
+      "Notes",
+      "Task Manager",
+      "Help Desk",
+      "Group Chat",
+      "Support Tickets",
+      "Email",
+      "Calendar",
+    ]),
+  },
+  {
+    label: "User Management",
+    icon: Users,
+    items: leaves("/user-management", [
+      "All Users",
+      "My Profile",
+      "Add User",
+      "Roles",
+      "Permissions",
+      "Teams",
+      "Departments",
+      "Activity Logs",
+    ]),
+  },
+  {
+    label: "Projects",
+    icon: FolderKanban,
+    items: leaves("/projects", [
+      "All Projects",
+      "Create Project",
+      "Timeline",
+      "Team Board",
+      "Sprint Board",
+      "Gantt View",
+      "Project Analytics",
+      "Kanban View",
+    ]),
+  },
+  {
+    label: "Finance",
+    icon: Landmark,
+    items: leaves("/finance", [
+      "Transactions",
+      "Payments",
+      "Expenses",
+      "Profit & Loss",
+      "Budget Management",
+      "Invoices",
+      "Financial Reports",
+    ]),
+  },
+  {
+    label: "CRM",
+    icon: Contact,
+    items: leaves("/crm", [
+      "CRM Dashboard",
+      "CRM App",
+      "Leads",
+      "Opportunities",
+      "Customers",
+      "Deals",
+      "Pipeline",
+      "Sales Funnel",
+      "Campaigns",
+      "Customer Journey",
+    ]),
+  },
+  {
+    label: "HR Management",
+    icon: BriefcaseBusiness,
+    items: leaves("/hr", [
+      "Employees",
+      "Attendance",
+      "Leave Requests",
+      "Payroll",
+      "Departments",
+      "Recruitment",
+      "Job Applications",
+    ]),
+  },
+  {
+    label: "Logistics",
+    icon: Truck,
+    items: leaves("/logistics", [
+      "Shipments",
+      "Delivery Tracking",
+      "Fleet Management",
+      "Warehouse Management",
+      "Route Planning",
+    ]),
+  },
+  {
+    label: "Ecommerce",
+    icon: Store,
+    items: leaves("/ecommerce", [
+      "Product Grid",
+      "Product List",
+      "Add Product",
+      "Categories",
+      "Orders",
+      "Create Order",
+      "Customers",
+      "Customer Analytics",
+      "Reviews",
+      "Inventory",
+      "Coupons",
+      "Wishlist",
+      "Promotions",
+    ]),
+  },
+  {
+    label: "Tables & Forms",
+    icon: Table2,
+    items: leaves("/tables-forms", [
+      "Responsive Table",
+      "Filter Table",
+      "Basic Table",
+      "Data Table",
+      "Advanced Table",
+      "Form Elements",
+      "Form Layouts",
+      "Form Validation",
+      "Multi-Step Wizard",
+      "File Upload",
+      "Rich Text Editor",
+      "Date Pickers",
+      "Select Components",
+      "Input Masks",
+    ]),
+  },
+  {
+    label: "Charts & Analytics",
+    icon: ChartColumn,
+    items: leaves("/charts", [
+      "Apex Charts",
+      "Chart.js",
+      "Statistics",
+      "KPI Analytics",
+      "Heatmaps",
+      "Revenue Analytics",
+      "User Analytics",
+    ]),
+  },
+  {
+    label: "Components",
+    icon: Component,
+    items: [
+      { label: "Overview", to: "/components" },
+      ...leaves("/components", [
+        "Buttons",
+        "Alerts",
+        "Cards",
+        "Modals",
+        "Tabs",
+        "Accordions",
+        "Avatars",
+        "Badges",
+        "Breadcrumbs",
+        "Dropdowns",
+        "Pagination",
+        "Progress",
+        "Tooltips",
+        "Popovers",
+        "Toasts",
+        "Timeline",
+        "Ratings",
+        "Carousel",
+        "Offcanvas",
+        "Loaders",
+        "Empty States",
+      ]),
+    ],
+  },
+  {
+    label: "Account",
+    icon: CircleUser,
+    items: leaves("/account", [
+      "Profile",
+      "Settings",
+      "Security",
+      "Billing",
+      "Notifications",
+      "Connected Apps",
+      "API",
+    ]),
+  },
+  {
+    label: "Marketing",
+    icon: Megaphone,
+    items: leaves("/marketing", [
+      "Overview",
+      "Email Campaigns",
+      "SMS Campaigns",
+      "Landing Pages",
+      "Segments",
+      "Analytics",
+    ]),
+  },
+  {
+    label: "Reports",
+    icon: FileBarChart,
+    items: leaves("/reports", [
+      "Sales Report",
+      "Revenue Report",
+      "Customer Report",
+      "Project Report",
+      "Marketing Report",
+      "Custom Builder",
+    ]),
+  },
+  {
+    label: "Settings",
+    icon: Settings,
+    items: leaves("/settings", [
+      "General",
+      "Company",
+      "Theme",
+      "Appearance",
+      "Locale",
+      "Notifications",
+      "Integrations",
+      "API",
+    ]),
+  },
+  {
+    label: "Utility",
+    icon: LifeBuoy,
+    items: leaves("/utility", [
+      "FAQ",
+      "Help Center",
+      "Knowledge Base",
+      "Documentation",
+      "Search Results",
+      "Notifications Center",
+      "Activity Feed",
+      "Pricing",
+      "Widget Gallery",
+      "UI Playground",
+    ]),
+  },
+  {
+    label: "Pages",
+    icon: FileText,
+    items: leaves("/pages", [
+      "Theme Customizer",
+      "RTL / Dark / Light Preview",
+      "Starter Kit",
+      "Changelog",
+      "Roadmap",
+    ]),
+  },
+  {
+    label: "Premium",
+    icon: Crown,
+    items: [
+      { label: "Release Notes", to: "/pages/release-notes" },
+      { label: "Login", to: "/" },
+      { label: "Register", to: "/register" },
+      { label: "Forgot Password", to: "/forgot-password" },
+      { label: "404 Error", to: "/404-error" },
+      { label: "Maintenance", to: "/maintenance" },
+    ],
+  },
+];
+
+/** Flat list of every internal route the nav points at (deduped). */
+export const NAV_ROUTES = Array.from(
+  new Set(
+    NAV.flatMap((section) =>
+      section.to ? [section.to] : section.items.map((i) => i.to)
+    )
+  )
+);
