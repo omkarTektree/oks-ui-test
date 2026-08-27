@@ -1,22 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import {
-  Menu as MenuIcon,
-  PanelLeftClose,
-  PanelLeft,
-  Search,
+  Avatar,
+  Badge,
+  Button,
+  Divider,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  TextField,
+  Tooltip,
+  toast,
+} from "oks-ui";
+import {
   Bell,
-  User,
-  Settings,
   LogOut,
+  Menu,
+  MoonStar,
+  PanelLeft,
+  PanelLeftClose,
+  Search,
+  Settings,
+  User,
 } from "lucide-react";
 import { loginEmail } from "../../data/login";
 import { useAuth } from "../../context/useAuth";
-import Menu, { MenuItem, MenuLabel, MenuDivider } from "./Menu";
 
 const NOTIFICATIONS = [
-  { title: "New comment on Projects", time: "2m ago" },
-  { title: "Report export is ready", time: "1h ago" },
-  { title: "Priya accepted your team invite", time: "Yesterday" },
+  { key: "n1", title: "Revenue report published", time: "12 minutes ago" },
+  { key: "n2", title: "Spike in checkout errors flagged", time: "48 minutes ago" },
+  { key: "n3", title: "Diego closed the Q3 campaign", time: "2 hours ago" },
 ];
 
 const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
@@ -29,88 +42,118 @@ const Header = ({ collapsed, onMenuClick, onCollapseToggle }) => {
   };
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-black/[0.08] bg-white/80 px-4 backdrop-blur sm:px-6">
-      <button
-        type="button"
-        onClick={onMenuClick}
-        className="rounded-lg p-2 text-black/60 transition-colors hover:bg-black/5 lg:hidden"
+    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-black/[0.08] bg-white/80 px-4 backdrop-blur sm:gap-3 sm:px-6">
+      <Button
+        isIconOnly
+        variant="ghost"
+        size="sm"
         aria-label="Open navigation"
+        className="lg:hidden"
+        onClick={onMenuClick}
       >
-        <MenuIcon size={20} />
-      </button>
-      <button
-        type="button"
-        onClick={onCollapseToggle}
-        className="hidden rounded-lg p-2 text-black/60 transition-colors hover:bg-black/5 lg:block"
-        aria-label="Toggle sidebar"
-      >
-        {collapsed ? <PanelLeft size={20} /> : <PanelLeftClose size={20} />}
-      </button>
+        <Menu size={20} />
+      </Button>
 
-      <div className="relative ml-1 hidden w-full max-w-xs sm:block">
-        <Search
-          size={16}
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-black/40"
-        />
-        <input
-          type="text"
-          placeholder="Search…"
-          className="w-full rounded-lg border border-black/[0.08] bg-black/[0.02] py-2 pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-black/40 focus:border-black/20 focus:bg-white"
+      <Tooltip
+        content={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        placement="bottom"
+        delay={300}
+      >
+        <Button
+          isIconOnly
+          variant="ghost"
+          size="sm"
+          aria-label="Toggle sidebar"
+          className="hidden lg:inline-flex"
+          onClick={onCollapseToggle}
+        >
+          {collapsed ? <PanelLeft size={20} /> : <PanelLeftClose size={20} />}
+        </Button>
+      </Tooltip>
+
+      <div className="hidden w-full max-w-xs sm:block">
+        <TextField
+          aria-label="Search"
+          placeholder="Search anything…"
+          size="sm"
+          radius="lg"
+          startIcon={<Search size={16} />}
         />
       </div>
 
-      <div className="ml-auto flex items-center gap-1 sm:gap-2">
-        <Menu
-          align="right"
-          width={288}
-          trigger={
-            <span className="relative rounded-lg p-2 text-black/60 transition-colors hover:bg-black/5">
-              <Bell size={20} />
-              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
-            </span>
-          }
-        >
-          <MenuLabel title="Notifications" />
-          <MenuDivider />
-          {NOTIFICATIONS.map((n) => (
-            <div
-              key={n.title}
-              className="rounded-lg px-3 py-2 hover:bg-black/[0.04]"
-            >
-              <p className="text-sm text-black/80">{n.title}</p>
-              <p className="text-xs text-black/40">{n.time}</p>
-            </div>
-          ))}
-          <MenuDivider />
-          <MenuItem onClick={() => {}}>View all notifications</MenuItem>
-        </Menu>
+      <div className="ml-auto flex items-center gap-1 sm:gap-1.5">
+        <Tooltip content="Toggle theme" placement="bottom" delay={300}>
+          <Button
+            isIconOnly
+            variant="ghost"
+            size="sm"
+            aria-label="Toggle theme"
+            onClick={() => toast.info("Dark mode is on the roadmap")}
+          >
+            <MoonStar size={19} />
+          </Button>
+        </Tooltip>
 
-        <Menu
-          align="right"
-          trigger={
-            <span className="flex items-center gap-2 rounded-lg p-1 pr-2 transition-colors hover:bg-black/5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-xs font-semibold text-white">
-                A
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Button isIconOnly variant="ghost" size="sm" aria-label="Notifications">
+              <Badge
+                content={NOTIFICATIONS.length}
+                size="sm"
+                color="danger"
+                placement="top-end"
+              >
+                <Bell size={19} />
+              </Badge>
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Notifications" selectionMode="none">
+            {NOTIFICATIONS.map((n) => (
+              <DropdownItem key={n.key} title={n.title} description={n.time} />
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+
+        <Divider orientation="vertical" className="mx-1 h-6" />
+
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Button variant="ghost" size="sm" className="gap-2 px-1.5">
+              <Avatar name="Admin User" size="sm" />
+              <span className="hidden leading-tight sm:block">
+                <span className="block text-sm font-medium">Admin</span>
+                <span className="block text-xs text-black/50">Administrator</span>
               </span>
-              <span className="hidden text-sm font-medium text-black/80 sm:block">
-                Admin
-              </span>
-            </span>
-          }
-        >
-          <MenuLabel title="Admin" subtitle={loginEmail} />
-          <MenuDivider />
-          <MenuItem icon={User} onClick={() => navigate("/settings")}>
-            Profile
-          </MenuItem>
-          <MenuItem icon={Settings} onClick={() => navigate("/settings")}>
-            Settings
-          </MenuItem>
-          <MenuDivider />
-          <MenuItem icon={LogOut} danger onClick={handleLogout}>
-            Log out
-          </MenuItem>
-        </Menu>
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Account" selectionMode="none">
+            <DropdownItem
+              key="who"
+              title="Admin"
+              description={loginEmail}
+              isReadOnly
+              showDivider
+            />
+            <DropdownItem
+              key="profile"
+              title="Profile"
+              startContent={<User size={16} />}
+              onAction={() => navigate("/settings")}
+            />
+            <DropdownItem
+              key="settings"
+              title="Settings"
+              startContent={<Settings size={16} />}
+              onAction={() => navigate("/settings")}
+            />
+            <DropdownItem
+              key="logout"
+              title="Log out"
+              startContent={<LogOut size={16} />}
+              onAction={handleLogout}
+            />
+          </DropdownMenu>
+        </Dropdown>
       </div>
     </header>
   );
