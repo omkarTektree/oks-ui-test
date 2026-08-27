@@ -375,6 +375,48 @@ export const LANDING_PAGES_LIST = Array.from({ length: 16 }, (_, i) => ({
   status: pick(["Published", "Published", "Draft"], i * 3),
 }));
 
+export const FINANCIAL_REPORTS_LIST = [
+  ["Profit & Loss", "P&L", "Monthly"],
+  ["Balance Sheet", "Balance", "Monthly"],
+  ["Cash Flow Statement", "Cash flow", "Monthly"],
+  ["Revenue by Product", "Revenue", "Quarterly"],
+  ["Expenses by Category", "Expense", "Monthly"],
+  ["AR Aging", "Receivables", "Weekly"],
+  ["AP Aging", "Payables", "Weekly"],
+  ["Budget vs Actual", "Budget", "Monthly"],
+  ["MRR Movement", "Revenue", "Monthly"],
+  ["Tax Summary", "Tax", "Quarterly"],
+  ["Headcount Cost", "Payroll", "Monthly"],
+  ["Board Pack — Finance", "Summary", "Quarterly"],
+].map(([name, type, cadence], i) => ({
+  id: `FR-${500 + i}`,
+  name,
+  type,
+  cadence,
+  owner: pick(PEOPLE, i * 5 + 3).name,
+  lastRun: `2026-0${(i % 6) + 1}-${String(((i * 4) % 27) + 1).padStart(2, "0")}`,
+  status: pick(["Ready", "Ready", "Scheduled", "Processing"], i * 3),
+}));
+
+export const BUDGET_LINES = [
+  ["Payroll", 42100, 44000, "People"],
+  ["Engineering tools", 18600, 22000, "Software"],
+  ["Marketing", 14200, 16000, "Growth"],
+  ["Office & ops", 12400, 20000, "Operations"],
+  ["Travel & events", 8880, 18000, "Operations"],
+  ["Contractors", 9600, 12000, "People"],
+  ["Cloud infrastructure", 15300, 17000, "Software"],
+  ["Legal & accounting", 4200, 8000, "Operations"],
+].map(([line, spent, budget, group], i) => ({
+  id: `BUD-${i + 1}`,
+  line,
+  group,
+  spent,
+  budget,
+  remaining: budget - spent,
+  used: Math.round((spent / budget) * 100),
+}));
+
 export const SEGMENTS_LIST = Array.from({ length: 14 }, (_, i) => ({
   id: `SEG-${300 + i}`,
   name: pick(
@@ -952,6 +994,23 @@ export const LIST_CONFIGS = {
       { key: "size", header: "Size", align: "right", sortable: true, render: (r) => r.size.toLocaleString() },
       { key: "basis", header: "Basis", render: (r) => nameChip(r.basis) },
       { key: "updated", header: "Updated", align: "right" },
+    ],
+  },
+  "/finance/financial-reports": {
+    title: "Financial reports", subtitle: "Saved statements and schedules.",
+    actionLabel: "New report", getRowKey: (r) => r.id, rows: FINANCIAL_REPORTS_LIST,
+    searchKeys: ["name", "type"],
+    filters: [
+      { key: "ready", label: "Ready", test: (r) => r.status === "Ready" },
+      { key: "scheduled", label: "Scheduled", test: (r) => r.status === "Scheduled" },
+    ],
+    columns: [
+      { key: "name", header: "Report", sortable: true, render: (r) => strong(r.name) },
+      { key: "type", header: "Type", render: (r) => nameChip(r.type) },
+      { key: "cadence", header: "Cadence", sortable: true },
+      { key: "owner", header: "Owner", render: (r) => <EntityCell name={r.owner} /> },
+      { key: "lastRun", header: "Last run", sortable: true },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
     ],
   },
 };

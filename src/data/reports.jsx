@@ -4,6 +4,25 @@
 
 import { MONTHLY, PLAN_MIX, REGIONS, CHANNELS, TOP_ACCOUNTS } from "./charts";
 
+const PL_LINES = [
+  { line: "Subscription revenue", amount: 214000, group: "Revenue" },
+  { line: "Services revenue", amount: 34400, group: "Revenue" },
+  { line: "Total revenue", amount: 248400, group: "Revenue", bold: true },
+  { line: "Cost of revenue", amount: -38200, group: "COGS" },
+  { line: "Gross profit", amount: 210200, group: "COGS", bold: true },
+  { line: "Sales & marketing", amount: -32100, group: "Opex" },
+  { line: "Research & development", amount: -41800, group: "Opex" },
+  { line: "General & administrative", amount: -22280, group: "Opex" },
+  { line: "Total operating expenses", amount: -96180, group: "Opex", bold: true },
+  { line: "Operating income", amount: 114020, group: "Net", bold: true },
+  { line: "Net income", amount: 108300, group: "Net", bold: true },
+];
+const EXPENSE_MIX = [
+  { category: "Research & development", value: 41800 },
+  { category: "Sales & marketing", value: 32100 },
+  { category: "General & admin", value: 22280 },
+];
+
 const rev = (key, name) => ({ key, label: name, data: MONTHLY, x: "month", series: key, dataFormat: { prefix: key === "signups" || key === "users" ? "" : "$", format: "compact" } });
 
 export const REPORT_CONFIGS = {
@@ -145,6 +164,41 @@ export const REPORT_CONFIGS = {
         { name: "Internal analytics tool", lead: "Jonas Weber", due: "Jul 25", status: "On track" },
         { name: "Billing migration", lead: "Diego Ruiz", due: "Sep 01", status: "On track" },
       ],
+    },
+  },
+
+  "/finance/profit-and-loss": {
+    title: "Profit & loss",
+    subtitle: "Income statement for the year to date.",
+    period: "YTD 2026",
+    kpis: [
+      { label: "Total revenue", value: "$248.4k", delta: 18.2, hint: "year to date" },
+      { label: "Total expenses", value: "$96.2k", delta: 4.1, deltaDirection: "down", hint: "year to date" },
+      { label: "Net income", value: "$108.3k", delta: 24.6, hint: "43.6% margin" },
+      { label: "Gross margin", value: "84.6%", delta: 1.1, hint: "after COGS" },
+    ],
+    chart: {
+      title: "Revenue vs expenses", headline: "$248,400", delta: 18.2, deltaLabel: "revenue YTD",
+      views: [
+        { key: "both", label: "Both", data: MONTHLY, x: "month", series: [{ key: "revenue", name: "Revenue" }, { key: "expenses", name: "Expenses" }], dataFormat: { prefix: "$", format: "compact" } },
+        { key: "rev", label: "Revenue", data: MONTHLY, x: "month", series: "revenue", dataFormat: { prefix: "$", format: "compact" } },
+      ],
+      height: 320,
+    },
+    breakdown: {
+      kind: "donut", title: "Expense mix", subtitle: "Share of total spend",
+      data: EXPENSE_MIX, categoryKey: "category", valueKey: "value",
+      centerValue: "$96k", centerLabel: "expenses",
+    },
+    table: {
+      title: "Income statement", subtitle: "Year to date",
+      getRowKey: (r) => r.line,
+      columns: [
+        { key: "line", header: "Line item", format: "strong" },
+        { key: "group", header: "Group" },
+        { key: "amount", header: "Amount", align: "right", format: "money" },
+      ],
+      rows: PL_LINES,
     },
   },
 

@@ -38,12 +38,13 @@ data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 
 ## Projects  `/projects/*`
 ✅ **All Projects** (`ListPage`) · **Team Board · Sprint Board · Kanban View**
-(`BoardPage`) · **Create Project** (`FormPage`) · ⬜ Timeline · Gantt View ·
-Project Analytics
+(`BoardPage`) · **Create Project** (`FormPage`) · **Project Analytics**
+(`analytics/ProjectAnalytics.jsx`) · ⬜ Timeline · Gantt View
 
 ## Finance  `/finance/*`
-✅ **Transactions · Invoices · Payments · Expenses** (`ListPage`) · ⬜
-Profit & Loss · Budget Management · Financial Reports
+✅ **Transactions · Invoices · Payments · Expenses · Financial Reports**
+(`ListPage`) · **Profit & Loss** (`ReportPage`) · **Budget Management**
+(`analytics/BudgetManagement.jsx`) · ⬜ —
 
 ## CRM  `/crm/*`
 ✅ **Leads · Deals · Customers · Opportunities · Campaigns** (`ListPage`) ·
@@ -61,7 +62,8 @@ Warehouse Management · Route Planning
 ## Ecommerce  `/ecommerce/*`
 ✅ **Product List · Orders · Customers · Categories · Reviews · Inventory ·
 Coupons · Wishlist · Promotions** (`ListPage`) · **Add Product · Create Order**
-(`FormPage`) · ⬜ Product Grid · Customer Analytics
+(`FormPage`) · **Customer Analytics** (`analytics/CustomerAnalytics.jsx`) · ⬜
+Product Grid
 
 ## Tables & Forms  `/tables-forms`, `/tables-forms/*`  ✅ (working demos)
 Overview grid + 14 pages:
@@ -94,7 +96,8 @@ Profile · Settings · Security · Billing · Notifications · Connected Apps ·
 
 ## Marketing  `/marketing/*`
 ✅ **Email Campaigns · SMS Campaigns · Landing Pages · Segments** (`ListPage`) ·
-⬜ Overview · Analytics
+**Overview** (→ `MarketingDashboard`) · **Analytics**
+(`analytics/MarketingAnalytics.jsx`)
 
 ## Reports  `/reports/*`  ✅ (6 pages)
 ✅ **Sales · Revenue · Customer · Project · Marketing Report** (`ReportPage`

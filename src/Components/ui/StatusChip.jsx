@@ -59,6 +59,7 @@ const TONE = {
   Discovery: "info",
   Qualification: "info",
   Proposal: "warning",
+  Ready: "success",
 };
 
 /** Maps a status label to a semantic colour, rendered as a dot chip. */

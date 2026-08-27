@@ -12,11 +12,22 @@ import DataTable from "../../Components/ui/DataTable";
 import StatusChip from "../../Components/ui/StatusChip";
 import TrendChip from "../../Components/ui/TrendChip";
 
-const money = (n) => (typeof n === "number" ? `$${n.toLocaleString()}` : n);
+const money = (n) => {
+  if (typeof n !== "number") return n;
+  return `${n < 0 ? "−" : ""}$${Math.abs(n).toLocaleString()}`;
+};
 
 const cell = (format) => {
   if (format === "money") return (r, k) => (
-    <span className="font-medium text-[var(--app-fg)]">{money(r[k])}</span>
+    <span
+      className={
+        typeof r[k] === "number" && r[k] < 0
+          ? "font-medium text-[color:var(--oks-color-danger-600)]"
+          : "font-medium text-[var(--app-fg)]"
+      }
+    >
+      {money(r[k])}
+    </span>
   );
   if (format === "strong") return (r, k) => (
     <span className="font-medium text-[var(--app-fg)]">{r[k]}</span>

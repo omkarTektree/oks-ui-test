@@ -40,6 +40,7 @@ about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
 | **Charts section** | `src/Pages/InnerPages/charts/*` — **7 pages** at `/charts/*` (apex-charts, chart-js, statistics, kpi-analytics, heatmaps, revenue-analytics, user-analytics). Data in `src/data/charts.js`. New `ChartPanel` local wrapper. |
 | **ReportPage archetype** | `src/Pages/InnerPages/ReportPage.jsx` — KPI row + `ChartCard` + breakdown + table, pure-data configs in `src/data/reports.jsx`. Powers 5 `/reports/*` routes + `CustomBuilder` stub. |
 | **Utility & Pages** | `src/Pages/InnerPages/pages/*` — FAQ, Help Center (+kb/docs variants), Pricing, Search Results, Notifications Center, Activity Feed, Changelog/Release Notes, Roadmap, Theme Customizer. Data in `src/data/content.jsx`. `NotFound` + `Maintenance` standalone in `src/Pages/` (routes `/404-error`, `/maintenance`, outside the shell). |
+| **Analytics dashboards** | `src/Pages/InnerPages/analytics/*` — `/projects/project-analytics`, `/ecommerce/customer-analytics`, `/marketing/analytics`, `/finance/budget-management`; `/marketing/overview` → existing `MarketingDashboard`; `/finance/profit-and-loss` (`REPORT_CONFIGS`) + `/finance/financial-reports` (`LIST_CONFIGS`). |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -100,20 +101,26 @@ verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
 
 ## Still open — what's left to build
 
-**20 nav leaves** still fall through to the themed `ComingSoon`. None need a new
-archetype — each reuses something that already exists. Suggested order (biggest
-reuse payoff first):
+**13 nav leaves** still fall through to the themed `ComingSoon` (Group A — 7
+analytics dashboards — is now **DONE**). None need a new archetype. Suggested
+order (biggest reuse payoff first):
 
-### A. Analytics-style dashboards (reuse the dashboard pattern + `ChartCard`/`DonutStat`/`MeterList`/`CohortGrid`/`KpiCard`)
-| Route | Build as |
-| --- | --- |
-| `/projects/project-analytics` | Dashboard page — reuse `src/data/projects.js` (KPIs, health, velocity, workload) + `ChartCard` for `SPRINT_VELOCITY`. Closest sibling: `ProjectsDashboard.jsx`. |
-| `/ecommerce/customer-analytics` | Dashboard page — cohort retention (`CohortGrid`), acquisition `DonutStat`, LTV `KpiCard`s, top-customers `DataTable` from `CUSTOMERS_LIST`. Mirror `charts/UserAnalytics.jsx`. |
-| `/marketing/overview` | Dashboard page — reuse `src/data/marketing.js` (already powers `MarketingDashboard.jsx`); can literally point the route at `MarketingDashboard` like `/crm/crm-dashboard` → `CrmDashboard`, or make a lighter variant. |
-| `/marketing/analytics` | Dashboard page — channel `DonutStat` + campaign ROAS `MeterList` + email/SMS engagement from `MKT_EMAIL_LIST`/`MKT_SMS_LIST` in `lists.jsx`. |
-| `/finance/profit-and-loss` | `ReportPage` config in `src/data/reports.jsx` — revenue vs expenses `ChartCard` (data already in `charts.js`) + a P&L line-item `table`. Add `/finance/profit-and-loss` key; route auto-wires. |
-| `/finance/financial-reports` | `ListPage` config in `src/data/lists.jsx` — a saved-reports list (name, type, period, owner, last run, status). Auto-wires via `listRoutePaths`. |
-| `/finance/budget-management` | `SettingsPage`-ish or a `MeterList` per department vs budget + an editable `DataTable`. Reuse `PROJECT_HEALTH`-style meter data. |
+### ~~A. Analytics-style dashboards~~ — **DONE**
+`src/Pages/InnerPages/analytics/*` + `analytics/routes.jsx`:
+- `/projects/project-analytics` → `ProjectAnalytics.jsx` (velocity `ChartCard`,
+  status `DonutStat`, cycle-time `MeterList`, workload `RankList`, delivery table)
+- `/ecommerce/customer-analytics` → `CustomerAnalytics.jsx` (growth `ChartCard`,
+  acquisition `DonutStat`, retention `CohortGrid`, spend-band `MeterList`,
+  top-customers table)
+- `/marketing/analytics` → `MarketingAnalytics.jsx` (spend/leads `ChartCard`,
+  channel `DonutStat`, funnel + ROAS `MeterList`s, email-engagement table)
+- `/marketing/overview` → routed straight at the existing `MarketingDashboard`
+- `/finance/budget-management` → `BudgetManagement.jsx` (utilisation `MeterList`s
+  + budget-lines `DataTable`; data `BUDGET_LINES` in `lists.jsx`)
+- `/finance/profit-and-loss` → `ReportPage` config in `reports.jsx` (income
+  statement table with signed amounts)
+- `/finance/financial-reports` → `ListPage` config in `lists.jsx`
+  (`FINANCIAL_REPORTS_LIST`)
 
 ### B. CRM funnel / pipeline views (reuse `MeterList` + `BoardView`)
 | Route | Build as |
@@ -145,12 +152,12 @@ reuse payoff first):
 | `/pages/starter-kit` | Static marketing page — feature grid, "what's included" checklist, copy-paste `npx` command in a `CodeBlock`. |
 
 ### Notes
-- `/marketing/overview` and `/finance/*` dashboards: check `src/data/marketing.js`
-  and `src/data/finance.js` first — the dashboard versions already have rich mock
-  data you can reuse wholesale.
 - Anything list-shaped: add to `LIST_CONFIGS` and you're done (route + nav
-  exclusion are automatic via `listRoutePaths`). Everything else needs the
-  5-step "How to add a page group" flow below.
+  exclusion are automatic via `listRoutePaths`). Same for `REPORT_CONFIGS` →
+  `reportsRoutePaths`. Everything else needs the 5-step "How to add a page group"
+  flow below.
+- `DonutStat`'s `centerValue` should equal the data total (oks-ui's donut renders
+  its own centre number underneath the overlay — matching values hides the seam).
 
 ## How to add a page group (the established pattern)
 
