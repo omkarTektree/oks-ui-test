@@ -9,6 +9,7 @@ import AuthTemplate from "./Pages/Auth/AuthTemplate";
 
 import InnerTemplate from "./Pages/InnerPages/InnerTemplate";
 import ComingSoon from "./Pages/InnerPages/ComingSoon";
+import { tablesFormsRoutes } from "./Pages/InnerPages/tables-forms/routes";
 import { NAV_ROUTES } from "./data/nav";
 
 const Login = lazy(() => import("./Pages/Auth/Login"));
@@ -59,7 +60,8 @@ const shellRoutes = NAV_ROUTES.filter(
     !AUTH_PATHS.has(path) &&
     !REAL_INNER.has(path) &&
     !path.startsWith("/40") &&
-    !path.startsWith("/components")
+    !path.startsWith("/components") &&
+    !path.startsWith("/tables-forms")
 );
 
 const App = () => {
@@ -117,6 +119,7 @@ const App = () => {
                 path="/components/:slug"
                 element={<ComponentPage />}
               />
+              {tablesFormsRoutes}
               {shellRoutes.map((path) => (
                 <Route key={path} path={path} element={<ComingSoon />} />
               ))}

@@ -32,6 +32,11 @@ import MeterList from "../Components/ui/MeterList";
 import GoalCard from "../Components/ui/GoalCard";
 import DataTable from "../Components/ui/DataTable";
 import ActivityFeed from "../Components/ui/ActivityFeed";
+import Timeline from "../Components/ui/Timeline";
+import CohortGrid from "../Components/ui/CohortGrid";
+import EmptyState from "../Components/ui/EmptyState";
+import StatTile from "../Components/ui/StatTile";
+import RankList from "../Components/ui/RankList";
 
 import {
   ACTIVITY,
@@ -603,6 +608,129 @@ const composed = [
           <div className="w-full">
             <Surface padding="none" className="overflow-hidden">
               <ActivityFeed items={ACTIVITY.slice(0, 3)} />
+            </Surface>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    slug: "timeline",
+    title: "Timeline",
+    description: "Dot-marker list with a connecting rail; per-item date + tag.",
+    examples: [
+      {
+        title: "Upcoming deadlines",
+        code: `<Timeline title="Deadlines" items={[
+  { title: "Ship v2", meta: "Mobile app", date: "Jul 12",
+    tag: { label: "2 days left", tone: "danger" }, tone: "danger" },
+]} />`,
+        render: () => (
+          <div className="w-full">
+            <Timeline
+              title="Deadlines"
+              items={[
+                { title: "Ship onboarding v2", meta: "Mobile app", date: "Jul 12", tag: { label: "2 days left", tone: "danger" }, tone: "danger" },
+                { title: "Finalize schema", meta: "Data platform", date: "Jul 14", tag: { label: "4 days left", tone: "warning" }, tone: "warning" },
+                { title: "QA pass", meta: "Checkout", date: "Jul 18", tag: { label: "8 days left", tone: "primary" }, tone: "primary" },
+              ]}
+            />
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    slug: "cohort-grid",
+    title: "CohortGrid",
+    description: "Retention heatmap — cells shaded by value via CSS color-mix.",
+    examples: [
+      {
+        title: "Retention by month",
+        code: `<CohortGrid columns={["M0","M1","M2","M3"]} rows={[
+  { label: "Feb", values: [100, 88, 81, 76] },
+]} />`,
+        render: () => (
+          <div className="w-full">
+            <CohortGrid
+              title="Cohort retention"
+              columns={["M0", "M1", "M2", "M3", "M4"]}
+              rows={[
+                { label: "Feb 2026", values: [100, 88, 81, 76, 72] },
+                { label: "Mar 2026", values: [100, 91, 84, 79, null] },
+                { label: "Apr 2026", values: [100, 90, 85, null, null] },
+              ]}
+            />
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    slug: "stat-tile",
+    title: "StatTile",
+    description: "Compact in-card metric with optional meter + trend.",
+    examples: [
+      {
+        title: "In a grid",
+        code: `<StatTile value="284" label="Calls made" delta={12} />
+<StatTile value="1.8%" label="Logo churn" sub="42 accounts" meter={18} tone="warning" />`,
+        render: () => (
+          <div className="grid w-full grid-cols-2 gap-3">
+            <StatTile value="284" label="Calls made" delta={12} />
+            <StatTile value="1.8%" label="Logo churn" sub="42 accounts" meter={18} tone="warning" />
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    slug: "rank-list",
+    title: "RankList",
+    description: "Numbered leaderboard — avatar, value, optional % bar.",
+    examples: [
+      {
+        title: "Top sales reps",
+        code: `<RankList title="Top reps" items={[
+  { name: "Maya Chen", value: "$284k", sub: "24 deals", percent: 96 },
+]} />`,
+        render: () => (
+          <div className="w-full">
+            <RankList
+              title="Top reps"
+              items={[
+                { name: "Maya Chen", value: "$284k", sub: "24 deals · 96% of target", percent: 96 },
+                { name: "Daniel Ortiz", value: "$246k", sub: "21 deals · 84% of target", percent: 84 },
+                { name: "Priya Nair", value: "$198k", sub: "18 deals · 71% of target", percent: 71 },
+              ]}
+            />
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    slug: "empty-state",
+    title: "EmptyState",
+    description: "Icon + message + optional action for empty lists.",
+    examples: [
+      {
+        title: "No results",
+        code: `<EmptyState title="No matches"
+  description="Try a different search."
+  action={<Button size="sm" variant="soft" color="primary">Clear filters</Button>} />`,
+        render: () => (
+          <div className="w-full">
+            <Surface padding="none" className="overflow-hidden">
+              <EmptyState
+                title="No matches"
+                description="Try a different search term or clear the filters."
+                action={
+                  <Button size="sm" variant="soft" color="primary">
+                    Clear filters
+                  </Button>
+                }
+              />
             </Surface>
           </div>
         ),

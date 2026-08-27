@@ -54,9 +54,10 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 
 | Component | Purpose | Built from | Status |
 | --- | --- | --- | --- |
-| `DataTable` | Column config + per‑cell renderers. Sorting / selection / pagination next. | `table` + `--app-*` tokens | ✅ (basic) |
-| `TableToolbar` | Search + filter chips + column/sort menu above a table. | `SearchInput` + `Chip` + `SelectField` + `Button` | ⬜ |
-| `Pagination` | Page controls. | `ButtonGroup` + `Button` `isIconOnly` | ⬜ |
+| `DataTable` | Column config + per‑cell renderers, opt‑in sorting / row selection / pagination / loading skeleton / empty state. | `table` + `Checkbox` + `Pagination` | ✅ |
+| `TableToolbar` | Search + toggleable filter chips + right‑aligned actions. | `SearchInput` + `Chip` | ✅ |
+| `Pagination` | Page controls with range summary. | `Button` `isIconOnly` | ✅ |
+| `SearchInput` | `TextField` preset with a search icon. | `TextField` `startIcon` | ✅ |
 | `StatusChip` | Status → colour map (In stock / Low stock / Out of stock…). | `Chip` `variant="dot"` | ✅ |
 | `EntityCell` | Avatar + primary text + muted secondary. | `Avatar` + text | ✅ |
 | `ActivityFeed` | Events list with actor avatar, text, relative time. | `Avatar` + `--app-*` tokens | ✅ (filter 🔨) |
@@ -94,9 +95,10 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | --- | --- | --- |
 | `SearchInput` | Icon + input + optional ⌘K hint. | `TextField` `startIcon` |
 | `FilterBar` | Search + toggleable filter chips + selects + reset. | `SearchInput` + `Chip` (toggle) + `SelectField` + `Button` |
-| `FormCard` | `Surface` wrapping a titled `Form` with a footer action row. | `Surface` + `Form` + `FormFieldSet` + `Button` |
-| `SettingRow` | Label + description + control, stacked with dividers. | `SwitchField` / `SelectField` + `Divider` |
-| `SettingsSection` | Group of `SettingRow`s under a heading in a `Surface`. | `Surface` + `SectionTitle` + `SettingRow` |
+| `FormCard` | `Surface` wrapping a titled `Form` with a footer action row. | `Surface` + `Form` | ✅ |
+| `SettingRow` | Label + description on the left, a control on the right. | `div` + tokens | ✅ |
+| `SettingsSection` | Group of `SettingRow`s under a heading in a `Surface`. | `Surface` + `SettingRow` | ✅ |
+| `EmptyState` | Icon + message + optional action. | icon + tokens | ✅ |
 
 ---
 

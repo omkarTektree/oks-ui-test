@@ -55,10 +55,11 @@ Product Grid · Product List · Add Product · Categories · Orders · Create Or
 Customers · Customer Analytics · Reviews · Inventory · Coupons · Wishlist ·
 Promotions
 
-## Tables & Forms  `/tables-forms/*`
-Responsive Table · Filter Table · Basic Table · Data Table · Advanced Table ·
-Form Elements · Form Layouts · Form Validation · Multi-Step Wizard · File Upload ·
-Rich Text Editor · Date Pickers · Select Components · Input Masks
+## Tables & Forms  `/tables-forms`, `/tables-forms/*`  ✅ (working demos)
+Overview grid + 14 pages:
+- **Tables:** Basic · Responsive · Filter · Data (sort + select + paginate) · Advanced (bulk actions)
+- **Forms:** Form Elements (every field) · Form Layouts · Form Validation · Multi-Step Wizard (`SteppedForm`)
+- **Inputs:** File Upload · Rich Text Editor (`TextEditor`) · Date Pickers · Select Components · Input Masks
 
 ## Charts & Analytics  `/charts/*`
 Apex Charts · Chart.js · Statistics · KPI Analytics · Heatmaps · Revenue Analytics ·
