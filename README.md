@@ -86,6 +86,7 @@ app shell have something to gate. It is not real authentication.
 
 ## Where to look
 
+- **`docs/HANDOFF.md`** — start here to continue the build (status + next steps + gotchas).
 - **`docs/COMPONENTS.md`** — the full list of components to build from `oks-ui`.
 - **`docs/PAGES.md`** — every route and its build status.
 - **`docs/THEMING.md`** — the custom token overrides and dark mode.
