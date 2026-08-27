@@ -3,8 +3,9 @@ import CardHeader from "./CardHeader";
 
 /**
  * A card of labelled horizontal meters.
- * Per item: `label`, `value` (drives the bar), optional `sub` (muted text under
- * the label), optional `display` (overrides the right-hand value text).
+ * Per item: `label`, `value` (drives the bar), optional `sub` (muted text by the
+ * label), optional `display` (overrides the right-hand value text), optional
+ * `tone` ("success" | "warning" | "danger" | "primary") for the bar colour.
  * `scaleToMax` sizes bars against the largest value; `showDropOff` adds the
  * stage-to-stage drop for funnels.
  */
@@ -53,8 +54,11 @@ const MeterList = ({
               </div>
               <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-[var(--app-surface-2)]">
                 <div
-                  className="h-full rounded-full bg-[var(--oks-color-primary-500)]"
-                  style={{ width: `${pct}%` }}
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${pct}%`,
+                    background: `var(--oks-color-${item.tone ?? "primary"}-500)`,
+                  }}
                 />
               </div>
               {dropOff != null && (

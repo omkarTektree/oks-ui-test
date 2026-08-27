@@ -20,6 +20,9 @@ const CrmDashboard = lazy(() => import("./Pages/InnerPages/CrmDashboard"));
 const EcommerceDashboard = lazy(
   () => import("./Pages/InnerPages/EcommerceDashboard")
 );
+const FinanceDashboard = lazy(
+  () => import("./Pages/InnerPages/FinanceDashboard")
+);
 const ComponentsOverview = lazy(
   () => import("./Pages/InnerPages/ComponentsOverview")
 );
@@ -31,6 +34,7 @@ const REAL_INNER = new Set([
   "/dashboards/analytics",
   "/dashboards/crm",
   "/dashboards/ecommerce",
+  "/dashboards/finance",
 ]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
@@ -67,6 +71,10 @@ const App = () => {
               <Route
                 path="/dashboards/ecommerce"
                 element={<EcommerceDashboard />}
+              />
+              <Route
+                path="/dashboards/finance"
+                element={<FinanceDashboard />}
               />
               <Route path="/components" element={<ComponentsOverview />} />
               <Route

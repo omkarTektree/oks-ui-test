@@ -12,7 +12,7 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 | Analytics | `/dashboards/analytics` | ✅ (KPIs · revenue chart · donut · funnel · device meters · goal gauge · products table · activity) |
 | CRM | `/dashboards/crm` | ✅ (KPIs · pipeline stages · win/loss donut · lead sources · activity tiles · rep leaderboard) |
 | Ecommerce | `/dashboards/ecommerce` | ✅ (KPIs · sales column chart · fulfilment donut · stat strip · category meters · two DataTables) |
-| Finance | `/dashboards/finance` | ⬜ |
+| Finance | `/dashboards/finance` | ✅ (KPIs · cash-flow cards · revenue-vs-expenses multi-series chart · expense donut · budget meters · transactions table) |
 | Sales | `/dashboards/sales` | ⬜ |
 | Marketing | `/dashboards/marketing` | ⬜ |
 | Logistics | `/dashboards/logistics` | ⬜ |
