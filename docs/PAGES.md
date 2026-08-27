@@ -37,8 +37,9 @@ data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 ⬜ My Profile · Add User · Permissions
 
 ## Projects  `/projects/*`
-✅ **All Projects** (`ListPage`) · ⬜ Create Project · Timeline · Team Board ·
-Sprint Board · Gantt View · Project Analytics · Kanban View
+✅ **All Projects** (`ListPage`) · **Team Board · Sprint Board · Kanban View**
+(`BoardPage` archetype — `src/data/boards.jsx`) · ⬜ Create Project · Timeline ·
+Gantt View · Project Analytics
 
 ## Finance  `/finance/*`
 ✅ **Transactions · Invoices** (`ListPage`) · ⬜ Payments · Expenses ·

@@ -26,6 +26,7 @@ real app.
 | **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **16 routes** from `src/data/lists.jsx` (All Users, Roles, Teams, Departments, Activity Logs, All Projects, Product List, Orders, Customers x2, Leads, Deals, Transactions, Invoices, Employees) |
 | **SettingsPage archetype** | `src/Pages/InnerPages/SettingsPage.jsx` — config-driven. Powers **15 routes** from `src/data/settings.jsx` (Settings/* and Account/*) |
 | **Apps section** | `src/Pages/InnerPages/apps/*` — **10 screens** at `/apps/*`: Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts. Data in `src/data/apps.js`, routes in `apps/routes.jsx`. New `BoardView` ui component (kanban). |
+| **BoardPage archetype** | `src/Pages/InnerPages/BoardPage.jsx` — config-driven kanban. Powers **3 routes** from `src/data/boards.jsx` (`/projects/team-board`, `/projects/sprint-board`, `/projects/kanban-view`). |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -41,10 +42,9 @@ SettingsSection, CodeBlock, Example.
 ## Next, in priority order
 
 1. ~~App shells~~ — **DONE** (commit after `c3762be`). 10 screens under `/apps/*`.
-2. **Board archetype** — `/projects/{team-board,sprint-board,kanban-view}`:
-   column layout with cards. **`BoardView` ui component already exists**
-   (`src/Components/ui/BoardView.jsx`, used by `/apps/task-manager`). Add a
-   `BoardPage` wrapper + configs in `src/data/`, wire the 3 project routes.
+2. ~~Board archetype~~ — **DONE**. `BoardPage` (`src/Pages/InnerPages/BoardPage.jsx`)
+   + `BoardView` ui component, configs in `src/data/boards.jsx`, powers
+   `/projects/{team-board,sprint-board,kanban-view}`.
 3. **FormPage archetype** — `/{user-management/add-user, projects/create-project,
    ecommerce/add-product, ecommerce/create-order}`: `FormCard` + fields, config-
    driven like ListPage. (`FormCard` already exists.)
