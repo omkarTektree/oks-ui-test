@@ -6,8 +6,12 @@ const TONE = {
   "Out of stock": "danger",
   Active: "success",
   Pending: "warning",
+  Processing: "info",
+  Shipped: "info",
+  Delivered: "success",
   Paused: "warning",
   Failed: "danger",
+  Refunded: "danger",
   Archived: "default",
   Completed: "success",
 };

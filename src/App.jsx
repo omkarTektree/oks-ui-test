@@ -17,6 +17,9 @@ const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword"));
 const Terms = lazy(() => import("./Pages/Auth/Terms"));
 const AnalyticsDashboard = lazy(() => import("./Pages/InnerPages/Dashboard"));
 const CrmDashboard = lazy(() => import("./Pages/InnerPages/CrmDashboard"));
+const EcommerceDashboard = lazy(
+  () => import("./Pages/InnerPages/EcommerceDashboard")
+);
 const ComponentsOverview = lazy(
   () => import("./Pages/InnerPages/ComponentsOverview")
 );
@@ -24,7 +27,11 @@ const ComponentPage = lazy(() => import("./Pages/InnerPages/ComponentPage"));
 
 // Auth screens live outside the app shell; everything else is a shell page.
 const AUTH_PATHS = new Set(["/", "/register", "/forgot-password"]);
-const REAL_INNER = new Set(["/dashboards/analytics", "/dashboards/crm"]);
+const REAL_INNER = new Set([
+  "/dashboards/analytics",
+  "/dashboards/crm",
+  "/dashboards/ecommerce",
+]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
     !AUTH_PATHS.has(path) &&
@@ -57,6 +64,10 @@ const App = () => {
                 element={<AnalyticsDashboard />}
               />
               <Route path="/dashboards/crm" element={<CrmDashboard />} />
+              <Route
+                path="/dashboards/ecommerce"
+                element={<EcommerceDashboard />}
+              />
               <Route path="/components" element={<ComponentsOverview />} />
               <Route
                 path="/components/:slug"
