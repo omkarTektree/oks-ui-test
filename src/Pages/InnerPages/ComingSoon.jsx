@@ -31,12 +31,15 @@ const ComingSoon = () => {
         subtitle="This screen is on the build plan — not implemented yet."
       />
 
-      <Surface padding="lg" className="flex flex-col items-center py-16 text-center">
+      <Surface
+        padding="lg"
+        className="mx-auto flex max-w-xl flex-col items-center py-14 text-center"
+      >
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--oks-color-primary-50)] text-[color:var(--oks-color-primary-600)]">
           <Hammer size={22} />
         </span>
         <p className="mt-4 text-sm font-medium text-[var(--app-fg)]">Coming soon</p>
-        <p className="mt-1 max-w-sm text-sm text-[color:var(--app-fg-muted)]">
+        <p className="mt-1 text-sm text-[color:var(--app-fg-muted)]">
           Track where this page sits in{" "}
           <code className="rounded bg-[var(--app-surface-2)] px-1 py-0.5 text-xs">
             docs/PAGES.md

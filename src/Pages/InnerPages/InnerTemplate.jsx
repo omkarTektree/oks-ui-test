@@ -65,7 +65,7 @@ const InnerTemplate = () => {
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="mx-auto w-full max-w-7xl p-4 sm:p-6 lg:p-8"
+            className="w-full p-4 sm:p-6 lg:p-8"
           >
             <Suspense fallback={<InnerFallback />}>
               <Outlet />
