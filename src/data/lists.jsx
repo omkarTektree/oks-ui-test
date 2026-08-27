@@ -115,7 +115,7 @@ export const DEALS_LIST = Array.from({ length: 22 }, (_, i) => ({
   id: `DEAL-${7000 + i}`,
   name: `${pick(COMPANIES, i)} — ${pick(["Annual", "Expansion", "Renewal", "Pilot"], i)}`,
   owner: pick(PEOPLE, i * 4 + 1).name,
-  stage: pick(["Qualification", "Discovery", "Proposal", "Negotiation", "Won", "Lost"], i * 3),
+  stage: pick(["Qualification", "Discovery", "Proposal", "Negotiation", "Won", "Lost"], i * 7 + 1),
   value: 3000 + ((i * 517) % 60000),
 }));
 

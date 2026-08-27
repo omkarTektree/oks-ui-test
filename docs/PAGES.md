@@ -46,8 +46,9 @@ Project Analytics
 Profit & Loss · Budget Management · Financial Reports
 
 ## CRM  `/crm/*`
-✅ **Leads · Deals · Customers · Opportunities · Campaigns** (`ListPage`) · ⬜
-CRM Dashboard · CRM App · Pipeline · Sales Funnel · Customer Journey
+✅ **Leads · Deals · Customers · Opportunities · Campaigns** (`ListPage`) ·
+**CRM Dashboard** (= `/dashboards/crm`) · **CRM App** (pipeline board workspace,
+`src/Pages/InnerPages/CrmApp.jsx`) · ⬜ Pipeline · Sales Funnel · Customer Journey
 
 ## HR Management  `/hr/*`
 ✅ **Employees · Attendance · Leave Requests · Payroll · Departments ·

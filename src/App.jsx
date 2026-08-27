@@ -54,6 +54,7 @@ const ComponentsOverview = lazy(
   () => import("./Pages/InnerPages/ComponentsOverview")
 );
 const ComponentPage = lazy(() => import("./Pages/InnerPages/ComponentPage"));
+const CrmApp = lazy(() => import("./Pages/InnerPages/CrmApp"));
 
 // Auth screens live outside the app shell; everything else is a shell page.
 const AUTH_PATHS = new Set(["/", "/register", "/forgot-password"]);
@@ -68,6 +69,8 @@ const REAL_INNER = new Set([
   "/dashboards/saas",
   "/dashboards/logistics",
   "/dashboards/business-intelligence",
+  "/crm/crm-dashboard",
+  "/crm/crm-app",
 ]);
 const CONFIGURED = new Set([
   ...listRoutePaths,
@@ -143,6 +146,8 @@ const App = () => {
                 path="/dashboards/business-intelligence"
                 element={<BiDashboard />}
               />
+              <Route path="/crm/crm-dashboard" element={<CrmDashboard />} />
+              <Route path="/crm/crm-app" element={<CrmApp />} />
               <Route path="/components" element={<ComponentsOverview />} />
               <Route
                 path="/components/:slug"

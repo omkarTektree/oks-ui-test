@@ -46,6 +46,11 @@ SettingsSection, CodeBlock, Example.
 
 ## Next, in priority order
 
+**All 9 original priority groups are done** (commits after `c3762be`). Component
+archetypes now cover ~120 routes; see "Still open" below for the tail of nav
+leaves that remain on `ComingSoon`. Re-check `npm run lint && npm run build` and
+verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
+
 1. ~~App shells~~ — **DONE** (commit after `c3762be`). 10 screens under `/apps/*`.
 2. ~~Board archetype~~ — **DONE**. `BoardPage` (`src/Pages/InnerPages/BoardPage.jsx`)
    + `BoardView` ui component, configs in `src/data/boards.jsx`, powers
@@ -80,9 +85,20 @@ SettingsSection, CodeBlock, Example.
    Notes, Roadmap, Theme Customizer. Standalone `NotFound` + `Maintenance` in
    `src/Pages/`. Still ⬜: `/utility/{widget-gallery,ui-playground}`,
    `/pages/{rtl-dark-light-preview,starter-kit}`.
-9. **CRM Dashboard vs CRM App** — nav has `/crm/crm-dashboard` separate from
-   the `/dashboards/crm` we built; point it at the same component or build a
-   variant.
+9. ~~CRM Dashboard vs CRM App~~ — **DONE**. `/crm/crm-dashboard` points at the
+   existing `CrmDashboard` component; `/crm/crm-app`
+   (`src/Pages/InnerPages/CrmApp.jsx`) is a new pipeline-board workspace
+   (`BoardView` of deals + tasks + rep leaderboard).
+
+## Still open (not in the original priority list)
+
+- `/crm/{pipeline,sales-funnel,customer-journey}`, `/ecommerce/product-grid`,
+  `/ecommerce/customer-analytics`, `/finance/{profit-and-loss,budget-management,
+  financial-reports}`, `/hr` gaps already covered, `/logistics/{warehouse-management,
+  route-planning}`, `/projects/{timeline,gantt-view,project-analytics}`,
+  `/marketing/{overview,analytics}`, `/user-management/permissions`,
+  `/utility/{widget-gallery,ui-playground}`, `/pages/{starter-kit,rtl-dark-light-preview}`.
+  All still resolve to the themed `ComingSoon`.
 
 ## How to add a page group (the established pattern)
 
