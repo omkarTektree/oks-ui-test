@@ -60,11 +60,11 @@ Recruitment · Job Applications** (`ListPage`)
 ✅ **Shipments · Delivery Tracking · Fleet Management · Warehouse Management ·
 Route Planning** (`ListPage`)
 
-## Ecommerce  `/ecommerce/*`
+## Ecommerce  `/ecommerce/*`  ✅ (all built)
 ✅ **Product List · Orders · Customers · Categories · Reviews · Inventory ·
 Coupons · Wishlist · Promotions** (`ListPage`) · **Add Product · Create Order**
-(`FormPage`) · **Customer Analytics** (`analytics/CustomerAnalytics.jsx`) · ⬜
-Product Grid
+(`FormPage`) · **Customer Analytics** (`analytics/CustomerAnalytics.jsx`) ·
+**Product Grid** (`ecommerce/ProductGrid.jsx`)
 
 ## Tables & Forms  `/tables-forms`, `/tables-forms/*`  ✅ (working demos)
 Overview grid + 14 pages:

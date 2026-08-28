@@ -42,6 +42,7 @@ about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
 | **Utility & Pages** | `src/Pages/InnerPages/pages/*` — FAQ, Help Center (+kb/docs variants), Pricing, Search Results, Notifications Center, Activity Feed, Changelog/Release Notes, Roadmap, Theme Customizer. Data in `src/data/content.jsx`. `NotFound` + `Maintenance` standalone in `src/Pages/` (routes `/404-error`, `/maintenance`, outside the shell). |
 | **Analytics dashboards** | `src/Pages/InnerPages/analytics/*` — `/projects/project-analytics`, `/ecommerce/customer-analytics`, `/marketing/analytics`, `/finance/budget-management`; `/marketing/overview` → existing `MarketingDashboard`; `/finance/profit-and-loss` (`REPORT_CONFIGS`) + `/finance/financial-reports` (`LIST_CONFIGS`). |
 | **CRM funnel views** | `src/Pages/InnerPages/crm/*` — `/crm/pipeline` (`BoardView`), `/crm/sales-funnel` (`MeterList` + `DonutStat` + table), `/crm/customer-journey` (`Timeline` + `MeterList` + `ActivityFeed`). |
+| **Product grid** | `src/Pages/InnerPages/ecommerce/ProductGrid.jsx` — `/ecommerce/product-grid` card grid + category filter + grid/list toggle. |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -102,9 +103,9 @@ verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
 
 ## Still open — what's left to build
 
-**7 nav leaves** still fall through to the themed `ComingSoon` (Groups A, B & C
-are now **DONE**). None need a new archetype. Suggested order (biggest reuse
-payoff first):
+**6 nav leaves** still fall through to the themed `ComingSoon` (Groups A–D are
+now **DONE**). None need a new archetype. Suggested order (biggest reuse payoff
+first):
 
 ### ~~A. Analytics-style dashboards~~ — **DONE**
 `src/Pages/InnerPages/analytics/*` + `analytics/routes.jsx`:
@@ -138,10 +139,11 @@ Configs added to `src/data/lists.jsx` (auto-wired via `listRoutePaths`):
 - `/logistics/route-planning` — `ROUTE_PLANS_LIST`
 - `/user-management/permissions` — `PERMISSIONS_LIST` (per-permission role chips + scope)
 
-### D. Marketing/Ecommerce product views
-| Route | Build as |
-| --- | --- |
-| `/ecommerce/product-grid` | Card grid variant of `PRODUCTS_LIST` (image placeholder, name, price, `StatusChip`) — like the File Manager grid. Toggle links to `/ecommerce/product-list`. |
+### ~~D. Product grid~~ — **DONE**
+`/ecommerce/product-grid` → `src/Pages/InnerPages/ecommerce/ProductGrid.jsx` —
+card grid over `PRODUCTS_LIST` (gradient+icon placeholder per category, price,
+stock-derived `StatusChip`), category-chip filter + search, grid/list toggle
+linking to `/ecommerce/product-list`.
 
 ### E. Utility / Pages leftovers (marketing-ish static)
 | Route | Build as |
