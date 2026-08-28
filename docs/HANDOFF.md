@@ -157,13 +157,23 @@ Candidate follow-ups, roughly in order of value:
 - **`oks-ui` `Chip`**: variants are `solid | soft | bordered | dot` (no `flat`).
   `onClick` works (it spreads `HTMLAttributes`), as does `selected` +
   `onSelectedChange`.
-- **`DonutStat`'s `centerValue` should equal the data total** — `oks-ui`'s donut
-  renders its own centre number under the overlay; matching values hides the seam.
+- **`DonutStat`** hides `oks-ui`'s built-in donut centre number
+  (`[&_svg_text]:hidden` on the chart wrapper) and shows a styled
+  `centerValue` / `centerLabel` overlay instead, grid-stacked so it stays
+  centred. Its segment colours are a `var(--oks-color-primary-*)` ramp, so the
+  donut re-tints with the theme.
 - **`Chart`** (`oks-ui`): `type`, `data`, `x`, `series` (string or
   `[{key,name,color}]`), `dataFormat={{prefix,format:"compact"}}`,
   `palette={{roles:["primary"]}}` or `{colors:[…]}`, `legend={{show}}`,
   `column={{stacked:true}}`. Multi-series → array + show legend. `ChartCard`
-  wraps most of this.
+  wraps most of this. With `roles:["primary"]` the SVG `fill` is
+  `var(--oks-color-primary-600)` (re-tints live on a CSS-var change); an
+  explicit-hex `colors` palette does not.
+- **`/pages/theme-customizer`** writes the *whole* `--oks-color-primary-*` ramp
+  (built from one accent hex via `color-mix`) + radius vars onto the document
+  root, so soft/tint variants, tinted surfaces (`UpgradeCard`) and charts all
+  update. Persists app-wide until reload / Reset. Setting only `-500/-600`
+  (the old behaviour) left soft variants and `-50`-based surfaces stale.
 - **Dev server port:** `vite.config.js` honours `$PORT` (`strictPort`) so the
   browser-tool preview can pin a port when 5173 is taken by another session.
   `.claude/launch.json` has `"autoPort": true`.

@@ -324,11 +324,35 @@ export const SETTINGS_CONFIGS = {
     subtitle: "Your personal information.",
     sections: [
       {
+        title: "Photo",
+        rows: [
+          {
+            title: "Profile photo",
+            description: "PNG or JPG, at least 200×200px.",
+            control: (
+              <div className="flex items-center gap-2">
+                <Button size="sm" variant="bordered">Upload</Button>
+                <Button size="sm" variant="link" color="danger">Remove</Button>
+              </div>
+            ),
+          },
+        ],
+      },
+      {
         title: "Details",
         rows: [
           { title: "Full name", control: txt("Admin User") },
-          { title: "Email", control: txt(loginEmail) },
+          { title: "Email", description: "Used for sign-in and notifications.", control: txt(loginEmail) },
           { title: "Job title", control: txt("Administrator") },
+          { title: "Phone", control: txt("+1 (415) 555-0100") },
+          { title: "Timezone", control: sel(
+            [
+              { label: "Pacific (US)", value: "pst" },
+              { label: "Eastern (US)", value: "est" },
+              { label: "Central Europe", value: "cet" },
+            ],
+            "pst"
+          ) },
           { title: "Bio", control: txt("Keeping the lights on.", "w-64") },
         ],
       },

@@ -8,7 +8,7 @@ import SettingRow from "../../Components/ui/SettingRow";
  * `config` = { title, subtitle, sections: [{ title, subtitle?, rows: [{ title, description?, control }] }], showSave? }
  */
 const SettingsPage = ({ config }) => (
-  <div className="mx-auto max-w-3xl space-y-6">
+  <div className="mx-auto max-w-4xl space-y-6">
     <SectionTitle title={config.title} subtitle={config.subtitle} />
 
     {config.sections.map((section) => (
