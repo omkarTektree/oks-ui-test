@@ -109,8 +109,9 @@ archetype — KPI row + `ChartCard` + breakdown + table, configs in
 `src/data/reports.jsx`) · **Custom Builder** (interactive builder stub —
 `src/Pages/InnerPages/reports/CustomBuilder.jsx`)
 
-## Settings  `/settings/*`
-General · Company · Theme · Appearance · Locale · Notifications · Integrations · API
+## Settings  `/settings/*`  ✅ (all `SettingsPage`)
+General · Company · **Theme** (brand accent / radius / logo) · Appearance ·
+Locale · Notifications · Integrations · API
 
 ## Utility  `/utility/*`  ✅ (all built)
 ✅ **FAQ · Help Center · Knowledge Base · Documentation · Search Results ·

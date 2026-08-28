@@ -77,6 +77,66 @@ export const SETTINGS_CONFIGS = {
       },
     ],
   },
+  "/settings/theme": {
+    title: "Theme",
+    subtitle: "Brand colour and shape for the whole workspace.",
+    sections: [
+      {
+        title: "Brand",
+        subtitle: "Applied for everyone in the organization.",
+        rows: [
+          {
+            title: "Accent colour",
+            description: "Drives buttons, links, focus rings and active nav.",
+            control: sel(
+              [
+                { label: "Iris (default)", value: "iris" },
+                { label: "Blue", value: "blue" },
+                { label: "Emerald", value: "emerald" },
+                { label: "Amber", value: "amber" },
+                { label: "Rose", value: "rose" },
+              ],
+              "iris"
+            ),
+          },
+          {
+            title: "Corner radius",
+            control: sel(
+              [
+                { label: "Sharp", value: "sharp" },
+                { label: "Default", value: "default" },
+                { label: "Round", value: "round" },
+              ],
+              "default"
+            ),
+          },
+          {
+            title: "Logo",
+            description: "SVG or PNG, shown in the sidebar and on emails.",
+            control: (
+              <Button size="sm" variant="bordered">
+                Upload
+              </Button>
+            ),
+          },
+        ],
+      },
+      {
+        title: "Preview",
+        rows: [
+          {
+            title: "Live theme customizer",
+            description: "Preview accent, radius and density changes in real time.",
+            control: (
+              <Button as="a" href="/pages/theme-customizer" size="sm" variant="soft" color="primary">
+                Open
+              </Button>
+            ),
+          },
+        ],
+      },
+    ],
+  },
   "/settings/appearance": {
     title: "Appearance",
     subtitle: "How the workspace looks for you.",

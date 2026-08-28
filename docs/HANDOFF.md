@@ -3,10 +3,12 @@
 Last updated after commit **`1624beb`**. Read this + [`PAGES.md`](PAGES.md) +
 [`COMPONENTS.md`](COMPONENTS.md) + [`THEMING.md`](THEMING.md).
 
-**Status: every leaf in `src/data/nav.js` renders a real page.** The themed
-`ComingSoon` now only appears for genuinely unknown URLs (the `path="*"`
-catch-all in `App.jsx`). Further work means *new* nav entries or *deepening*
-existing pages — see [Where to go next](#where-to-go-next).
+**Status: every leaf in `src/data/nav.js` renders a real page** — verified by a
+full client-side crawl of all 180 routes (0 JS errors, 0 unintended
+`ComingSoon`). The themed `ComingSoon` now only appears for genuinely unknown
+URLs (the `path="*"` catch-all in `App.jsx`). Further work means *new* nav
+entries or *deepening* existing pages — see
+[Where to go next](#where-to-go-next).
 
 ---
 
@@ -48,7 +50,7 @@ Not "all oks-ui", not a fork or a merge.
 | Archetype | Component | Config source | Powers |
 | --- | --- | --- | --- |
 | **ListPage** | `src/Pages/InnerPages/ListPage.jsx` | `LIST_CONFIGS` in `src/data/lists.jsx` | **44 routes** — User Mgmt, Projects, Finance, CRM, HR, Logistics, Ecommerce, Marketing, `/orders` |
-| **SettingsPage** | `src/Pages/InnerPages/SettingsPage.jsx` | `SETTINGS_CONFIGS` in `src/data/settings.jsx` | **15 routes** — `/settings/*`, `/account/*` |
+| **SettingsPage** | `src/Pages/InnerPages/SettingsPage.jsx` | `SETTINGS_CONFIGS` in `src/data/settings.jsx` | **15 routes** — all of `/settings/*` + `/account/*` |
 | **BoardPage** | `src/Pages/InnerPages/BoardPage.jsx` (+ `ui/BoardView`) | `BOARD_CONFIGS` in `src/data/boards.jsx` | `/projects/{team-board,sprint-board,kanban-view}` |
 | **FormPage** | `src/Pages/InnerPages/FormPage.jsx` | `FORM_CONFIGS` in `src/data/forms.jsx` | add-user, create-project, add-product, create-order |
 | **DetailPage** | `src/Pages/InnerPages/DetailPage.jsx` (+ `ui/KeyValueList`) | `DETAIL_CONFIGS` in `src/data/details.jsx` | `/user-management/my-profile` |
