@@ -3,6 +3,12 @@
 Last updated after commit **`d02f983`**. Read this + [`PAGES.md`](PAGES.md) +
 [`COMPONENTS.md`](COMPONENTS.md) + [`THEMING.md`](THEMING.md).
 
+This repo is also the **reference implementation** for
+[`OKS-UI-TEMPLATE-PLAYBOOK.md`](OKS-UI-TEMPLATE-PLAYBOOK.md) — the reusable spec
+for building more `oks-ui` showcase templates the same way. Gaps found in `oks-ui`
+while building are logged in [`OKS-UI-FEEDBACK.md`](OKS-UI-FEEDBACK.md) — keep
+appending to it whenever you write a workaround.
+
 **Status: every leaf in `src/data/nav.js` renders a real page** — verified by a
 full client-side crawl of all 180 routes (0 JS errors, 0 unintended
 `ComingSoon`). The themed `ComingSoon` now only appears for genuinely unknown
