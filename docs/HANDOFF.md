@@ -1,6 +1,6 @@
 # Session handoff — continue here
 
-Last updated after commit **`1624beb`**. Read this + [`PAGES.md`](PAGES.md) +
+Last updated after commit **`d02f983`**. Read this + [`PAGES.md`](PAGES.md) +
 [`COMPONENTS.md`](COMPONENTS.md) + [`THEMING.md`](THEMING.md).
 
 **Status: every leaf in `src/data/nav.js` renders a real page** — verified by a
@@ -9,6 +9,25 @@ full client-side crawl of all 180 routes (0 JS errors, 0 unintended
 URLs (the `path="*"` catch-all in `App.jsx`). Further work means *new* nav
 entries or *deepening* existing pages — see
 [Where to go next](#where-to-go-next).
+
+### Recent fixes (`2d22b79`, `d02f983`)
+
+- **`/settings/theme`** — was in nav but had no `SETTINGS_CONFIGS` entry, so it
+  fell through to `ComingSoon`. Now a real Theme settings page (brand accent,
+  radius, logo, link to the live customizer).
+- **`DonutStat`** — `oks-ui`'s donut draws its own centre total; it collided
+  with the styled overlay. The native text is now hidden and the overlay is
+  grid-stacked on the chart so it stays centred. Segment colours switched to a
+  `var(--oks-color-primary-*)` ramp so donuts re-tint with the theme.
+- **`/pages/theme-customizer`** — accent change now writes the *full*
+  `--oks-color-primary-50…950` ramp (built from one hex via `color-mix`), so
+  soft/tint button & chip variants and tinted surfaces (sidebar `UpgradeCard`)
+  update too — not just solid `-500/-600`. Removed the no-op "compact density"
+  switch; the preview gained a live chart + donut.
+- **`SettingsSection` / `SettingsPage`** — the section header was a 77px bordered
+  band; it's now a light inline `<h3>` + a thin top-border on the rows.
+  `SettingsPage` widened `max-w-3xl → max-w-4xl`. Thin `/account/profile`
+  fleshed out (Photo section + phone/timezone rows).
 
 ---
 
@@ -177,6 +196,13 @@ Candidate follow-ups, roughly in order of value:
 - **Dev server port:** `vite.config.js` honours `$PORT` (`strictPort`) so the
   browser-tool preview can pin a port when 5173 is taken by another session.
   `.claude/launch.json` has `"autoPort": true`.
+- **Verifying colour changes in the browser tool:** when the preview pane isn't
+  displayed, screenshots time out *and* Chrome throttles style recalc for the
+  hidden tab — `getComputedStyle(el).backgroundColor` can read stale after a
+  JS-driven CSS-var change (multi-hop `var()` chains especially). Force a recalc
+  first: `document.body.style.display='none'; void document.body.offsetHeight;
+  document.body.style.display='';`. SVG `fill` reads and the var values
+  themselves stay fresh; it's only resolved paint on elements that lags.
 
 ---
 
