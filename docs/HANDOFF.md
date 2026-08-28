@@ -1,231 +1,181 @@
 # Session handoff — continue here
 
-Last updated after commit **`e443875`** (all 9 priority groups done). Read this +
-[`PAGES.md`](PAGES.md) + [`COMPONENTS.md`](COMPONENTS.md) +
-[`THEMING.md`](THEMING.md), then pick up from **"Still open"** below.
+Last updated after commit **`1624beb`**. Read this + [`PAGES.md`](PAGES.md) +
+[`COMPONENTS.md`](COMPONENTS.md) + [`THEMING.md`](THEMING.md).
+
+**Status: every leaf in `src/data/nav.js` renders a real page.** The themed
+`ComingSoon` now only appears for genuinely unknown URLs (the `path="*"`
+catch-all in `App.jsx`). Further work means *new* nav entries or *deepening*
+existing pages — see [Where to go next](#where-to-go-next).
 
 ---
 
 ## What this project is
 
 A promotional showcase for **`oks-ui`** (a CSS-variable React component library).
-Rebuild the **Vela** admin template (`https://vela.elsayedb.com`) using `oks-ui`,
-and compose the widgets `oks-ui` lacks (Card, Table, charts wrappers…) into a
-reusable `src/Components/ui/` layer. Every screen should be copy-pasteable into a
-real app.
+It rebuilds the **Vela** admin template (`https://vela.elsayedb.com`) with
+`oks-ui`, composing the widgets `oks-ui` lacks (Card, Table, chart wrappers…)
+into a reusable `src/Components/ui/` layer. Every screen is meant to be
+copy-pasteable into a real app.
 
 **Two layers, one token system** (see [`COMPONENTS.md`](COMPONENTS.md) →
-"How the UI is layered"): Layer 1 is `oks-ui` primitives used **directly and
-unmodified** (customized only through CSS variables in `theme.css` — no forks,
-no overrides); Layer 2 is the ~29-component `src/Components/ui/` composition
-layer that fills `oks-ui`'s gaps — about half assembled from `oks-ui` primitives,
-about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
+"How the UI is layered"):
 
-## Done (all committed to `main`, pushed)
+- **Layer 1 — `oks-ui` primitives, used directly and unmodified.** Customized
+  only through CSS variables in `src/styles/theme.css` — no forks, no overrides.
+- **Layer 2 — the ~31-component `src/Components/ui/` composition layer** that
+  fills `oks-ui`'s gaps. ~16 are assembled from `oks-ui` primitives, ~15 are
+  pure structural CSS + tokens.
 
-| Area | State |
-| --- | --- |
-| **App shell** | `Header`, `Sidebar` (full ~150-item Vela nav from `src/data/nav.js`, collapsible, mini mode), `Footer` — all `oks-ui` + `--app-*` tokens |
-| **Custom theme** | `src/styles/theme.css` — custom "iris" brand palette overriding `--oks-color-primary-*`, rounder radii, full dark mode via `data-theme`. `src/lib/theme.js` persists the choice. `--app-*` layer that `ui/` components read. |
-| **Real avatars** | `src/lib/avatar.js` — `avatarUrl(name)` -> stable `i.pravatar.cc` photo; `oks-ui <Avatar>` falls back to initials. Wired into every avatar. |
-| **9 dashboards** | Analytics, CRM, Ecommerce, Finance, Sales, Projects, Marketing, SaaS, Logistics, Business Intelligence — all at `/dashboards/*` |
-| **Component gallery** | `/components` grid + `/components/:slug` — 28 entries (12 oks-ui primitives + 16 composed), live examples + copyable code. Registry: `src/data/gallery.jsx` |
-| **Tables & Forms** | `/tables-forms` + 14 demo pages (5 tables, 4 forms, 5 specialised inputs). `src/Pages/InnerPages/tables-forms/` |
-| **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **44 routes** from `src/data/lists.jsx` across User Management, Projects, Finance, CRM, HR, Logistics, Ecommerce, Marketing + `/orders` |
-| **SettingsPage archetype** | `src/Pages/InnerPages/SettingsPage.jsx` — config-driven. Powers **15 routes** from `src/data/settings.jsx` (Settings/* and Account/*) |
-| **Apps section** | `src/Pages/InnerPages/apps/*` — **10 screens** at `/apps/*`: Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts. Data in `src/data/apps.js`, routes in `apps/routes.jsx`. New `BoardView` ui component (kanban). |
-| **BoardPage archetype** | `src/Pages/InnerPages/BoardPage.jsx` — config-driven kanban. Powers **3 routes** from `src/data/boards.jsx` (`/projects/team-board`, `/projects/sprint-board`, `/projects/kanban-view`). |
-| **FormPage archetype** | `src/Pages/InnerPages/FormPage.jsx` — config-driven create form (`FormFieldSet` grid + media/tips aside). Powers **4 routes** from `src/data/forms.jsx` (add-user, create-project, add-product, create-order). |
-| **DetailPage archetype** | `src/Pages/InnerPages/DetailPage.jsx` — header + stat tiles + tabs + typed content blocks. New `KeyValueList` ui component. Powers `/user-management/my-profile` from `src/data/details.jsx`. |
-| **Charts section** | `src/Pages/InnerPages/charts/*` — **7 pages** at `/charts/*` (apex-charts, chart-js, statistics, kpi-analytics, heatmaps, revenue-analytics, user-analytics). Data in `src/data/charts.js`. New `ChartPanel` local wrapper. |
-| **ReportPage archetype** | `src/Pages/InnerPages/ReportPage.jsx` — KPI row + `ChartCard` + breakdown + table, pure-data configs in `src/data/reports.jsx`. Powers 5 `/reports/*` routes + `CustomBuilder` stub. |
-| **Utility & Pages** | `src/Pages/InnerPages/pages/*` — FAQ, Help Center (+kb/docs variants), Pricing, Search Results, Notifications Center, Activity Feed, Changelog/Release Notes, Roadmap, Theme Customizer. Data in `src/data/content.jsx`. `NotFound` + `Maintenance` standalone in `src/Pages/` (routes `/404-error`, `/maintenance`, outside the shell). |
-| **Analytics dashboards** | `src/Pages/InnerPages/analytics/*` — `/projects/project-analytics`, `/ecommerce/customer-analytics`, `/marketing/analytics`, `/finance/budget-management`; `/marketing/overview` → existing `MarketingDashboard`; `/finance/profit-and-loss` (`REPORT_CONFIGS`) + `/finance/financial-reports` (`LIST_CONFIGS`). |
-| **CRM funnel views** | `src/Pages/InnerPages/crm/*` — `/crm/pipeline` (`BoardView`), `/crm/sales-funnel` (`MeterList` + `DonutStat` + table), `/crm/customer-journey` (`Timeline` + `MeterList` + `ActivityFeed`). |
-| **Product grid** | `src/Pages/InnerPages/ecommerce/ProductGrid.jsx` — `/ecommerce/product-grid` card grid + category filter + grid/list toggle. |
-| **Gantt / Timeline** | `src/Pages/InnerPages/projects/GanttView.jsx` — config-driven date-scaled bars, powers `/projects/timeline` + `/projects/gantt-view` from `src/data/gantt.js`. |
-| **Widget Gallery / UI Playground / RTL preview / Starter Kit** | `src/Pages/InnerPages/pages/*` — the last four `/utility` + `/pages` leaves. |
-| **Everything in `nav.js`** | now resolves to a real page. `ComingSoon` (catch-all in `App.jsx`) only fires for unknown URLs. |
-
-### `src/Components/ui/` — 28 composed components, all in the gallery
-
-Surface, CardHeader, SectionTitle, Stat, StatTile, TrendChip, KpiCard,
-StatGroup, RankList, UpgradeCard, ChartCard, DonutStat, MeterList, GoalCard,
-StatusChip, EntityCell, DataTable, ActivityFeed, Timeline, CohortGrid,
-Pagination, SearchInput, TableToolbar, EmptyState, FormCard, SettingRow,
-SettingsSection, CodeBlock, Example.
+Not "all oks-ui", not a fork or a merge.
 
 ---
 
-## Next, in priority order
+## Current state
 
-**All 9 original priority groups + the A–E follow-up groups are done** (commits
-after `c3762be`). **Every leaf in `src/data/nav.js` now renders a real page** —
-`ComingSoon` only fires for unknown URLs. Re-check `npm run lint && npm run build`
-and verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
+| Area | Where | Notes |
+| --- | --- | --- |
+| **App shell** | `src/Components/Commom/{Header,Sidebar,Footer}` (dir spelled "Commom") | Full ~150-item Vela nav from `src/data/nav.js`; collapsible + mini mode |
+| **Theme** | `src/styles/theme.css`, `src/lib/theme.js` | Custom "iris" palette, rounder radii, full dark mode via `data-theme`, persisted |
+| **Avatars** | `src/lib/avatar.js` | `avatarUrl(name)` → stable `i.pravatar.cc` photo; `<Avatar>` falls back to initials |
+| **10 dashboards** | `src/Pages/InnerPages/*Dashboard.jsx` | `/dashboards/{analytics,crm,ecommerce,finance,sales,projects,marketing,saas,logistics,business-intelligence}` |
+| **Component gallery** | `/components`, `/components/:slug` — registry `src/data/gallery.jsx` | **28 entries** (12 `oks-ui` primitives + 16 composed). ⚠ `BoardView` and `KeyValueList` are built + exported but **not yet in the gallery/nav** |
+| **Tables & Forms** | `src/Pages/InnerPages/tables-forms/` | `/tables-forms` + 14 demo pages |
+| **Auth & system** | `src/Pages/Auth/*`, `src/Pages/{NotFound,Maintenance}.jsx` | Login/register/forgot/terms + `/404-error`, `/maintenance` (outside the shell) |
 
-1. ~~App shells~~ — **DONE** (commit after `c3762be`). 10 screens under `/apps/*`.
-2. ~~Board archetype~~ — **DONE**. `BoardPage` (`src/Pages/InnerPages/BoardPage.jsx`)
-   + `BoardView` ui component, configs in `src/data/boards.jsx`, powers
-   `/projects/{team-board,sprint-board,kanban-view}`.
-3. ~~FormPage archetype~~ — **DONE**. `FormPage` (`src/Pages/InnerPages/FormPage.jsx`),
-   pure-data configs in `src/data/forms.jsx`, powers `/user-management/add-user`,
-   `/projects/create-project`, `/ecommerce/add-product`, `/ecommerce/create-order`.
-   Config supports `sections[].columns`, `fields[].fullWidth`, `media`, `tips`.
-4. ~~Detail/profile archetype~~ — **DONE**. `DetailPage`
-   (`src/Pages/InnerPages/DetailPage.jsx`) — header + stat tiles + tabs, blocks
-   of kind keyvalue/timeline/activity/list/text. New `KeyValueList` ui component.
-   Configs in `src/data/details.jsx`, powers `/user-management/my-profile`.
-   Add more configs for customer/deal detail once those routes exist in nav.
-5. ~~Remaining list routes~~ — **DONE**. Added **24 configs** to
-   `src/data/lists.jsx` (auto-wired via `listRoutePaths`): `/orders`, HR
-   (attendance, leave-requests, payroll, departments, recruitment,
-   job-applications), Ecommerce (categories, reviews, inventory, coupons,
-   promotions, wishlist), Logistics (shipments, delivery-tracking,
-   fleet-management), CRM (opportunities, campaigns), Finance (payments,
-   expenses), Marketing (email-campaigns, sms-campaigns, landing-pages,
-   segments). `ListPage` now covers **40 routes**.
-6. ~~Charts & Analytics section~~ — **DONE**. 7 pages in
-   `src/Pages/InnerPages/charts/` (apex-charts, chart-js, statistics,
-   kpi-analytics, heatmaps, revenue-analytics, user-analytics), data in
-   `src/data/charts.js`, shared `ChartPanel` wrapper.
-7. ~~Reports section~~ — **DONE**. `ReportPage` archetype
-   (`src/Pages/InnerPages/ReportPage.jsx`, configs `src/data/reports.jsx`) for
-   the 5 report pages + an interactive `CustomBuilder` stub.
-8. ~~Utility & Pages sections~~ — **DONE**. `src/Pages/InnerPages/pages/*` —
-   FAQ, Help Center (+ Knowledge Base / Documentation variants), Pricing,
-   Search Results, Notifications Center, Activity Feed, Changelog / Release
-   Notes, Roadmap, Theme Customizer. Standalone `NotFound` + `Maintenance` in
-   `src/Pages/`. Still ⬜: `/utility/{widget-gallery,ui-playground}`,
-   `/pages/{rtl-dark-light-preview,starter-kit}`.
-9. ~~CRM Dashboard vs CRM App~~ — **DONE**. `/crm/crm-dashboard` points at the
-   existing `CrmDashboard` component; `/crm/crm-app`
-   (`src/Pages/InnerPages/CrmApp.jsx`) is a new pipeline-board workspace
-   (`BoardView` of deals + tasks + rep leaderboard).
+### Page archetypes (config-driven — this is how you extend the app)
 
-## Still open — what's left to build
+| Archetype | Component | Config source | Powers |
+| --- | --- | --- | --- |
+| **ListPage** | `src/Pages/InnerPages/ListPage.jsx` | `LIST_CONFIGS` in `src/data/lists.jsx` | **44 routes** — User Mgmt, Projects, Finance, CRM, HR, Logistics, Ecommerce, Marketing, `/orders` |
+| **SettingsPage** | `src/Pages/InnerPages/SettingsPage.jsx` | `SETTINGS_CONFIGS` in `src/data/settings.jsx` | **15 routes** — `/settings/*`, `/account/*` |
+| **BoardPage** | `src/Pages/InnerPages/BoardPage.jsx` (+ `ui/BoardView`) | `BOARD_CONFIGS` in `src/data/boards.jsx` | `/projects/{team-board,sprint-board,kanban-view}` |
+| **FormPage** | `src/Pages/InnerPages/FormPage.jsx` | `FORM_CONFIGS` in `src/data/forms.jsx` | add-user, create-project, add-product, create-order |
+| **DetailPage** | `src/Pages/InnerPages/DetailPage.jsx` (+ `ui/KeyValueList`) | `DETAIL_CONFIGS` in `src/data/details.jsx` | `/user-management/my-profile` |
+| **ReportPage** | `src/Pages/InnerPages/ReportPage.jsx` | `REPORT_CONFIGS` in `src/data/reports.jsx` | `/reports/*` (5) + `/finance/profit-and-loss` |
+| **GanttView** | `src/Pages/InnerPages/projects/GanttView.jsx` | `GANTT_CONFIGS` in `src/data/gantt.js` | `/projects/{timeline,gantt-view}` |
 
-**Nothing.** Every leaf in `src/data/nav.js` now resolves to a real page
-(Groups A–E all **DONE**). `ComingSoon` only shows for genuinely unknown URLs
-via the `path="*"` catch-all. New work = new nav entries or deepening existing
-pages. The group breakdown below is kept as a record of what was built.
+**ListPage and ReportPage auto-wire**: add a key to `LIST_CONFIGS` /
+`REPORT_CONFIGS` and the route + nav exclusion happen automatically via
+`listRoutePaths` / `reportsRoutePaths`. Every other archetype needs a
+`*/routes.jsx` manifest spread into `App.jsx` (see
+[How to add a page](#how-to-add-a-page)).
 
-### ~~A. Analytics-style dashboards~~ — **DONE**
-`src/Pages/InnerPages/analytics/*` + `analytics/routes.jsx`:
-- `/projects/project-analytics` → `ProjectAnalytics.jsx` (velocity `ChartCard`,
-  status `DonutStat`, cycle-time `MeterList`, workload `RankList`, delivery table)
-- `/ecommerce/customer-analytics` → `CustomerAnalytics.jsx` (growth `ChartCard`,
-  acquisition `DonutStat`, retention `CohortGrid`, spend-band `MeterList`,
-  top-customers table)
-- `/marketing/analytics` → `MarketingAnalytics.jsx` (spend/leads `ChartCard`,
-  channel `DonutStat`, funnel + ROAS `MeterList`s, email-engagement table)
-- `/marketing/overview` → routed straight at the existing `MarketingDashboard`
-- `/finance/budget-management` → `BudgetManagement.jsx` (utilisation `MeterList`s
-  + budget-lines `DataTable`; data `BUDGET_LINES` in `lists.jsx`)
-- `/finance/profit-and-loss` → `ReportPage` config in `reports.jsx` (income
-  statement table with signed amounts)
-- `/finance/financial-reports` → `ListPage` config in `lists.jsx`
-  (`FINANCIAL_REPORTS_LIST`)
+### Bespoke page sections (not archetype-driven)
 
-### ~~B. CRM funnel / pipeline views~~ — **DONE**
-`src/Pages/InnerPages/crm/*` + `crm/routes.jsx`:
-- `/crm/pipeline` → `Pipeline.jsx` (`BoardView` of open `DEALS_LIST` by stage,
-  column `$`/count meta, weighted-value KPI)
-- `/crm/sales-funnel` → `SalesFunnel.jsx` (`MeterList` funnel with drop-off,
-  `WIN_LOSS` `DonutStat`, stage-conversion table)
-- `/crm/customer-journey` → `CustomerJourney.jsx` (`Timeline` of lifecycle
-  stages with step conversion, `MeterList` by stage, touchpoint `ActivityFeed`)
+| Section | Where | Routes |
+| --- | --- | --- |
+| **Apps** | `src/Pages/InnerPages/apps/*` | Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts |
+| **Charts** | `src/Pages/InnerPages/charts/*` (data `src/data/charts.js`) | apex-charts, chart-js, statistics, kpi-analytics, heatmaps, revenue-analytics, user-analytics |
+| **Analytics dashboards** | `src/Pages/InnerPages/analytics/*` | project-analytics, customer-analytics, marketing-analytics, budget-management (+ `/marketing/overview` → `MarketingDashboard`) |
+| **CRM funnel views** | `src/Pages/InnerPages/crm/*` | pipeline (`BoardView`), sales-funnel, customer-journey (`Timeline`), CRM app workspace |
+| **Utility & Pages** | `src/Pages/InnerPages/pages/*` (copy `src/data/content.jsx`) | FAQ, Help Center (+kb/docs variants), Pricing, Search Results, Notifications Center, Activity Feed, Changelog/Release Notes, Roadmap, Theme Customizer, Widget Gallery, UI Playground, RTL/Dark/Light Preview, Starter Kit |
+| **Product grid** | `src/Pages/InnerPages/ecommerce/ProductGrid.jsx` | `/ecommerce/product-grid` |
 
-### ~~C. Simple list routes~~ — **DONE**
-Configs added to `src/data/lists.jsx` (auto-wired via `listRoutePaths`):
-- `/logistics/warehouse-management` — `WAREHOUSES_LIST` (capacity `bar()`, staff, SKUs)
-- `/logistics/route-planning` — `ROUTE_PLANS_LIST`
-- `/user-management/permissions` — `PERMISSIONS_LIST` (per-permission role chips + scope)
+### `src/Components/ui/` — 31 components
 
-### ~~D. Product grid~~ — **DONE**
-`/ecommerce/product-grid` → `src/Pages/InnerPages/ecommerce/ProductGrid.jsx` —
-card grid over `PRODUCTS_LIST` (gradient+icon placeholder per category, price,
-stock-derived `StatusChip`), category-chip filter + search, grid/list toggle
-linking to `/ecommerce/product-list`.
+Barrel (`index.js`, 29): Surface, CardHeader, SectionTitle, Stat, StatTile,
+TrendChip, KpiCard, StatGroup, RankList, UpgradeCard, ChartCard, DonutStat,
+MeterList, GoalCard, StatusChip, EntityCell, DataTable, ActivityFeed, Timeline,
+CohortGrid, **BoardView**, **KeyValueList**, Pagination, SearchInput,
+TableToolbar, EmptyState, FormCard, SettingRow, SettingsSection.
+Direct-import only: CodeBlock, Example.
 
-### ~~E. Utility / Pages leftovers~~ — **DONE**
-- `/projects/{timeline,gantt-view}` → `src/Pages/InnerPages/projects/GanttView.jsx`
-  (config-driven horizontal Gantt; date-scaled bars), configs in `src/data/gantt.js`
-- `/utility/widget-gallery` → `pages/WidgetGallery.jsx` (live dashboard widgets +
-  links to `/components/:slug`)
-- `/utility/ui-playground` → `pages/UiPlayground.jsx` (prop tweaker for
-  Button/Chip/Badge/Alert + `CodeBlock` output)
-- `/pages/rtl-dark-light-preview` → `pages/RtlDarkLightPreview.jsx` (Light/Dark
-  toggle whole-page, RTL via `dir` on root — reset on unmount — plus a forced-RTL
-  panel)
-- `/pages/starter-kit` → `pages/StarterKit.jsx` (static marketing page + `npx`
-  `CodeBlock`)
+---
 
-### Notes
-- Anything list-shaped: add to `LIST_CONFIGS` and you're done (route + nav
-  exclusion are automatic via `listRoutePaths`). Same for `REPORT_CONFIGS` →
-  `reportsRoutePaths`. Everything else needs the 5-step "How to add a page group"
-  flow below.
-- `DonutStat`'s `centerValue` should equal the data total (oks-ui's donut renders
-  its own centre number underneath the overlay — matching values hides the seam).
+## Where to go next
 
-## How to add a page group (the established pattern)
+Nothing in `nav.js` is missing. Candidate follow-ups, roughly in order of value:
+
+1. **Add `BoardView` + `KeyValueList` to the gallery.** They're built and
+   exported but absent from `src/data/gallery.jsx` and the `nav.js` Components
+   group — the only inconsistency left. Follow the pattern of the other composed
+   entries (live `render` + copyable `code`).
+2. **Deepen the archetypes as needed** — e.g. `DetailPage` only powers one route;
+   add `DETAIL_CONFIGS` for customer / deal / employee detail and link the list
+   rows to them.
+3. **Real interactions** — the boards, pipeline and Gantt are presentational.
+   Drag-and-drop, inline edit, and working filters/sort beyond what `DataTable`
+   already does would make the showcase more convincing.
+4. **`CommandMenu` (⌘K)**, `Breadcrumbs`, mini-mode sidebar flyouts — flagged
+   `🔨`/`⬜` in `COMPONENTS.md` and never built.
+5. **Trim mock-data quirks** — some `src/data/lists.jsx` generators pick
+   `category`, `status` and `stock` independently, so a row can read
+   "Out of stock · In stock". `ProductGrid` already works around this by deriving
+   status from stock; the list pages don't.
+
+---
+
+## How to add a page
 
 1. Look at the Vela reference: open `https://vela.elsayedb.com/<path>` in the
    browser tool, `get_page_text` + `read_page`.
-2. Mock data -> `src/data/<domain>.js(x)`.
-3. Reuse `ui/` components; only build a new one if 2+ pages need it, then add it
+2. Mock data → `src/data/<domain>.js(x)`.
+3. Reuse `ui/` components; build a new one only if 2+ pages need it, then add it
    to `src/Components/ui/index.js` **and** `src/data/gallery.jsx` **and**
    `src/data/nav.js` Components group.
-4. Page component -> `src/Pages/InnerPages/...`.
+4. Page component → `src/Pages/InnerPages/…`.
 5. Route: add to a `*Routes.jsx` manifest and spread it in `App.jsx` inside the
-   `<Route element={<InnerTemplate />}>` block, **and** add the path to the
-   `CONFIGURED`/`REAL_INNER` exclusion so it doesn't fall through to
-   `ComingSoon`.
+   `<Route element={<InnerTemplate />}>` block, **and** add the path(s) to the
+   `CONFIGURED` / `REAL_INNER` set so it doesn't fall through to `ComingSoon`.
+   (`LIST_CONFIGS` / `REPORT_CONFIGS` keys skip this — they're auto-wired.)
 6. `npm run lint && npm run build` — both must pass.
 7. Verify in the browser (see gotchas), then commit with a `Co-Authored-By`
    trailer.
+
+---
 
 ## Gotchas learned the hard way
 
 - **Restart the dev server after a batch of edits.** Vite HMR goes stale on this
   project (deleted files, prop-shape changes) and throws phantom
   `X is not defined` / 404s that a **fresh browser tab** does not. Always verify
-  in a new tab, and `preview_stop` + `preview_start` if in doubt.
-- **CSS import order matters:** `src/index.css` (Tailwind) -> `oks-ui/styles.css`
-  -> `src/styles/theme.css`. If `oks-ui/styles.css` loads first, component CSS
+  in a new tab; `preview_stop` + `preview_start` if in doubt.
+- **CSS import order matters:** `src/index.css` (Tailwind) → `oks-ui/styles.css`
+  → `src/styles/theme.css`. If `oks-ui/styles.css` loads first, component CSS
   silently doesn't apply (buttons render transparent). See `src/main.jsx`.
+- **No side effects inside a `setState` updater.** React StrictMode double-invokes
+  the updater in dev, so `setX(v => { document.…setAttribute(...); return !v })`
+  fires the effect twice and cancels out. Compute `next` outside, then
+  `setX(next)` and do the side effect. (Hit this in `RtlDarkLightPreview`.)
 - **framer-motion `AnimatePresence` conditional exit is unreliable here**
-  (framer 13 + React 19 + StrictMode). Use CSS transitions for
-  mount/unmount (see the mobile drawer in `InnerTemplate.jsx`) or a keyed
-  remount. `AnimatePresence mode="wait"` with a changing `key` is fine.
-- **No emoji anywhere** — user rule. Icons only (`lucide-react`). `·` separators
+  (framer 13 + React 19 + StrictMode). Use CSS transitions for mount/unmount
+  (see the mobile drawer in `InnerTemplate.jsx`) or a keyed remount.
+  `AnimatePresence mode="wait"` with a changing `key` is fine.
+- **No emoji anywhere** — user rule. Icons only (`lucide-react`); `·` separators
   are fine. `grep -nP "[\x{1F000}-\x{1FFFF}]" src/` should stay empty.
 - **`react-refresh/only-export-components`** (lint error, blocks build) fires on
-  files that export both components and non-components — keep route manifests
-  (`*Routes.jsx`) importing page components, never defining them, and exporting
-  only the route array.
+  files that export both components and non-components. Route manifests
+  (`*Routes.jsx`) must import page components, never define them, and export only
+  the route array — or carry the `/* eslint-disable */` header the existing
+  manifests use. Data files with JSX (`lists.jsx`, `reports.jsx`) are fine as
+  long as they don't *define* a named component.
 - **JSX attribute strings can't contain `\"`** — parse error. Use plain text or
-  `{"..."}`.
-- **Tailwind arbitrary classes lag one render in dev** after being added — a
-  reload fixes it; production build is always correct.
-- **`oks-ui` Dropdown works well**; the custom framer `Menu` did not (deleted).
-- **Chart** (`oks-ui`): `type`, `data`, `x`, `series` (string or
+  `{'…"…"…'}`.
+- **`oks-ui` `Chip`**: variants are `solid | soft | bordered | dot` (no `flat`).
+  `onClick` works (it spreads `HTMLAttributes`), as does `selected` +
+  `onSelectedChange`.
+- **`DonutStat`'s `centerValue` should equal the data total** — `oks-ui`'s donut
+  renders its own centre number under the overlay; matching values hides the seam.
+- **`Chart`** (`oks-ui`): `type`, `data`, `x`, `series` (string or
   `[{key,name,color}]`), `dataFormat={{prefix,format:"compact"}}`,
-  `palette={{roles:["primary"]}}` or `{colors:[…]}`, `legend={{show}}`. Multi-
-  series -> array + show legend. `ChartCard` wraps all this.
-
-- **Dev server port:** `vite.config.js` now honours `$PORT` (`strictPort`) so the
+  `palette={{roles:["primary"]}}` or `{colors:[…]}`, `legend={{show}}`,
+  `column={{stacked:true}}`. Multi-series → array + show legend. `ChartCard`
+  wraps most of this.
+- **Dev server port:** `vite.config.js` honours `$PORT` (`strictPort`) so the
   browser-tool preview can pin a port when 5173 is taken by another session.
   `.claude/launch.json` has `"autoPort": true`.
+
+---
 
 ## Verify / run
 
 ```
 npm run dev        # or the browser-tool preview
-npm run lint       # must pass (blocks build)
+npm run lint       # must pass (blocks the build in CI intent)
 npm run build      # must pass
 ```
-Login: `admin@example.com` / `admin123` (mock — a localStorage flag).
 
-Dashboards render at `/dashboards/analytics` etc. `/dashboard` redirects there.
+Login: `admin@example.com` / `admin123` (mock — a `localStorage` flag;
+`localStorage.setItem('oks_is_authenticated','true')` skips the form).
+`/dashboard` redirects to `/dashboards/analytics`.
