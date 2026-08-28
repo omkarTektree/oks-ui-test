@@ -41,6 +41,7 @@ about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
 | **ReportPage archetype** | `src/Pages/InnerPages/ReportPage.jsx` — KPI row + `ChartCard` + breakdown + table, pure-data configs in `src/data/reports.jsx`. Powers 5 `/reports/*` routes + `CustomBuilder` stub. |
 | **Utility & Pages** | `src/Pages/InnerPages/pages/*` — FAQ, Help Center (+kb/docs variants), Pricing, Search Results, Notifications Center, Activity Feed, Changelog/Release Notes, Roadmap, Theme Customizer. Data in `src/data/content.jsx`. `NotFound` + `Maintenance` standalone in `src/Pages/` (routes `/404-error`, `/maintenance`, outside the shell). |
 | **Analytics dashboards** | `src/Pages/InnerPages/analytics/*` — `/projects/project-analytics`, `/ecommerce/customer-analytics`, `/marketing/analytics`, `/finance/budget-management`; `/marketing/overview` → existing `MarketingDashboard`; `/finance/profit-and-loss` (`REPORT_CONFIGS`) + `/finance/financial-reports` (`LIST_CONFIGS`). |
+| **CRM funnel views** | `src/Pages/InnerPages/crm/*` — `/crm/pipeline` (`BoardView`), `/crm/sales-funnel` (`MeterList` + `DonutStat` + table), `/crm/customer-journey` (`Timeline` + `MeterList` + `ActivityFeed`). |
 | **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
@@ -101,9 +102,9 @@ verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
 
 ## Still open — what's left to build
 
-**13 nav leaves** still fall through to the themed `ComingSoon` (Group A — 7
-analytics dashboards — is now **DONE**). None need a new archetype. Suggested
-order (biggest reuse payoff first):
+**10 nav leaves** still fall through to the themed `ComingSoon` (Groups A & B are
+now **DONE**). None need a new archetype. Suggested order (biggest reuse payoff
+first):
 
 ### ~~A. Analytics-style dashboards~~ — **DONE**
 `src/Pages/InnerPages/analytics/*` + `analytics/routes.jsx`:
@@ -122,12 +123,14 @@ order (biggest reuse payoff first):
 - `/finance/financial-reports` → `ListPage` config in `lists.jsx`
   (`FINANCIAL_REPORTS_LIST`)
 
-### B. CRM funnel / pipeline views (reuse `MeterList` + `BoardView`)
-| Route | Build as |
-| --- | --- |
-| `/crm/pipeline` | `BoardView` of `DEALS_LIST` by `stage` with column `$` totals — this is exactly the board already inside `CrmApp.jsx`; extract it or make `/crm/pipeline` a focused board-only page. |
-| `/crm/sales-funnel` | `MeterList` with `scaleToMax` + `showDropOff` over `PIPELINE_STAGES` (in `src/data/crm.js`). One `Surface`. |
-| `/crm/customer-journey` | `Timeline` component — stages from lead → onboarded → expansion, with per-stage counts. Reuse `Timeline` + `DonutStat`. |
+### ~~B. CRM funnel / pipeline views~~ — **DONE**
+`src/Pages/InnerPages/crm/*` + `crm/routes.jsx`:
+- `/crm/pipeline` → `Pipeline.jsx` (`BoardView` of open `DEALS_LIST` by stage,
+  column `$`/count meta, weighted-value KPI)
+- `/crm/sales-funnel` → `SalesFunnel.jsx` (`MeterList` funnel with drop-off,
+  `WIN_LOSS` `DonutStat`, stage-conversion table)
+- `/crm/customer-journey` → `CustomerJourney.jsx` (`Timeline` of lifecycle
+  stages with step conversion, `MeterList` by stage, touchpoint `ActivityFeed`)
 
 ### C. Simple list routes (add a config to `src/data/lists.jsx` — auto-wires, no App.jsx edit)
 | Route | Rows |

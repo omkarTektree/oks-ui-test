@@ -18,6 +18,7 @@ import { chartsRoutes, chartsRoutePaths } from "./Pages/InnerPages/charts/routes
 import { reportsRoutes, reportsRoutePaths } from "./Pages/InnerPages/reports/routes";
 import { pagesRoutes, pagesRoutePaths } from "./Pages/InnerPages/pages/routes";
 import { analyticsRoutes, analyticsRoutePaths } from "./Pages/InnerPages/analytics/routes";
+import { crmRoutes, crmRoutePaths } from "./Pages/InnerPages/crm/routes";
 import { listRoutes, listRoutePaths } from "./Pages/InnerPages/listRoutes";
 import {
   settingsRoutes,
@@ -84,6 +85,7 @@ const CONFIGURED = new Set([
   ...reportsRoutePaths,
   ...pagesRoutePaths,
   ...analyticsRoutePaths,
+  ...crmRoutePaths,
 ]);
 const shellRoutes = NAV_ROUTES.filter(
   (path) =>
@@ -164,6 +166,7 @@ const App = () => {
               {reportsRoutes}
               {pagesRoutes}
               {analyticsRoutes}
+              {crmRoutes}
               {listRoutes}
               {settingsRoutes}
               {shellRoutes.map((path) => (

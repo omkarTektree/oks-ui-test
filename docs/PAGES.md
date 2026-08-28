@@ -46,10 +46,11 @@ data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 (`ListPage`) · **Profit & Loss** (`ReportPage`) · **Budget Management**
 (`analytics/BudgetManagement.jsx`) · ⬜ —
 
-## CRM  `/crm/*`
+## CRM  `/crm/*`  ✅ (all built)
 ✅ **Leads · Deals · Customers · Opportunities · Campaigns** (`ListPage`) ·
 **CRM Dashboard** (= `/dashboards/crm`) · **CRM App** (pipeline board workspace,
-`src/Pages/InnerPages/CrmApp.jsx`) · ⬜ Pipeline · Sales Funnel · Customer Journey
+`src/Pages/InnerPages/CrmApp.jsx`) · **Pipeline · Sales Funnel · Customer
+Journey** (`src/Pages/InnerPages/crm/*`)
 
 ## HR Management  `/hr/*`
 ✅ **Employees · Attendance · Leave Requests · Payroll · Departments ·
