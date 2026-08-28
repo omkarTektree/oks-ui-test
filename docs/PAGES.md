@@ -36,10 +36,11 @@ data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 ✅ **All Users · Roles · Teams · Departments · Activity Logs · Permissions**
 (`ListPage`) · **Add User** (`FormPage`) · **My Profile** (`DetailPage`)
 
-## Projects  `/projects/*`
+## Projects  `/projects/*`  ✅ (all built)
 ✅ **All Projects** (`ListPage`) · **Team Board · Sprint Board · Kanban View**
 (`BoardPage`) · **Create Project** (`FormPage`) · **Project Analytics**
-(`analytics/ProjectAnalytics.jsx`) · ⬜ Timeline · Gantt View
+(`analytics/ProjectAnalytics.jsx`) · **Timeline · Gantt View**
+(`projects/GanttView.jsx`, configs `src/data/gantt.js`)
 
 ## Finance  `/finance/*`
 ✅ **Transactions · Invoices · Payments · Expenses · Financial Reports**
@@ -109,15 +110,15 @@ archetype — KPI row + `ChartCard` + breakdown + table, configs in
 ## Settings  `/settings/*`
 General · Company · Theme · Appearance · Locale · Notifications · Integrations · API
 
-## Utility  `/utility/*`
+## Utility  `/utility/*`  ✅ (all built)
 ✅ **FAQ · Help Center · Knowledge Base · Documentation · Search Results ·
-Notifications Center · Activity Feed · Pricing** — pages in
-`src/Pages/InnerPages/pages/`. `HelpCenter` has a `variant` prop
-(help/kb/docs). ⬜ Widget Gallery · UI Playground
+Notifications Center · Activity Feed · Pricing · Widget Gallery · UI Playground** —
+pages in `src/Pages/InnerPages/pages/`. `HelpCenter` has a `variant` prop
+(help/kb/docs).
 
-## Pages  `/pages/*`
+## Pages  `/pages/*`  ✅ (all built)
 ✅ **Changelog · Release Notes · Roadmap** (`BoardView`) · **Theme Customizer**
-(live CSS-var preview) · ⬜ RTL / Dark / Light Preview · Starter Kit
+(live CSS-var preview) · **RTL / Dark / Light Preview** · **Starter Kit**
 
 ## Auth & system  (outside the app shell)
 | Page | Route | Status |

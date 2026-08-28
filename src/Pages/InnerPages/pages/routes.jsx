@@ -11,6 +11,10 @@ const SearchResults = lazy(() => import("./SearchResults"));
 const Changelog = lazy(() => import("./Changelog"));
 const Roadmap = lazy(() => import("./Roadmap"));
 const ThemeCustomizer = lazy(() => import("./ThemeCustomizer"));
+const WidgetGallery = lazy(() => import("./WidgetGallery"));
+const UiPlayground = lazy(() => import("./UiPlayground"));
+const RtlDarkLightPreview = lazy(() => import("./RtlDarkLightPreview"));
+const StarterKit = lazy(() => import("./StarterKit"));
 
 const R = [
   ["/utility/faq", <Faq />],
@@ -21,10 +25,14 @@ const R = [
   ["/utility/notifications-center", <NotificationsCenter />],
   ["/utility/activity-feed", <ActivityFeedPage />],
   ["/utility/search-results", <SearchResults />],
+  ["/utility/widget-gallery", <WidgetGallery />],
+  ["/utility/ui-playground", <UiPlayground />],
   ["/pages/changelog", <Changelog />],
   ["/pages/release-notes", <Changelog title="Release notes" subtitle="Detailed notes for each release." />],
   ["/pages/roadmap", <Roadmap />],
   ["/pages/theme-customizer", <ThemeCustomizer />],
+  ["/pages/rtl-dark-light-preview", <RtlDarkLightPreview />],
+  ["/pages/starter-kit", <StarterKit />],
 ];
 
 export const pagesRoutePaths = R.map(([path]) => path);

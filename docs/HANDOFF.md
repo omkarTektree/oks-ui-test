@@ -43,7 +43,9 @@ about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
 | **Analytics dashboards** | `src/Pages/InnerPages/analytics/*` — `/projects/project-analytics`, `/ecommerce/customer-analytics`, `/marketing/analytics`, `/finance/budget-management`; `/marketing/overview` → existing `MarketingDashboard`; `/finance/profit-and-loss` (`REPORT_CONFIGS`) + `/finance/financial-reports` (`LIST_CONFIGS`). |
 | **CRM funnel views** | `src/Pages/InnerPages/crm/*` — `/crm/pipeline` (`BoardView`), `/crm/sales-funnel` (`MeterList` + `DonutStat` + table), `/crm/customer-journey` (`Timeline` + `MeterList` + `ActivityFeed`). |
 | **Product grid** | `src/Pages/InnerPages/ecommerce/ProductGrid.jsx` — `/ecommerce/product-grid` card grid + category filter + grid/list toggle. |
-| **Everything else** | resolves to the themed `ComingSoon` page (catch-all in `App.jsx`) |
+| **Gantt / Timeline** | `src/Pages/InnerPages/projects/GanttView.jsx` — config-driven date-scaled bars, powers `/projects/timeline` + `/projects/gantt-view` from `src/data/gantt.js`. |
+| **Widget Gallery / UI Playground / RTL preview / Starter Kit** | `src/Pages/InnerPages/pages/*` — the last four `/utility` + `/pages` leaves. |
+| **Everything in `nav.js`** | now resolves to a real page. `ComingSoon` (catch-all in `App.jsx`) only fires for unknown URLs. |
 
 ### `src/Components/ui/` — 28 composed components, all in the gallery
 
@@ -57,10 +59,10 @@ SettingsSection, CodeBlock, Example.
 
 ## Next, in priority order
 
-**All 9 original priority groups are done** (commits after `c3762be`). Component
-archetypes now cover ~120 routes; see "Still open" below for the tail of nav
-leaves that remain on `ComingSoon`. Re-check `npm run lint && npm run build` and
-verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
+**All 9 original priority groups + the A–E follow-up groups are done** (commits
+after `c3762be`). **Every leaf in `src/data/nav.js` now renders a real page** —
+`ComingSoon` only fires for unknown URLs. Re-check `npm run lint && npm run build`
+and verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
 
 1. ~~App shells~~ — **DONE** (commit after `c3762be`). 10 screens under `/apps/*`.
 2. ~~Board archetype~~ — **DONE**. `BoardPage` (`src/Pages/InnerPages/BoardPage.jsx`)
@@ -103,9 +105,10 @@ verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
 
 ## Still open — what's left to build
 
-**6 nav leaves** still fall through to the themed `ComingSoon` (Groups A–D are
-now **DONE**). None need a new archetype. Suggested order (biggest reuse payoff
-first):
+**Nothing.** Every leaf in `src/data/nav.js` now resolves to a real page
+(Groups A–E all **DONE**). `ComingSoon` only shows for genuinely unknown URLs
+via the `path="*"` catch-all. New work = new nav entries or deepening existing
+pages. The group breakdown below is kept as a record of what was built.
 
 ### ~~A. Analytics-style dashboards~~ — **DONE**
 `src/Pages/InnerPages/analytics/*` + `analytics/routes.jsx`:
@@ -145,15 +148,18 @@ card grid over `PRODUCTS_LIST` (gradient+icon placeholder per category, price,
 stock-derived `StatusChip`), category-chip filter + search, grid/list toggle
 linking to `/ecommerce/product-list`.
 
-### E. Utility / Pages leftovers (marketing-ish static)
-| Route | Build as |
-| --- | --- |
-| `/projects/timeline` | Horizontal Gantt-lite: project rows with a positioned bar per date range. Custom, small; reuse `Surface` + `PROJECTS_LIST` (`due`, `progress`). |
-| `/projects/gantt-view` | Same as `/projects/timeline` with finer-grained task bars — build one component, two configs. |
-| `/utility/widget-gallery` | A curated subset of the `/components` gallery — can reuse `src/data/gallery.jsx` filtered, or a bespoke "dashboard widgets" showcase (`KpiCard`, `ChartCard`, `GoalCard`, `RankList` side by side). |
-| `/utility/ui-playground` | Interactive prop-tweaker for 3–4 components (Button/Chip/Chart) — state + live render. Like `ThemeCustomizer.jsx`'s live-preview pattern. |
-| `/pages/rtl-dark-light-preview` | Side-by-side `iframe`-free preview: render a mini component cluster three times with `dir="rtl"` / forced `data-theme`. Reuse `ThemeCustomizer` preview cluster. |
-| `/pages/starter-kit` | Static marketing page — feature grid, "what's included" checklist, copy-paste `npx` command in a `CodeBlock`. |
+### ~~E. Utility / Pages leftovers~~ — **DONE**
+- `/projects/{timeline,gantt-view}` → `src/Pages/InnerPages/projects/GanttView.jsx`
+  (config-driven horizontal Gantt; date-scaled bars), configs in `src/data/gantt.js`
+- `/utility/widget-gallery` → `pages/WidgetGallery.jsx` (live dashboard widgets +
+  links to `/components/:slug`)
+- `/utility/ui-playground` → `pages/UiPlayground.jsx` (prop tweaker for
+  Button/Chip/Badge/Alert + `CodeBlock` output)
+- `/pages/rtl-dark-light-preview` → `pages/RtlDarkLightPreview.jsx` (Light/Dark
+  toggle whole-page, RTL via `dir` on root — reset on unmount — plus a forced-RTL
+  panel)
+- `/pages/starter-kit` → `pages/StarterKit.jsx` (static marketing page + `npx`
+  `CodeBlock`)
 
 ### Notes
 - Anything list-shaped: add to `LIST_CONFIGS` and you're done (route + nav
