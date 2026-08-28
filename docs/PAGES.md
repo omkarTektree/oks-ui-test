@@ -32,9 +32,9 @@ Legend: **✅ built** · 🔨 next · ⬜ planned
 **Contacts** (grid + detail panel). Pages in `src/Pages/InnerPages/apps/`,
 data in `src/data/apps.js`, routes in `apps/routes.jsx`.
 
-## User Management  `/user-management/*`
-✅ **All Users · Roles · Teams · Departments · Activity Logs** (`ListPage`) ·
-**Add User** (`FormPage`) · **My Profile** (`DetailPage`) · ⬜ Permissions
+## User Management  `/user-management/*`  ✅ (all built)
+✅ **All Users · Roles · Teams · Departments · Activity Logs · Permissions**
+(`ListPage`) · **Add User** (`FormPage`) · **My Profile** (`DetailPage`)
 
 ## Projects  `/projects/*`
 ✅ **All Projects** (`ListPage`) · **Team Board · Sprint Board · Kanban View**
@@ -56,9 +56,9 @@ Journey** (`src/Pages/InnerPages/crm/*`)
 ✅ **Employees · Attendance · Leave Requests · Payroll · Departments ·
 Recruitment · Job Applications** (`ListPage`)
 
-## Logistics  `/logistics/*`
-✅ **Shipments · Delivery Tracking · Fleet Management** (`ListPage`) · ⬜
-Warehouse Management · Route Planning
+## Logistics  `/logistics/*`  ✅ (all built)
+✅ **Shipments · Delivery Tracking · Fleet Management · Warehouse Management ·
+Route Planning** (`ListPage`)
 
 ## Ecommerce  `/ecommerce/*`
 ✅ **Product List · Orders · Customers · Categories · Reviews · Inventory ·

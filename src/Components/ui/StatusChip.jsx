@@ -60,6 +60,12 @@ const TONE = {
   Qualification: "info",
   Proposal: "warning",
   Ready: "success",
+  Operational: "success",
+  "Near capacity": "warning",
+  "Under-utilised": "default",
+  Planned: "info",
+  Restricted: "warning",
+  Enabled: "success",
 };
 
 /** Maps a status label to a semantic colour, rendered as a dot chip. */

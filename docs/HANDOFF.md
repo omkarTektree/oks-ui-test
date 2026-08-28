@@ -31,7 +31,7 @@ about half pure structural CSS + tokens. Not "all oks-ui", not a fork/merge.
 | **9 dashboards** | Analytics, CRM, Ecommerce, Finance, Sales, Projects, Marketing, SaaS, Logistics, Business Intelligence — all at `/dashboards/*` |
 | **Component gallery** | `/components` grid + `/components/:slug` — 28 entries (12 oks-ui primitives + 16 composed), live examples + copyable code. Registry: `src/data/gallery.jsx` |
 | **Tables & Forms** | `/tables-forms` + 14 demo pages (5 tables, 4 forms, 5 specialised inputs). `src/Pages/InnerPages/tables-forms/` |
-| **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **40 routes** from `src/data/lists.jsx` across User Management, Projects, Finance, CRM, HR, Logistics, Ecommerce, Marketing + `/orders` |
+| **ListPage archetype** | `src/Pages/InnerPages/ListPage.jsx` — config-driven CRUD list (search, filter chips, sort, paginate, empty). Powers **44 routes** from `src/data/lists.jsx` across User Management, Projects, Finance, CRM, HR, Logistics, Ecommerce, Marketing + `/orders` |
 | **SettingsPage archetype** | `src/Pages/InnerPages/SettingsPage.jsx` — config-driven. Powers **15 routes** from `src/data/settings.jsx` (Settings/* and Account/*) |
 | **Apps section** | `src/Pages/InnerPages/apps/*` — **10 screens** at `/apps/*`: Chat, Group Chat, Email, Calendar, File Manager, Notes, Task Manager, Help Desk, Support Tickets, Contacts. Data in `src/data/apps.js`, routes in `apps/routes.jsx`. New `BoardView` ui component (kanban). |
 | **BoardPage archetype** | `src/Pages/InnerPages/BoardPage.jsx` — config-driven kanban. Powers **3 routes** from `src/data/boards.jsx` (`/projects/team-board`, `/projects/sprint-board`, `/projects/kanban-view`). |
@@ -102,9 +102,9 @@ verify in a fresh browser tab (Vite HMR goes stale — restart the dev server).
 
 ## Still open — what's left to build
 
-**10 nav leaves** still fall through to the themed `ComingSoon` (Groups A & B are
-now **DONE**). None need a new archetype. Suggested order (biggest reuse payoff
-first):
+**7 nav leaves** still fall through to the themed `ComingSoon` (Groups A, B & C
+are now **DONE**). None need a new archetype. Suggested order (biggest reuse
+payoff first):
 
 ### ~~A. Analytics-style dashboards~~ — **DONE**
 `src/Pages/InnerPages/analytics/*` + `analytics/routes.jsx`:
@@ -132,12 +132,11 @@ first):
 - `/crm/customer-journey` → `CustomerJourney.jsx` (`Timeline` of lifecycle
   stages with step conversion, `MeterList` by stage, touchpoint `ActivityFeed`)
 
-### C. Simple list routes (add a config to `src/data/lists.jsx` — auto-wires, no App.jsx edit)
-| Route | Rows |
-| --- | --- |
-| `/logistics/warehouse-management` | warehouses: name, location, capacity %, SKUs, staff, status. Reuse the `bar()` cell helper. |
-| `/logistics/route-planning` | routes: id, driver, stops, distance, est. time, vehicle, status. |
-| `/user-management/permissions` | permission matrix — either a `ListPage` (permission, description, roles-with-it) or a custom `CohortGrid`-style grid (roles × permissions with check cells). |
+### ~~C. Simple list routes~~ — **DONE**
+Configs added to `src/data/lists.jsx` (auto-wired via `listRoutePaths`):
+- `/logistics/warehouse-management` — `WAREHOUSES_LIST` (capacity `bar()`, staff, SKUs)
+- `/logistics/route-planning` — `ROUTE_PLANS_LIST`
+- `/user-management/permissions` — `PERMISSIONS_LIST` (per-permission role chips + scope)
 
 ### D. Marketing/Ecommerce product views
 | Route | Build as |

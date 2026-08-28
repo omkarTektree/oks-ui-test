@@ -302,6 +302,64 @@ export const FLEET_LIST = Array.from({ length: 18 }, (_, i) => ({
   status: pick(["Active", "Active", "Maintenance", "Idle"], i * 3),
 }));
 
+export const WAREHOUSES_LIST = [
+  ["Berlin DC", "Berlin, DE", 88, 12400, 42],
+  ["Rotterdam Hub", "Rotterdam, NL", 71, 18600, 58],
+  ["Chicago DC", "Chicago, US", 94, 21200, 66],
+  ["Austin DC", "Austin, US", 63, 9800, 31],
+  ["Lyon Depot", "Lyon, FR", 46, 6400, 22],
+  ["Leeds Depot", "Leeds, UK", 79, 8900, 27],
+  ["Porto Micro-hub", "Porto, PT", 55, 3100, 14],
+  ["Gdansk DC", "Gdansk, PL", 68, 11700, 39],
+].map(([name, location, capacity, skus, staff], i) => ({
+  id: `WH-${10 + i}`,
+  name,
+  location,
+  capacity,
+  skus,
+  staff,
+  status: capacity >= 90 ? "Near capacity" : capacity >= 50 ? "Operational" : "Under-utilised",
+}));
+
+export const ROUTE_PLANS_LIST = Array.from({ length: 20 }, (_, i) => ({
+  id: `RT-${2200 + i}`,
+  name: `${pick(CITIES, i)} → ${pick(CITIES, i + 2)}`,
+  driver: pick(PEOPLE, i * 3 + 1).name,
+  vehicle: `VH-${300 + (i % 18)}`,
+  stops: 4 + (i % 11),
+  distance: 60 + ((i * 47) % 540),
+  window: pick(["06:00–12:00", "08:00–14:00", "12:00–18:00", "14:00–20:00"], i),
+  status: pick(["Planned", "Active", "Completed", "Delayed", "Planned"], i * 3),
+}));
+
+// [name, category, description, how-many-of ROLE_SET roles have it (from the top)]
+const PERMISSIONS = [
+  ["View dashboards", "Analytics", "See all dashboard pages and widgets", 5],
+  ["Export data", "Analytics", "Download tables and reports as CSV / PDF", 4],
+  ["Manage projects", "Projects", "Create, edit and archive projects", 3],
+  ["Manage deals", "CRM", "Create and edit deals and the pipeline", 3],
+  ["Manage customers", "CRM", "Edit customer and contact records", 3],
+  ["Manage products", "Ecommerce", "Add, edit and publish catalogue items", 3],
+  ["Process refunds", "Ecommerce", "Issue refunds and credit notes", 2],
+  ["View payroll", "HR", "See salary and payroll information", 2],
+  ["Approve leave", "HR", "Approve or reject time-off requests", 2],
+  ["Manage members", "Admin", "Invite, deactivate and change roles", 2],
+  ["Manage billing", "Admin", "Change plan, payment methods and invoices", 1],
+  ["Configure integrations", "Admin", "Connect and remove third-party apps", 2],
+  ["Manage API keys", "Developer", "Create and revoke API keys and webhooks", 2],
+  ["Impersonate users", "Developer", "Sign in as another member for support", 1],
+];
+const ROLE_SET = ["Owner", "Admin", "Editor", "Member", "Viewer"];
+
+export const PERMISSIONS_LIST = PERMISSIONS.map(([name, category, description, count], i) => ({
+  id: `PERM-${100 + i}`,
+  name,
+  category,
+  description,
+  roles: ROLE_SET.slice(0, count),
+  scope: count <= 2 ? "Restricted" : "Standard",
+}));
+
 export const OPPORTUNITIES_LIST = Array.from({ length: 22 }, (_, i) => ({
   id: `OPP-${8000 + i}`,
   account: pick(COMPANIES, i),
@@ -879,6 +937,68 @@ export const LIST_CONFIGS = {
       { key: "driver", header: "Driver", render: (r) => <EntityCell name={r.driver} /> },
       { key: "mileage", header: "Mileage", align: "right", sortable: true, render: (r) => `${r.mileage.toLocaleString()} mi` },
       { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/logistics/warehouse-management": {
+    title: "Warehouse management", subtitle: "Capacity and staffing across every site.",
+    actionLabel: "Add warehouse", getRowKey: (r) => r.id, rows: WAREHOUSES_LIST,
+    searchKeys: ["name", "location"],
+    filters: [
+      { key: "near", label: "Near capacity", test: (r) => r.status === "Near capacity" },
+      { key: "under", label: "Under-utilised", test: (r) => r.status === "Under-utilised" },
+    ],
+    columns: [
+      { key: "name", header: "Warehouse", sortable: true, render: (r) => strong(r.name) },
+      { key: "location", header: "Location", sortable: true },
+      { key: "skus", header: "SKUs", align: "right", sortable: true, render: (r) => r.skus.toLocaleString() },
+      { key: "staff", header: "Staff", align: "right", sortable: true },
+      { key: "capacity", header: "Capacity", align: "right", sortable: true, render: (r) => bar(r.capacity) },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/logistics/route-planning": {
+    title: "Route planning", subtitle: "Planned and active delivery routes.",
+    actionLabel: "Plan route", getRowKey: (r) => r.id, rows: ROUTE_PLANS_LIST,
+    searchKeys: ["id", "name", "driver"], pageSize: 12,
+    filters: [
+      { key: "planned", label: "Planned", test: (r) => r.status === "Planned" },
+      { key: "active", label: "Active", test: (r) => r.status === "Active" },
+      { key: "delayed", label: "Delayed", test: (r) => r.status === "Delayed" },
+    ],
+    columns: [
+      { key: "id", header: "Route", sortable: true, render: (r) => strong(r.id) },
+      { key: "name", header: "Leg", sortable: true },
+      { key: "driver", header: "Driver", render: (r) => <EntityCell name={r.driver} /> },
+      { key: "stops", header: "Stops", align: "right", sortable: true },
+      { key: "distance", header: "Distance", align: "right", sortable: true, render: (r) => `${r.distance} km` },
+      { key: "window", header: "Window" },
+      { key: "status", header: "Status", render: (r) => <StatusChip status={r.status} /> },
+    ],
+  },
+  "/user-management/permissions": {
+    title: "Permissions", subtitle: "What each role is allowed to do.",
+    getRowKey: (r) => r.id, rows: PERMISSIONS_LIST, searchKeys: ["name", "category", "description"],
+    filters: [
+      { key: "restricted", label: "Restricted", test: (r) => r.scope === "Restricted" },
+      { key: "admin", label: "Admin", test: (r) => r.category === "Admin" },
+      { key: "developer", label: "Developer", test: (r) => r.category === "Developer" },
+    ],
+    columns: [
+      { key: "name", header: "Permission", sortable: true, render: (r) => (
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-[var(--app-fg)]">{r.name}</p>
+          <p className="truncate text-xs text-[color:var(--app-fg-subtle)]">{r.description}</p>
+        </div>
+      ) },
+      { key: "category", header: "Category", sortable: true, render: (r) => nameChip(r.category) },
+      { key: "roles", header: "Granted to", render: (r) => (
+        <div className="flex flex-wrap gap-1">
+          {r.roles.map((role) => (
+            <Chip key={role} size="sm" variant="bordered">{role}</Chip>
+          ))}
+        </div>
+      ) },
+      { key: "scope", header: "Scope", render: (r) => <StatusChip status={r.scope === "Restricted" ? "Restricted" : "Enabled"} /> },
     ],
   },
 
