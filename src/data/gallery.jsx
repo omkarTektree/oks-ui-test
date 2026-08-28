@@ -34,6 +34,8 @@ import DataTable from "../Components/ui/DataTable";
 import ActivityFeed from "../Components/ui/ActivityFeed";
 import Timeline from "../Components/ui/Timeline";
 import CohortGrid from "../Components/ui/CohortGrid";
+import BoardView from "../Components/ui/BoardView";
+import KeyValueList from "../Components/ui/KeyValueList";
 import EmptyState from "../Components/ui/EmptyState";
 import StatTile from "../Components/ui/StatTile";
 import RankList from "../Components/ui/RankList";
@@ -484,6 +486,67 @@ const composed = [
     ],
   },
   {
+    slug: "key-value-list",
+    title: "KeyValueList",
+    description: "Definition list for detail panels — one- or two-column.",
+    examples: [
+      {
+        title: "Two columns",
+        code: `<KeyValueList columns={2} items={[
+  { label: "Full name", value: "Amara Bello" },
+  { label: "Email", value: "amara.bello@acme.io" },
+  { label: "Role", value: <Chip size="sm">Owner</Chip> },
+  { label: "2FA", value: "Enabled" },
+]} />`,
+        render: () => (
+          <div className="w-full">
+            <Surface>
+              <KeyValueList
+                columns={2}
+                items={[
+                  { label: "Full name", value: "Amara Bello" },
+                  { label: "Email", value: "amara.bello@acme.io" },
+                  { label: "Department", value: "Product" },
+                  {
+                    label: "Role",
+                    value: (
+                      <Chip size="sm" variant="soft" color="primary">
+                        Owner
+                      </Chip>
+                    ),
+                  },
+                  { label: "Location", value: "San Francisco, CA" },
+                  { label: "2FA", value: "Enabled" },
+                ]}
+              />
+            </Surface>
+          </div>
+        ),
+      },
+      {
+        title: "One column",
+        code: `<KeyValueList items={[
+  { label: "Plan", value: "Team" },
+  { label: "Seats", value: "24 of 30" },
+  { label: "Renews", value: "Jan 5, 2027" },
+]} />`,
+        render: () => (
+          <div className="w-full max-w-sm">
+            <Surface>
+              <KeyValueList
+                items={[
+                  { label: "Plan", value: "Team" },
+                  { label: "Seats", value: "24 of 30" },
+                  { label: "Renews", value: "Jan 5, 2027" },
+                ]}
+              />
+            </Surface>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
     slug: "chart-card",
     title: "ChartCard",
     description: "oks-ui Tabs series switcher over an oks-ui area Chart.",
@@ -660,6 +723,69 @@ const composed = [
                 { label: "Mar 2026", values: [100, 91, 84, 79, null] },
                 { label: "Apr 2026", values: [100, 90, 85, null, null] },
               ]}
+            />
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    slug: "board-view",
+    title: "BoardView",
+    description:
+      "Horizontal kanban columns with count badges and a card render prop.",
+    examples: [
+      {
+        title: "Three columns",
+        code: `<BoardView
+  columns={[
+    { id: "todo", title: "To do", accent: "info", items: [/* … */] },
+    { id: "doing", title: "In progress", accent: "primary", items: [/* … */] },
+    { id: "done", title: "Done", accent: "success", items: [/* … */] },
+  ]}
+  renderCard={(t) => (
+    <>
+      <p>{t.title}</p>
+      <Chip size="sm" variant="bordered">{t.tag}</Chip>
+    </>
+  )}
+/>`,
+        render: () => (
+          <div className="w-full">
+            <BoardView
+              columns={[
+                {
+                  id: "todo",
+                  title: "To do",
+                  accent: "info",
+                  items: [
+                    { id: "T-1", title: "Draft the notifications spec", tag: "product" },
+                    { id: "T-2", title: "Audit colour contrast", tag: "a11y" },
+                  ],
+                },
+                {
+                  id: "doing",
+                  title: "In progress",
+                  accent: "primary",
+                  items: [{ id: "T-3", title: "New review + confirm step", tag: "design" }],
+                },
+                {
+                  id: "done",
+                  title: "Done",
+                  accent: "success",
+                  items: [{ id: "T-4", title: "Sprint 24 retro", tag: "ops" }],
+                },
+              ]}
+              renderCard={(t) => (
+                <>
+                  <p className="text-sm font-medium text-[var(--app-fg)]">{t.title}</p>
+                  <div className="mt-2">
+                    <Chip size="sm" variant="bordered">
+                      {t.tag}
+                    </Chip>
+                  </div>
+                </>
+              )}
             />
           </div>
         ),

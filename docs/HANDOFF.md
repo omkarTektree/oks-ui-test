@@ -39,7 +39,7 @@ Not "all oks-ui", not a fork or a merge.
 | **Theme** | `src/styles/theme.css`, `src/lib/theme.js` | Custom "iris" palette, rounder radii, full dark mode via `data-theme`, persisted |
 | **Avatars** | `src/lib/avatar.js` | `avatarUrl(name)` → stable `i.pravatar.cc` photo; `<Avatar>` falls back to initials |
 | **10 dashboards** | `src/Pages/InnerPages/*Dashboard.jsx` | `/dashboards/{analytics,crm,ecommerce,finance,sales,projects,marketing,saas,logistics,business-intelligence}` |
-| **Component gallery** | `/components`, `/components/:slug` — registry `src/data/gallery.jsx` | **28 entries** (12 `oks-ui` primitives + 16 composed). ⚠ `BoardView` and `KeyValueList` are built + exported but **not yet in the gallery/nav** |
+| **Component gallery** | `/components`, `/components/:slug` — registry `src/data/gallery.jsx` | **30 entries** (12 `oks-ui` primitives + 18 composed), live examples + copyable code |
 | **Tables & Forms** | `src/Pages/InnerPages/tables-forms/` | `/tables-forms` + 14 demo pages |
 | **Auth & system** | `src/Pages/Auth/*`, `src/Pages/{NotFound,Maintenance}.jsx` | Login/register/forgot/terms + `/404-error`, `/maintenance` (outside the shell) |
 
@@ -77,29 +77,29 @@ Not "all oks-ui", not a fork or a merge.
 Barrel (`index.js`, 29): Surface, CardHeader, SectionTitle, Stat, StatTile,
 TrendChip, KpiCard, StatGroup, RankList, UpgradeCard, ChartCard, DonutStat,
 MeterList, GoalCard, StatusChip, EntityCell, DataTable, ActivityFeed, Timeline,
-CohortGrid, **BoardView**, **KeyValueList**, Pagination, SearchInput,
-TableToolbar, EmptyState, FormCard, SettingRow, SettingsSection.
-Direct-import only: CodeBlock, Example.
+CohortGrid, BoardView, KeyValueList, Pagination, SearchInput, TableToolbar,
+EmptyState, FormCard, SettingRow, SettingsSection. Direct-import only: CodeBlock,
+Example. The gallery covers the 18 that have interesting props to show; helpers
+(CardHeader, SectionTitle, Stat, StatGroup, Pagination, SearchInput,
+TableToolbar, FormCard, SettingRow, SettingsSection, UpgradeCard) are demoed
+in-context on other pages.
 
 ---
 
 ## Where to go next
 
-Nothing in `nav.js` is missing. Candidate follow-ups, roughly in order of value:
+Nothing in `nav.js` is missing, and every composed component is in the gallery.
+Candidate follow-ups, roughly in order of value:
 
-1. **Add `BoardView` + `KeyValueList` to the gallery.** They're built and
-   exported but absent from `src/data/gallery.jsx` and the `nav.js` Components
-   group — the only inconsistency left. Follow the pattern of the other composed
-   entries (live `render` + copyable `code`).
-2. **Deepen the archetypes as needed** — e.g. `DetailPage` only powers one route;
+1. **Deepen the archetypes as needed** — e.g. `DetailPage` only powers one route;
    add `DETAIL_CONFIGS` for customer / deal / employee detail and link the list
    rows to them.
-3. **Real interactions** — the boards, pipeline and Gantt are presentational.
+2. **Real interactions** — the boards, pipeline and Gantt are presentational.
    Drag-and-drop, inline edit, and working filters/sort beyond what `DataTable`
    already does would make the showcase more convincing.
-4. **`CommandMenu` (⌘K)**, `Breadcrumbs`, mini-mode sidebar flyouts — flagged
-   `🔨`/`⬜` in `COMPONENTS.md` and never built.
-5. **Trim mock-data quirks** — some `src/data/lists.jsx` generators pick
+3. **`CommandMenu` (⌘K)**, `Breadcrumbs`, mini-mode sidebar flyouts — flagged
+   `next`/`planned` in `COMPONENTS.md` and never built.
+4. **Trim mock-data quirks** — some `src/data/lists.jsx` generators pick
    `category`, `status` and `stock` independently, so a row can read
    "Out of stock · In stock". `ProductGrid` already works around this by deriving
    status from stock; the list pages don't.

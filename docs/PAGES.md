@@ -89,7 +89,9 @@ copyable source. Registry: `src/data/gallery.jsx`.
 - **oks-ui:** Button · Chip · Badge · Avatar · Alert · Tabs · Tooltip · Dropdown ·
   Toast · Loader · Divider · PageTitle
 - **Composed (`src/Components/ui`):** Surface · KpiCard · TrendChip · StatusChip ·
-  EntityCell · ChartCard · DonutStat · MeterList · GoalCard · DataTable · ActivityFeed
+  EntityCell · KeyValueList · ChartCard · DonutStat · MeterList · GoalCard ·
+  DataTable · ActivityFeed · Timeline · CohortGrid · BoardView · StatTile ·
+  RankList · EmptyState
 
 More entries are just data — add an object to the registry.
 
